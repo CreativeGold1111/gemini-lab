@@ -1,0 +1,2726 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1" />
+  <title>ヒアリングシート</title>
+
+  <style>
+    :root{
+      --navy:#0B1B3A;
+      --navy2:#122A52;
+      --orange:#FF6A2A;
+      --orange2:#FF8557;
+      --bg:#F6F7F9;
+      --card:#fff;
+      --ring:rgba(11,27,58,.12);
+      --text:#0f172a;
+      --muted:#64748b;
+      --muted2:#94a3b8;
+      --shadow: 0 10px 20px rgba(2,6,23,.06);
+      --radius: 18px;
+    }
+
+    *{ box-sizing:border-box; }
+    html,body{ height:100%; }
+    body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, "Hiragino Kaku Gothic ProN", "Noto Sans JP", "Yu Gothic", sans-serif;
+      color:var(--text);
+      background:var(--bg);
+      line-height:1.8em;
+    }
+
+    /* background glow */
+    .bg-glow{ position:fixed; inset:0; pointer-events:none; overflow:hidden; z-index:0; }
+    .glow1{ position:absolute; left:50%; top:-140px; width:520px; height:520px; transform:translateX(-50%);
+      border-radius:999px; filter:blur(48px);
+      background:radial-gradient(circle at center, rgba(255,106,42,.18), transparent 60%);
+    }
+    .glow2{ position:absolute; right:-160px; top:-180px; width:640px; height:640px;
+      border-radius:999px; filter:blur(60px);
+      background:radial-gradient(circle at center, rgba(11,27,58,.16), transparent 60%);
+    }
+
+    .wrap{ position:relative; z-index:1; max-width:1100px; margin:0 auto; padding:24px 16px 96px; }
+
+    .header{ display:flex; gap:6px; align-items:flex-start; justify-content:space-between; flex-wrap:wrap; margin-bottom:12px; }
+    .brand{ display:flex; gap:12px; align-items:center; }
+    .logo{
+      width:40px; height:40px; border-radius:16px; background:#fff; box-shadow:var(--shadow);
+      border:1px solid var(--ring); display:grid; place-items:center;
+    }
+    .logo svg{ width:36px; height:36px; }
+    .title small{ display:block; color:var(--muted); font-weight:600; letter-spacing:.02em; margin-bottom:-6px; margin-top:-7px; }
+    .title h1{ margin:2px 0 0 -3px; font-size:22px; line-height:1.2; color:var(--navy); }
+    .title p{ margin:6px 0 0; color:var(--muted); font-size:14px; }
+
+    .chips{ display:flex; gap:8px; flex-wrap:wrap; align-items:center; }
+    @media (max-width:720px){ .chips{ flex-direction:column; align-items:flex-end; gap:0; } }
+    .chip{
+      display:inline-flex; align-items:center; gap:8px;
+      padding:4px 0;
+      background:none; border:none;
+      color:var(--muted); font-size:10px; font-weight:700; line-height:2em;
+    }
+    @media (max-width:720px){ .chip{ padding:0; } #chip-save{ padding-right:7px !important; } }
+    .chip .dot{ width:6px; height:6px; border-radius:999px; background:var(--orange); }
+
+    /* WordPress theme style isolation */
+    .btn, .urllist-add, .urllist-row .btn-del, .step-pill, .mood-option, .pick, .preset-swatch-wrap{
+      box-sizing: border-box !important;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, "Hiragino Kaku Gothic ProN", "Noto Sans JP", sans-serif !important;
+      text-transform: none !important;
+      letter-spacing: normal !important;
+      box-shadow: none !important;
+      outline: none !important;
+    }
+
+    .btn{
+      appearance: none !important;
+      -webkit-appearance: none !important;
+      border: 0 !important;
+      cursor: pointer !important;
+      display: inline-flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      gap: 8px !important;
+      padding: 10px 12px !important;
+      border-radius: 14px !important;
+      font-weight: 800 !important;
+      font-size: 13px !important;
+      transition: transform .05s ease, background .15s ease, border-color .15s ease !important;
+      user-select: none !important;
+      line-height: 1 !important;
+      text-decoration: none !important;
+      width: auto !important;
+      margin: 0 !important;
+    }
+    .btn:active{ transform:translateY(1px) !important; }
+    .btn-outline{ background:#fff !important; border:1px solid var(--ring) !important; color:var(--navy) !important; }
+    .btn-outline:hover{ background:#f8fafc !important; }
+    .btn-solid{ background:var(--navy) !important; color:#fff !important; }
+    .btn-solid:hover{ background:var(--navy2) !important; }
+    .btn-orange{ background:var(--orange) !important; color:#fff !important; }
+    .btn-orange:hover{ background:var(--orange2) !important; }
+    .btn-ghost{ background:transparent !important; color:var(--muted) !important; box-shadow:none !important; }
+    .btn-ghost:hover{ background:#f8fafc !important; color:var(--text) !important; }
+    .btn:disabled{ opacity:.5 !important; cursor:not-allowed !important; }
+
+    .card{
+      background:var(--card);
+      border:1px solid var(--ring);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+    }
+
+    .progress-card{ padding:16px; }
+    .row{ display:flex; gap:12px; align-items:center; justify-content:space-between; flex-wrap:wrap; }
+    .row .meta{ display:flex; gap:10px; align-items:center; }
+    .row .meta .step{ font-weight:800; font-size:13px; }
+    .row .meta .pct{ font-weight:700; color:var(--muted); font-size:13px; }
+    .row .hint{ color:var(--muted); font-size:12px; }
+
+    .bar{ margin-top:10px; height:10px; border-radius:999px; background:#e2e8f0; overflow:hidden; }
+    .bar > i{ display:block; height:100%; width:0%; background:linear-gradient(90deg, var(--orange), var(--orange2)); border-radius:999px; }
+
+    .steps{ margin-top:12px; display:flex; flex-wrap:wrap; gap:8px; }
+    @media (max-width: 720px){
+      .steps{ column-gap:5px; row-gap:10px; margin-top:8px; }
+      .step-pill{ padding:6px 9px !important; font-size:11px !important; gap:5px !important; }
+      .step-pill .num{ font-size:10px !important; }
+      .step-pill .ok{ width:15px !important; height:15px !important; font-size:10px !important; }
+    }
+    .step-pill{
+      border: 1px solid var(--ring) !important;
+      background: #fff !important;
+      color: var(--navy) !important;
+      border-radius: 999px !important;
+      padding: 8px 12px !important;
+      display: inline-flex !important;
+      gap: 8px !important;
+      align-items: center !important;
+      font-weight: 800 !important;
+      font-size: 13px !important;
+      cursor: pointer !important;
+      transition: background .15s ease, color .15s ease !important;
+      text-decoration: none !important;
+      line-height: 1 !important;
+      box-shadow: none !important;
+      text-transform: none !important;
+    }
+    .step-pill:hover{ background:#f8fafc !important; }
+    .step-pill[data-active="true"]{ background:var(--navy) !important; color:#fff !important; border-color:transparent !important; }
+    .step-pill .num{ font-size:11px !important; color:var(--muted2) !important; }
+    .step-pill[data-active="true"] .num{ color:rgba(255,255,255,.8) !important; }
+    .step-pill .ok{
+      width:18px !important; height:18px !important; border-radius:999px !important; display:grid !important; place-items:center !important;
+      background:rgba(255,106,42,.16) !important; color:var(--orange) !important;
+      font-size:12px !important;
+    }
+    .step-pill[data-active="true"] .ok{ background:rgba(255,255,255,.18) !important; color:#fff !important; }
+
+    .layout{ display:grid; grid-template-columns: 1.25fr .9fr; gap:18px; margin-top:18px; }
+    @media (max-width: 980px){ .layout{ grid-template-columns: 1fr; } }
+
+    .card-header{ padding:14px 16px 0; }
+    .card-title{ display:flex; align-items:flex-start; justify-content:space-between; gap:12px; }
+    .card-title h2{ margin:0; font-size:16px; color:var(--navy); }
+    .card-title p{ margin:4px 0 0; font-size:13px; color:var(--muted); line-height:1.4 !important; }
+    #form-step-desc{ line-height:1.4 !important; }
+    input[type="text"], input[type="email"], input[type="date"], textarea{ line-height:1.4 !important; }
+    input[type="text"], input[type="email"], input[type="date"], textarea{ line-height:1.4 !important; }
+
+    .card-body{ padding:14px 16px 16px; }
+
+    .group{ border:1px solid var(--ring); border-radius:18px; background:#fff; padding:14px; margin-bottom:14px; }
+    .group-head{ display:flex; align-items:center; justify-content:space-between; gap:10px; margin-bottom:12px; }
+    .group-head .gtitle{ font-weight:900; color:var(--navy); font-size:14px; }
+
+    .fields{ display:grid; grid-template-columns: 1fr 1fr; gap:12px; }
+    @media (max-width: 720px){ .fields{ grid-template-columns: 1fr; } }
+    @media (max-width: 720px){ body{ line-height:1.4em; } }
+    @media (max-width: 720px){
+      .btn, .step-pill { line-height:1 !important; }
+    }
+
+    .field{ display:flex; flex-direction:column; gap:6px; }
+    .field.full{ grid-column: 1 / -1; }
+    .field label{ font-size:13px; font-weight:800; color:#0f172a; display:flex; align-items:center; justify-content:space-between; gap:10px; }
+    .req{ color:#e11d48; font-weight:900; margin-left:6px; }
+    .req-tag{ font-size:11px; color:var(--muted); font-weight:800; }
+
+    input[type="text"], input[type="email"], input[type="date"], textarea, select{
+      width:100%;
+      border:1px solid var(--ring);
+      border-radius:14px;
+      padding:10px 12px;
+      font-size:14px;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, "Hiragino Kaku Gothic ProN", "Noto Sans JP", "Yu Gothic", sans-serif;
+      outline:none !important;
+      background:#fff;
+      transition:border-color .15s ease, box-shadow .15s ease;
+    }
+    select{
+      padding-right:40px;
+      appearance:none;
+      -webkit-appearance:none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%2364748b' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 12px center;
+    }
+    input[type="date"]{
+      max-width:100%;
+      width:100%;
+      min-width:0;
+      -webkit-appearance:none;
+      appearance:none;
+      display:block;
+      box-sizing:border-box;
+    }
+    ::placeholder{ color:#94a3b8; opacity:1; }
+    ::-webkit-input-placeholder{ color:#94a3b8; }
+    ::-moz-placeholder{ color:#94a3b8; opacity:1; }
+    input:focus, textarea:focus, select:focus{
+      border-color: rgba(255,106,42,.45);
+      box-shadow: 0 0 0 4px rgba(255,106,42,.18);
+    }
+    textarea{ min-height:96px; resize:vertical; }
+    textarea.rows3{ min-height:80px; }
+
+    .toggle{ width:100%; border:1px solid var(--ring); border-radius:14px; padding:10px 12px; display:flex; align-items:center; justify-content:space-between; background:#fff; }
+    .toggle .state{ font-size:13px; color:#334155; font-weight:800; }
+
+    .switch{ position:relative; width:44px; height:24px; }
+    .switch input{ display:none; }
+    .track{ position:absolute; inset:0; border-radius:999px; background:#e2e8f0; transition:.2s; }
+    .thumb{ position:absolute; top:3px; left:3px; width:18px; height:18px; border-radius:999px; background:#fff; box-shadow:0 4px 10px rgba(2,6,23,.18); transition:.2s; }
+    .switch input:checked + .track{ background:rgba(255,106,42,.65); }
+    .switch input:checked ~ .thumb{ transform:translateX(20px); }
+
+    .divider{ height:1px; background:rgba(2,6,23,.08); margin:16px 0; }
+
+    .navline{ display:flex; align-items:center; justify-content:space-between; gap:10px; flex-wrap:wrap; }
+    .navline .note{ font-size:12px; color:var(--muted); }
+    .navline .actions{ display:flex; gap:10px; }
+
+    /* Custom pickers */
+    .color-pair{ display:grid; grid-template-columns: 1fr 1fr; gap:10px; }
+    @media (max-width: 720px){ .color-pair{ grid-template-columns: 1fr; } }
+
+    .color-card{ border:1px solid var(--ring); border-radius:16px; background:#fff; padding:10px; display:flex; align-items:center; justify-content:space-between; gap:10px; }
+    .color-meta{ display:grid; gap:2px; }
+    .color-meta .ct{ font-weight:900; font-size:13px; }
+    .color-meta .cv{ font-size:12px; color:var(--muted); }
+    .color-input{ display:flex; align-items:center; gap:8px; }
+
+    input[type="color"]{ width:44px; height:44px; border:0; padding:0; background:transparent; cursor:pointer; }
+    .sw-sample{ width:26px; height:26px; border-radius:10px; border:1px solid rgba(2,6,23,.08); background:#fff; }
+
+    /* カラープリセット */
+    .color-section{ display:grid; gap:14px; }
+    .color-section-label{ font-size:13px; font-weight:800; color:#0f172a; margin-bottom:6px; }
+    .preset-palette{ display:grid; grid-template-columns: repeat(8, 1fr); gap:6px; }
+    @media (max-width: 720px){ .preset-palette{ grid-template-columns: repeat(auto-fill, minmax(48px, 1fr)); gap:5px; } }
+    .preset-swatch-wrap{ display:flex; flex-direction:column; align-items:center; gap:4px; cursor:pointer; }
+    .preset-swatch{
+      width:100%; aspect-ratio:1; border-radius:10px;
+      border:2px solid transparent;
+      transition: transform .1s ease, box-shadow .15s ease, border-color .15s ease;
+      position:relative;
+    }
+    .preset-swatch:hover{ transform:scale(1.1); box-shadow:0 4px 12px rgba(2,6,23,.18); }
+    .preset-swatch-wrap[data-active="true"] .preset-swatch{
+      border-color: var(--orange);
+      box-shadow: 0 0 0 3px rgba(255,106,42,.3);
+      transform:scale(1.08);
+    }
+    .preset-swatch-wrap[data-active="true"] .preset-swatch::after{
+      content:'✓';
+      position:absolute; inset:0; display:grid; place-items:center;
+      color:#fff; font-size:14px; font-weight:900;
+      text-shadow: 0 1px 3px rgba(0,0,0,.5);
+    }
+    .preset-swatch-name{ font-size:9px; font-weight:700; color:var(--muted); text-align:center; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; max-width:100%; }
+    .color-divider{ display:flex; align-items:center; gap:10px; font-size:12px; color:var(--muted); font-weight:700; margin-top:20px; }
+    .color-divider::before, .color-divider::after{ content:''; flex:1; height:1px; background:rgba(2,6,23,.08); }
+    .picker-row{ display:flex; align-items:center; gap:10px; }
+    .picker-label{ font-size:12px; color:var(--muted); font-weight:700; flex:1; }
+    .picker-custom{ display:flex; align-items:center; gap:8px; }
+    .picker-hex{ font-size:12px; font-weight:800; color:#334155; }
+
+    .mood-wrap{ border:1px solid var(--ring); border-radius:16px; padding:12px; background:#fff; }
+    .mood-top{ display:flex; align-items:center; justify-content:space-between; gap:10px; flex-wrap:wrap; }
+    .mood-top .mval{ font-weight:900; color:var(--navy); font-size:13px; }
+    .mood-top .mhint{ font-size:12px; color:var(--muted); }
+
+    .mood-options{ display:flex; flex-wrap:wrap; gap:8px; margin-top:12px; }
+    .mood-option{
+      flex:1; min-width:80px;
+      border:1px solid var(--ring); border-radius:12px; background:#fff;
+      padding:10px 8px; cursor:pointer;
+      display:flex; flex-direction:column; align-items:center; gap:6px;
+      transition: border-color .15s, box-shadow .15s, background .15s;
+      user-select:none;
+    }
+    .mood-option:hover{ background:#f8fafc; }
+    .mood-option[data-selected="true"]{
+      border-color: var(--orange);
+      box-shadow: 0 0 0 3px rgba(255,106,42,.18);
+      background:#fff8f5;
+    }
+    .mood-option .mood-dot{
+      width:20px; height:20px; border-radius:999px;
+      border:2px solid var(--ring); background:#fff;
+      display:grid; place-items:center;
+      transition: border-color .15s, background .15s;
+    }
+    .mood-option[data-selected="true"] .mood-dot{
+      border-color: var(--orange);
+      background: var(--orange);
+    }
+    .mood-option[data-selected="true"] .mood-dot::after{
+      content:''; width:8px; height:8px; border-radius:999px; background:#fff;
+    }
+    .mood-option .mood-name{ font-size:12px; font-weight:800; color:var(--navy); text-align:center; }
+
+    .checklist{ border:none; border-radius:16px; background:transparent; padding:0; display:grid; gap:8px; }
+    .check{ display:flex; align-items:flex-start; justify-content:space-between; gap:10px; padding:8px 10px; border-radius:14px; background:#f8fafc; border:1px solid rgba(2,6,23,.06); }
+    .check .left{ display:flex; gap:10px; align-items:flex-start; }
+    .check input{ margin-top:2px; }
+    .check .lbl{ font-weight:900; font-size:13px; line-height:1.3; }
+    .check .desc{ font-size:12px; font-weight:400; color:var(--muted); margin-top:0; line-height:1.3; }
+
+    .font-grid{ display:grid; grid-template-columns: 1fr 1fr; gap:10px; }
+    @media (max-width: 720px){ .font-grid{ grid-template-columns: 1fr; } }
+
+    .pick{ border:1px solid var(--ring); background:#fff; border-radius:16px; padding:10px; cursor:pointer; transition: box-shadow .15s ease, border-color .15s ease, transform .05s ease; display:grid; gap:10px; }
+    .pick:active{ transform:translateY(1px); }
+    .pick[data-selected="true"]{ border-color: rgba(255,106,42,.55); box-shadow: 0 0 0 4px rgba(255,106,42,.18); }
+    .pick .ptitle{ font-weight:900; font-size:13px; color:#0f172a; }
+    .pick .pdesc{ font-size:12px; color:var(--muted); line-height:1.4; }
+
+    .font-sample{ border:1px solid rgba(2,6,23,.08); background:#f8fafc; border-radius:14px; padding:10px; line-height:1.4; }
+    .mincho{ font-family: "Hiragino Mincho ProN", "Yu Mincho", "Noto Serif JP", serif; }
+    .gothic{ font-family: "Hiragino Kaku Gothic ProN", "Noto Sans JP", "Yu Gothic", sans-serif; }
+
+    /* Preview */
+    .sticky{ position:sticky; top:16px; }
+    .pdf-logo-header{ display:none; }
+
+    .summary{ background:linear-gradient(135deg, var(--navy) 55%, var(--navy2) 100%); color:#fff; border-radius:18px; padding:14px; border:1px solid rgba(255,255,255,.10); }
+    .summary .top{ display:flex; align-items:center; justify-content:flex-end; gap:10px; }
+    .summary .label{ font-size:13px; color:rgba(255,255,255,.78); font-weight:700; }
+    .summary .auto{ font-size:11px; font-weight:900; display:inline-flex; align-items:center; gap:8px; background:rgba(255,106,42,.18); padding:6px 10px; border-radius:999px; }
+    .summary .auto .dot{ width:6px; height:6px; border-radius:999px; background:var(--orange); }
+    .summary .name{ font-size:18px; font-weight:900; margin-top:4px; background:none; padding:0; border-radius:0; }
+    .summary-sub-wrap{ text-align:right; padding:6px 2px 2px; }
+    .summary-sub-wrap .sub{ font-size:12px; color:var(--orange); font-weight:700; }
+
+    .preview-box{ margin-top:10px; border:1px solid var(--ring); border-radius:18px; background:#fff; padding:12px; max-height:52vh; overflow:auto; }
+    .p-sec{ margin-bottom:12px; }
+    .p-sec-head{ display:flex; align-items:center; justify-content:space-between; gap:10px; margin-bottom:8px; }
+    .p-sec-head .t{ font-weight:900; color:var(--navy); font-size:13px; }
+
+    .p-group{ background:#f8fafc; border-radius:14px; padding:10px; margin-bottom:8px; }
+    .p-group .gt{ font-size:12px; font-weight:900; color:#334155; margin-bottom:8px; }
+    .p-row{ display:flex; justify-content:space-between; gap:12px; align-items:flex-start; margin:6px 0; }
+    .p-row .k{ min-width:40%; color:#64748b; font-size:12px; }
+    .p-row .v{ text-align:right; font-weight:800; font-size:12px; }
+    .p-row .v.empty{ color:#94a3b8; font-weight:700; }
+
+    details{ border:1px solid var(--ring); border-radius:18px; background:#fff; padding:12px 12px; }
+    summary{ cursor:pointer; font-weight:900; color:#1f2937; font-size:16px; }
+    pre{ margin:10px 0 0; background:#f8fafc; border-radius:14px; padding:10px; font-size:11px; overflow:auto; white-space:pre-wrap; word-break:break-all; max-width:100%; box-sizing:border-box; line-height:1.4; }
+
+    /* Mobile bottom bar - removed */
+
+    /* show mobile-only UI only on narrow view */
+    .only-mobile{ display:none; }
+    @media (max-width: 980px){
+      .only-mobile{ display:flex; }
+      .sticky{ position:static; }
+      .wrap{ padding-bottom:24px; }
+    }
+
+    /* Pane control on mobile */
+    [data-pane="preview"] .pane-form{ display:none; }
+    [data-pane="form"] .pane-preview{ display:none; }
+    @media (min-width: 981px){
+      [data-pane="preview"] .pane-form{ display:block; }
+      [data-pane="form"] .pane-preview{ display:block; }
+    }
+
+    /* URL リスト */
+    .urllist{ display:grid; gap:8px; }
+    .urllist-row{ display:flex; gap:8px; align-items:center; }
+    .urllist-row input{ flex:1; }
+    .urllist-row .btn-del{
+      all: unset;
+      box-sizing: border-box !important;
+      flex-shrink: 0 !important;
+      width: 32px !important;
+      height: 32px !important;
+      border-radius: 10px !important;
+      border: 1px solid var(--ring) !important;
+      background: #fff !important;
+      color: var(--muted) !important;
+      font-size: 16px !important;
+      display: grid !important;
+      place-items: center !important;
+      cursor: pointer !important;
+      transition: background .15s, color .15s !important;
+      line-height: 1 !important;
+      padding: 0 !important;
+      font-weight: 400 !important;
+      text-decoration: none !important;
+    }
+    .urllist-row .btn-del:hover{ background:#fee2e2 !important; color:#dc2626 !important; border-color:#fca5a5 !important; }
+    .urllist-add{
+      all: unset;
+      box-sizing: border-box !important;
+      display: inline-flex !important;
+      align-items: center !important;
+      gap: 6px !important;
+      padding: 8px 14px !important;
+      border-radius: 12px !important;
+      border: 1px dashed rgba(11,27,58,.25) !important;
+      background: #fff !important;
+      color: var(--navy) !important;
+      font-size: 13px !important;
+      font-weight: 800 !important;
+      cursor: pointer !important;
+      transition: background .15s, border-color .15s !important;
+      width: 100% !important;
+      justify-content: center !important;
+      text-decoration: none !important;
+      line-height: 1 !important;
+    }
+    .urllist-add:hover{ background:#f0f4ff !important; border-color:var(--navy) !important; }
+    .urllist-add .plus{ font-size:18px; line-height:1; }
+
+    /* 参考サイト reflist */
+    .reflist-block{ border:1px solid var(--ring); border-radius:14px; padding:12px; margin-bottom:10px; background:#f8fafc; display:grid; gap:0; }
+    .reflist-label{ font-size:12px; font-weight:800; color:var(--muted); margin:8px 0 2px; line-height:1.8; }
+    .reflist-label:first-child{ margin-top:0; }
+
+    /* SNS チェックリスト */
+    .sns-list{ display:grid !important; grid-template-columns: 1fr 1fr; gap:8px; }
+    @media (max-width: 720px){
+      .field label{ line-height:1.4; }
+      .navline .note{ line-height:1.4; }
+      body{ line-height:1.4; }
+    }
+    .sns-item{ display:block !important; border:1px solid var(--ring) !important; border-radius:14px !important; background:#fff !important; overflow:hidden !important; transition: border-color .15s; }
+    .sns-item[data-checked="true"]{ border-color: var(--orange) !important; }
+    .sns-check-row{ display:flex !important; align-items:center !important; gap:10px !important; padding:8px 14px !important; cursor:pointer !important; user-select:none !important; }
+    .sns-check-row input[type="checkbox"]{ width:16px; height:16px; accent-color:var(--orange); cursor:pointer; flex-shrink:0; }
+    input[type="radio"]{
+      accent-color: var(--orange);
+      width: 16px;
+      height: 16px;
+      flex-shrink: 0;
+      cursor: pointer;
+      margin: 0;
+    }
+    /* divベース選択ボタン（Safari完全対応） */
+    .opt-btn{
+      display: flex !important;
+      align-items: center !important;
+      gap: 10px !important;
+      padding: 10px 14px !important;
+      border: 1px solid var(--ring) !important;
+      border-radius: 14px !important;
+      background: #fff !important;
+      cursor: pointer !important;
+      user-select: none !important;
+      transition: border-color .15s !important;
+    }
+    .opt-btn[data-selected="true"]{
+      border-color: var(--orange) !important;
+      background: #fff8f5 !important;
+    }
+    .opt-btn-circle{
+      width: 18px !important;
+      height: 18px !important;
+      min-width: 18px !important;
+      border-radius: 50% !important;
+      border: 2px solid #cbd5e1 !important;
+      background: #fff !important;
+      display: flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      box-sizing: border-box !important;
+      transition: border-color .15s, background .15s !important;
+      flex-shrink: 0 !important;
+    }
+    .opt-btn[data-selected="true"] .opt-btn-circle{
+      border-color: var(--orange) !important;
+      background: var(--orange) !important;
+    }
+    .opt-btn-circle::after{
+      content: '' !important;
+      width: 6px !important;
+      height: 6px !important;
+      border-radius: 50% !important;
+      background: #fff !important;
+      opacity: 0 !important;
+    }
+    .opt-btn[data-selected="true"] .opt-btn-circle::after{
+      opacity: 1 !important;
+    }
+    .opt-btn-label{
+      font-size: 13px !important;
+      font-weight: 800 !important;
+      color: var(--navy) !important;
+    }
+    /* チェック時：白いチェックマーク */
+    input[type="checkbox"] {
+      accent-color: var(--orange);
+      width: 16px;
+      height: 16px;
+      flex-shrink: 0;
+      cursor: pointer;
+      margin: 0;
+      margin-top: 4px;
+      vertical-align: middle;
+    }
+    .sns-check-label{ font-weight:800; font-size:12px; flex:1; }
+    .sns-url-wrap{ overflow:hidden; max-height:0; transition: max-height .25s ease, padding .25s ease; padding:0 12px; }
+    .sns-item[data-checked="true"] .sns-url-wrap,
+    [data-checked="true"] .sns-url-wrap{ max-height:120px; padding:0 12px 10px; }
+    .sns-item[data-checked="true"] .sns-url-wrap.wrap-lg,
+    [data-checked="true"] .sns-url-wrap.wrap-lg{ max-height:800px; padding:0 12px 10px; }
+    .sns-url-wrap input, .sns-url-wrap textarea{ margin-top:0; }
+
+    /* Print (PDF via browser) */
+    @media print{
+      @page { margin: 15mm 12mm; size: A4; }
+      * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
+      body{ background:#fff; font-family: 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', sans-serif; }
+      .bg-glow, .mobile-bar, .steps, .chips, .pane-form, details, #btn-copy, #btn-pdf, #btn-consult, #btn-clear, .header, .progress-card, .mobile-tab { display:none !important; }
+      .pane-preview{ display:block !important; }
+      .pdf-logo-header{
+        display:flex !important;
+        align-items:center !important;
+        gap:8px !important;
+        margin-bottom:12px !important;
+      }
+      .pdf-logo-header svg{ width:28px; height:28px; }
+      .pdf-logo-header span{ font-size:13px; font-weight:900; color:#263976; letter-spacing:.04em; }
+      .wrap{ max-width:100%; padding:0; }
+      .layout{ grid-template-columns:1fr; gap:0; }
+      .pane-preview{ padding:0; }
+      .card{ box-shadow:none; border:0; padding:0; background:transparent; }
+      .card-header{ display:none; }
+      .card-body{ padding:0; }
+
+      /* サマリーヘッダー */
+      .summary{
+        color: #fff !important;
+        border-radius: 10px !important;
+        padding: 18px 24px !important;
+        margin-bottom: 4px !important;
+        border: 0 !important;
+        display: block !important;
+        width: 100% !important;
+        box-sizing: border-box !important;
+      }
+      .summary .label{ display:none !important; }
+      .summary .top{ display:none !important; }
+      .summary .auto{ display:none !important; }
+      .summary .dot{ display:none !important; }
+      .summary .name{ color:#fff !important; font-size:22px !important; font-weight:900 !important; margin:0 !important; padding:0 !important; background:none !important; }
+      .summary-sub-wrap{ text-align:right !important; padding: 6px 0 12px !important; }
+      .summary-sub-wrap .sub{ font-size:12px !important; font-weight:700 !important; }
+      /* プレビューボックス */
+      .preview-box{ max-height:none !important; overflow:visible !important; border:0 !important; padding:0 !important; }
+
+      /* セクション */
+      .p-section{ margin-bottom:20px !important; break-inside:avoid; }
+      .p-section-title{
+        font-size:11px !important;
+        font-weight:900 !important;
+        letter-spacing:.12em !important;
+        text-transform:uppercase !important;
+        color:#fff !important;
+        background:#0B1B3A !important;
+        padding:5px 12px !important;
+        border-radius:6px !important;
+        margin-bottom:10px !important;
+        display:inline-block !important;
+      }
+      .p-group{ margin-bottom:12px !important; break-inside:avoid; }
+      .p-group-title{
+        font-size:10px !important;
+        font-weight:900 !important;
+        color:#FF6A2A !important;
+        letter-spacing:.06em !important;
+        border-bottom:1.5px solid #FF6A2A !important;
+        padding-bottom:3px !important;
+        margin-bottom:8px !important;
+      }
+      .p-row{
+        display:grid !important;
+        grid-template-columns:38% 62% !important;
+        gap:0 !important;
+        padding:5px 0 !important;
+        border-bottom:1px solid #f0f0f0 !important;
+        align-items:start !important;
+      }
+      .p-row .k{
+        font-size:10px !important;
+        color:#64748b !important;
+        font-weight:700 !important;
+        padding-right:8px !important;
+        line-height:1.5 !important;
+      }
+      .p-row .v{
+        font-size:11px !important;
+        color:#0B1B3A !important;
+        font-weight:600 !important;
+        line-height:1.6 !important;
+        white-space:pre-wrap !important;
+      }
+      .p-row .v.empty{ color:#ccc !important; font-style:italic !important; }
+      .divider{ display:none !important; }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="bg-glow" aria-hidden>
+    <div class="glow1"></div>
+    <div class="glow2"></div>
+  </div>
+
+  <div class="wrap" id="app" data-pane="form">
+    <div class="header">
+      <div style="display:flex; justify-content:space-between; align-items:flex-start; gap:12px; width:100%;">
+        <div class="brand">
+          <div class="logo" aria-hidden>
+            <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="40" height="40" rx="10" fill="#0B1B3A"/><g transform="translate(8, 8) scale(0.375)"><path d="M29.2465 29.2463C28.8849 29.6077 28.598 30.0368 28.4022 30.5091C28.2064 30.9814 28.1056 31.4877 28.1055 31.999C28.1053 32.5103 28.2059 33.0165 28.4015 33.4889C28.5971 33.9613 28.8837 34.3906 29.2452 34.7522C29.6067 35.1141 30.0359 35.4013 30.5084 35.5972C30.981 35.7932 31.4875 35.8941 31.999 35.8941C32.5105 35.8942 33.017 35.7934 33.4896 35.5976C33.9622 35.4018 34.3915 35.1147 34.753 34.7528C35.1152 34.3914 35.4025 33.9621 35.5986 33.4895C35.7946 33.0169 35.8955 32.5103 35.8955 31.9986C35.8955 31.4869 35.7946 30.9803 35.5986 30.5077C35.4025 30.0351 35.1152 29.6058 34.753 29.2444C34.3915 28.8826 33.9622 28.5957 33.4897 28.4C33.0172 28.2043 32.5108 28.1036 31.9994 28.1038C31.4879 28.104 30.9816 28.205 30.5092 28.401C30.0368 28.5971 29.6078 28.8843 29.2465 29.2463ZM48.9918 50.6658C59.2138 40.356 59.1895 23.6533 48.9137 13.3775C48.899 13.3628 48.8817 13.3538 48.867 13.3397L48.8708 13.3359L47.7854 12.2492L47.7726 12.262C47.484 12.0309 47.1213 11.9127 46.7521 11.9293C46.3828 11.9459 46.0322 12.0962 45.7655 12.3522L45.7636 12.3503L45.747 12.3669L45.7418 12.3714L45.738 12.3765L43.9633 14.1506L43.962 14.1519C43.962 14.1522 43.9619 14.1525 43.9616 14.1528C43.9614 14.153 43.9611 14.1532 43.9607 14.1532L43.8327 14.2812L43.8455 14.294C43.6335 14.5634 43.5188 14.8966 43.52 15.2394C43.5211 15.5822 43.6381 15.9146 43.8519 16.1826L43.8398 16.1948L43.9614 16.3164V16.317L44.9258 17.2802L44.9431 17.2629C44.9572 17.2776 44.9668 17.2949 44.9815 17.3096C53.0884 25.4172 53.114 38.5922 45.0596 46.733L45.0487 46.7221L44.0862 47.6847L44.0842 47.686L44.083 47.6879L43.9626 47.8082L43.9748 47.8204C43.7438 48.1089 43.6255 48.4716 43.6421 48.8409C43.6587 49.2101 43.809 49.5608 44.065 49.8274L44.0631 49.8293L44.083 49.8492L44.0842 49.8511L44.0862 49.8524L44.9796 50.7458L44.9809 50.7477L44.9828 50.749L45.8634 51.6296L45.8647 51.6316L45.8666 51.6328L45.9934 51.7596L46.0062 51.7468C46.2756 51.9589 46.6089 52.0737 46.9518 52.0727C47.2947 52.0717 47.6273 51.9548 47.8954 51.741L47.9076 51.7532L48.9105 50.7496C48.9114 50.7486 48.9125 50.7477 48.9137 50.7471L48.9252 50.7349L48.9937 50.6664L48.9918 50.6658Z" fill="white"/><path d="M41.5509 43.2257C47.6699 37.0183 47.6456 26.9921 41.4722 20.8193C41.4574 20.8045 41.4402 20.7956 41.4254 20.7809L41.4299 20.7764L40.3438 19.6897L40.331 19.7025C40.0424 19.4717 39.6797 19.3536 39.3106 19.3702C38.9414 19.3868 38.5908 19.5369 38.324 19.7927L38.3221 19.7908L38.3035 19.8093L38.3003 19.8119L38.2978 19.8151L36.5224 21.5905L36.5198 21.5924L36.5179 21.5949L36.3912 21.7217L36.404 21.7345C36.1919 22.0038 36.0771 22.3369 36.0781 22.6798C36.0792 23.0226 36.196 23.355 36.4098 23.6231L36.3976 23.6353L36.5186 23.7562L36.5198 23.7575L36.5211 23.7588L37.4837 24.722L37.501 24.7047C37.515 24.7194 37.5246 24.7367 37.5394 24.7514C41.5445 28.7559 41.5669 35.2519 37.6155 39.2903L37.6072 39.282L36.644 40.2452L36.6427 40.2458L36.6421 40.2471L36.5211 40.3681L36.5333 40.3802C36.3024 40.6687 36.1843 41.0313 36.2009 41.4004C36.2175 41.7695 36.3677 42.12 36.6235 42.3866L36.621 42.3892L38.4232 44.1908L38.5518 44.3194L38.5646 44.3066C38.8341 44.5185 39.1672 44.6332 39.51 44.6321C39.8527 44.6311 40.1851 44.5144 40.4533 44.3009L40.4661 44.3137L41.4722 43.3076L41.5522 43.2276L41.5509 43.2257Z" fill="white"/><path d="M34.7551 29.2481C34.3936 28.8862 33.9643 28.5991 33.4918 28.4033C33.0193 28.2074 32.5128 28.1065 32.0013 28.1064C31.4898 28.1064 30.9833 28.2071 30.5108 28.4029C30.0382 28.5987 29.6089 28.8857 29.2473 29.2475C28.8853 29.6089 28.5982 30.0381 28.4022 30.5106C28.2063 30.9831 28.1055 31.4896 28.1055 32.0011C28.1055 32.5126 28.2063 33.019 28.4022 33.4915C28.5982 33.964 28.8853 34.3933 29.2473 34.7547C29.6087 35.1166 30.038 35.4037 30.5105 35.5996C30.983 35.7954 31.4895 35.8962 32.001 35.8962C32.5125 35.8961 33.019 35.7952 33.4915 35.5992C33.9639 35.4032 34.3931 35.116 34.7545 34.754C35.4846 34.0239 35.8948 33.0337 35.8949 32.0012C35.895 30.9687 35.485 29.9784 34.7551 29.2481Z" fill="white"/><path d="M27.59 40.3769L27.6022 40.3647L27.4819 40.2444L27.4799 40.2418L27.478 40.2399L26.5161 39.2774L26.4988 39.2946C26.4847 39.2799 26.4751 39.2626 26.4611 39.2486C22.4559 35.2434 22.4335 28.7474 26.3849 24.709L26.3932 24.7174L27.4793 23.6319L27.4665 23.6191C27.6974 23.3306 27.8155 22.9681 27.7989 22.5989C27.7823 22.2298 27.6321 21.8793 27.3763 21.6127L27.3788 21.6102L25.4473 19.6793L25.4345 19.6921C25.1651 19.48 24.832 19.3652 24.4892 19.3662C24.1464 19.3673 23.8139 19.4841 23.5459 19.6978L23.5337 19.6857L23.4115 19.8079L22.5276 20.6918L22.4476 20.7718L22.4495 20.7737C16.3299 26.981 16.3548 37.0073 22.5283 43.1807C22.5423 43.1948 22.5596 43.2044 22.5743 43.2185L22.5705 43.2223L23.6566 44.309L23.6694 44.2962C23.958 44.5269 24.3205 44.6448 24.6895 44.6282C25.0586 44.6116 25.4091 44.4616 25.6758 44.206L25.6777 44.2079L25.6963 44.1894L25.6995 44.1868L25.702 44.1836L27.478 42.4076L27.4799 42.4063L27.4812 42.405L27.6086 42.2777L27.5958 42.2649C27.8079 41.9957 27.9228 41.6626 27.9218 41.3199C27.9207 40.9771 27.8038 40.6448 27.59 40.3769Z" fill="white"/><path d="M20.1493 47.8176L20.1615 47.8054L20.0399 47.6838L20.0392 47.6832L20.0386 47.6825L19.0747 46.7193L19.0575 46.7366C19.0434 46.7219 19.0338 46.7046 19.0197 46.6899C10.9122 38.5817 10.8879 25.408 18.9423 17.2672L18.9525 17.2774L19.9151 16.3149L19.917 16.3136L19.9183 16.3117L20.0386 16.1913L20.0264 16.1792C20.2575 15.8907 20.3757 15.5279 20.3591 15.1587C20.3425 14.7894 20.1922 14.4388 19.9362 14.1721L19.9387 14.1696L19.021 13.2518L19.0203 13.2512L19.0197 13.2505L18.0079 12.2387L17.9951 12.2521C17.7257 12.0401 17.3926 11.9252 17.0497 11.9263C16.7069 11.9273 16.3745 12.0442 16.1064 12.2579L16.0936 12.2451L15.0082 13.3312L15.0101 13.3331C4.78674 23.6435 4.81106 40.3469 15.0875 50.6227C15.1023 50.6374 15.1195 50.6464 15.1343 50.6605L15.1298 50.6649L16.2159 51.7517L16.2287 51.7389C16.5174 51.9696 16.8801 52.0875 17.2493 52.0708C17.6185 52.0541 17.969 51.9038 18.2357 51.648L18.2376 51.6499L18.2587 51.6288L20.0367 49.8502L20.0399 49.8477L20.0424 49.8445L20.1679 49.719L20.1551 49.7062C20.3671 49.4369 20.482 49.1037 20.4809 48.7609C20.4799 48.4181 20.363 48.0856 20.1493 47.8176Z" fill="white"/></g></svg>
+          </div>
+          <div class="title">
+            <small>Hearing Sheet</small>
+            <h1>ヒアリングシート</h1>
+          </div>
+        </div>
+        <div class="chips" style="flex-shrink:0; margin-left:auto; margin-top:-4px;">
+          <div class="chip" id="chip-save" style="padding-right:5px;"><span class="dot"></span><span>自動保存</span></div>
+          <button class="btn btn-outline" id="btn-reset" type="button" style="font-size:11px !important; padding-top:8px !important; padding-bottom:8px !important;">リセット</button>
+        </div>
+      </div>
+      <p style="margin:1px 0 5px 3px; font-size:13px; color:var(--muted); line-height:1.6; width:100%;">Webサイト制作をスムーズに進めるためのヒアリングシートです。入力内容は自動保存され、PDFでの書き出しも可能です。</p>
+    </div>
+
+    <div class="card progress-card">
+      <div class="row">
+        <div class="meta">
+          <div class="step" id="step-label">Step 1 / 4</div>
+          <div class="pct" id="pct-label">進捗 0%</div>
+        </div>
+
+      </div>
+      <div class="bar" aria-hidden><i id="bar"></i></div>
+      <div class="steps" id="step-pills"></div>
+
+      <!-- Mobile tabs only -->
+      <div style="margin-top:20px; justify-content:center;" class="only-mobile">
+        <div id="tab-switcher" style="display:inline-flex; width:100%; max-width:280px; padding:4px; border-radius:999px; background:#fff; border:1px solid var(--ring); position:relative;">
+          <button class="btn" id="tab-form" type="button" style="flex:1; padding:10px 0; border-radius:999px; font-size:13px; font-weight:800; z-index:1;">入力</button>
+          <button class="btn" id="tab-preview" type="button" style="flex:1; padding:10px 0; border-radius:999px; font-size:13px; font-weight:800; z-index:1;">プレビュー</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="layout">
+      <div class="pane-form">
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title">
+              <div>
+                <h2 id="form-step-title">基本情報</h2>
+                <p id="form-step-desc">基本情報の入力をお願いします。わかる範囲で大丈夫です。</p>
+              </div>
+            </div>
+          </div>
+          <div class="card-body" id="form-groups"></div>
+        </div>
+      </div>
+
+      <div class="pane-preview">
+        <div class="sticky">
+          <div class="card">
+            <div class="card-header">
+              <div class="card-title" style="align-items:center;">
+                <div><h2 style="margin:0;">プレビュー</h2></div>
+                <div style="display:flex; gap:8px; flex-wrap:wrap; justify-content:flex-end;">
+                  <button class="btn btn-outline" id="btn-copy" type="button">テキストコピー</button>
+                  <button class="btn btn-outline" id="btn-pdf" type="button">PDF出力</button>
+                </div>
+              </div>
+            </div>
+            <div class="card-body">
+              <div class="pdf-logo-header">
+                <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="40" height="40" rx="10" fill="#0B1B3A"/><g transform="translate(8, 8) scale(0.375)"><path d="M29.2465 29.2463C28.8849 29.6077 28.598 30.0368 28.4022 30.5091C28.2064 30.9814 28.1056 31.4877 28.1055 31.999C28.1053 32.5103 28.2059 33.0165 28.4015 33.4889C28.5971 33.9613 28.8837 34.3906 29.2452 34.7522C29.6067 35.1141 30.0359 35.4013 30.5084 35.5972C30.981 35.7932 31.4875 35.8941 31.999 35.8941C32.5105 35.8942 33.017 35.7934 33.4896 35.5976C33.9622 35.4018 34.3915 35.1147 34.753 34.7528C35.1152 34.3914 35.4025 33.9621 35.5986 33.4895C35.7946 33.0169 35.8955 32.5103 35.8955 31.9986C35.8955 31.4869 35.7946 30.9803 35.5986 30.5077C35.4025 30.0351 35.1152 29.6058 34.753 29.2444C34.3915 28.8826 33.9622 28.5957 33.4897 28.4C33.0172 28.2043 32.5108 28.1036 31.9994 28.1038C31.4879 28.104 30.9816 28.205 30.5092 28.401C30.0368 28.5971 29.6078 28.8843 29.2465 29.2463ZM48.9918 50.6658C59.2138 40.356 59.1895 23.6533 48.9137 13.3775C48.899 13.3628 48.8817 13.3538 48.867 13.3397L48.8708 13.3359L47.7854 12.2492L47.7726 12.262C47.484 12.0309 47.1213 11.9127 46.7521 11.9293C46.3828 11.9459 46.0322 12.0962 45.7655 12.3522L45.7636 12.3503L45.747 12.3669L45.7418 12.3714L45.738 12.3765L43.9633 14.1506L43.962 14.1519C43.962 14.1522 43.9619 14.1525 43.9616 14.1528C43.9614 14.153 43.9611 14.1532 43.9607 14.1532L43.8327 14.2812L43.8455 14.294C43.6335 14.5634 43.5188 14.8966 43.52 15.2394C43.5211 15.5822 43.6381 15.9146 43.8519 16.1826L43.8398 16.1948L43.9614 16.3164V16.317L44.9258 17.2802L44.9431 17.2629C44.9572 17.2776 44.9668 17.2949 44.9815 17.3096C53.0884 25.4172 53.114 38.5922 45.0596 46.733L45.0487 46.7221L44.0862 47.6847L44.0842 47.686L44.083 47.6879L43.9626 47.8082L43.9748 47.8204C43.7438 48.1089 43.6255 48.4716 43.6421 48.8409C43.6587 49.2101 43.809 49.5608 44.065 49.8274L44.0631 49.8293L44.083 49.8492L44.0842 49.8511L44.0862 49.8524L44.9796 50.7458L44.9809 50.7477L44.9828 50.749L45.8634 51.6296L45.8647 51.6316L45.8666 51.6328L45.9934 51.7596L46.0062 51.7468C46.2756 51.9589 46.6089 52.0737 46.9518 52.0727C47.2947 52.0717 47.6273 51.9548 47.8954 51.741L47.9076 51.7532L48.9105 50.7496C48.9114 50.7486 48.9125 50.7477 48.9137 50.7471L48.9252 50.7349L48.9937 50.6664L48.9918 50.6658Z" fill="white"/><path d="M41.5509 43.2257C47.6699 37.0183 47.6456 26.9921 41.4722 20.8193C41.4574 20.8045 41.4402 20.7956 41.4254 20.7809L41.4299 20.7764L40.3438 19.6897L40.331 19.7025C40.0424 19.4717 39.6797 19.3536 39.3106 19.3702C38.9414 19.3868 38.5908 19.5369 38.324 19.7927L38.3221 19.7908L38.3035 19.8093L38.3003 19.8119L38.2978 19.8151L36.5224 21.5905L36.5198 21.5924L36.5179 21.5949L36.3912 21.7217L36.404 21.7345C36.1919 22.0038 36.0771 22.3369 36.0781 22.6798C36.0792 23.0226 36.196 23.355 36.4098 23.6231L36.3976 23.6353L36.5186 23.7562L36.5198 23.7575L36.5211 23.7588L37.4837 24.722L37.501 24.7047C37.515 24.7194 37.5246 24.7367 37.5394 24.7514C41.5445 28.7559 41.5669 35.2519 37.6155 39.2903L37.6072 39.282L36.644 40.2452L36.6427 40.2458L36.6421 40.2471L36.5211 40.3681L36.5333 40.3802C36.3024 40.6687 36.1843 41.0313 36.2009 41.4004C36.2175 41.7695 36.3677 42.12 36.6235 42.3866L36.621 42.3892L38.4232 44.1908L38.5518 44.3194L38.5646 44.3066C38.8341 44.5185 39.1672 44.6332 39.51 44.6321C39.8527 44.6311 40.1851 44.5144 40.4533 44.3009L40.4661 44.3137L41.4722 43.3076L41.5522 43.2276L41.5509 43.2257Z" fill="white"/><path d="M34.7551 29.2481C34.3936 28.8862 33.9643 28.5991 33.4918 28.4033C33.0193 28.2074 32.5128 28.1065 32.0013 28.1064C31.4898 28.1064 30.9833 28.2071 30.5108 28.4029C30.0382 28.5987 29.6089 28.8857 29.2473 29.2475C28.8853 29.6089 28.5982 30.0381 28.4022 30.5106C28.2063 30.9831 28.1055 31.4896 28.1055 32.0011C28.1055 32.5126 28.2063 33.019 28.4022 33.4915C28.5982 33.964 28.8853 34.3933 29.2473 34.7547C29.6087 35.1166 30.038 35.4037 30.5105 35.5996C30.983 35.7954 31.4895 35.8962 32.001 35.8962C32.5125 35.8961 33.019 35.7952 33.4915 35.5992C33.9639 35.4032 34.3931 35.116 34.7545 34.754C35.4846 34.0239 35.8948 33.0337 35.8949 32.0012C35.895 30.9687 35.485 29.9784 34.7551 29.2481Z" fill="white"/><path d="M27.59 40.3769L27.6022 40.3647L27.4819 40.2444L27.4799 40.2418L27.478 40.2399L26.5161 39.2774L26.4988 39.2946C26.4847 39.2799 26.4751 39.2626 26.4611 39.2486C22.4559 35.2434 22.4335 28.7474 26.3849 24.709L26.3932 24.7174L27.4793 23.6319L27.4665 23.6191C27.6974 23.3306 27.8155 22.9681 27.7989 22.5989C27.7823 22.2298 27.6321 21.8793 27.3763 21.6127L27.3788 21.6102L25.4473 19.6793L25.4345 19.6921C25.1651 19.48 24.832 19.3652 24.4892 19.3662C24.1464 19.3673 23.8139 19.4841 23.5459 19.6978L23.5337 19.6857L23.4115 19.8079L22.5276 20.6918L22.4476 20.7718L22.4495 20.7737C16.3299 26.981 16.3548 37.0073 22.5283 43.1807C22.5423 43.1948 22.5596 43.2044 22.5743 43.2185L22.5705 43.2223L23.6566 44.309L23.6694 44.2962C23.958 44.5269 24.3205 44.6448 24.6895 44.6282C25.0586 44.6116 25.4091 44.4616 25.6758 44.206L25.6777 44.2079L25.6963 44.1894L25.6995 44.1868L25.702 44.1836L27.478 42.4076L27.4799 42.4063L27.4812 42.405L27.6086 42.2777L27.5958 42.2649C27.8079 41.9957 27.9228 41.6626 27.9218 41.3199C27.9207 40.9771 27.8038 40.6448 27.59 40.3769Z" fill="white"/><path d="M20.1493 47.8176L20.1615 47.8054L20.0399 47.6838L20.0392 47.6832L20.0386 47.6825L19.0747 46.7193L19.0575 46.7366C19.0434 46.7219 19.0338 46.7046 19.0197 46.6899C10.9122 38.5817 10.8879 25.408 18.9423 17.2672L18.9525 17.2774L19.9151 16.3149L19.917 16.3136L19.9183 16.3117L20.0386 16.1913L20.0264 16.1792C20.2575 15.8907 20.3757 15.5279 20.3591 15.1587C20.3425 14.7894 20.1922 14.4388 19.9362 14.1721L19.9387 14.1696L19.021 13.2518L19.0203 13.2512L19.0197 13.2505L18.0079 12.2387L17.9951 12.2521C17.7257 12.0401 17.3926 11.9252 17.0497 11.9263C16.7069 11.9273 16.3745 12.0442 16.1064 12.2579L16.0936 12.2451L15.0082 13.3312L15.0101 13.3331C4.78674 23.6435 4.81106 40.3469 15.0875 50.6227C15.1023 50.6374 15.1195 50.6464 15.1343 50.6605L15.1298 50.6649L16.2159 51.7517L16.2287 51.7389C16.5174 51.9696 16.8801 52.0875 17.2493 52.0708C17.6185 52.0541 17.969 51.9038 18.2357 51.648L18.2376 51.6499L18.2587 51.6288L20.0367 49.8502L20.0399 49.8477L20.0424 49.8445L20.1679 49.719L20.1551 49.7062C20.3671 49.4369 20.482 49.1037 20.4809 48.7609C20.4799 48.4181 20.363 48.0856 20.1493 47.8176Z" fill="white"/></g></svg>
+                <span>Hearing Sheet</span>
+              </div>
+              <div class="summary" id="summary">
+                <div class="top">
+                  <div class="auto"><span class="dot"></span>Auto preview</div>
+                </div>
+                <div class="name" id="summary-name">（会社名未入力）</div>
+              </div>
+              <div class="summary-sub-wrap">
+                <div class="sub" id="summary-sub">依頼：—</div>
+              </div>
+
+              <div class="preview-box" id="preview-box"></div>
+
+              <div class="divider"></div>
+
+              <div style="display:grid; gap:10px;">
+                <button class="btn btn-orange" type="button" id="btn-consult" style="padding-top:13px!important;padding-bottom:13px!important;font-size:15px!important;">この内容で共有する <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg></button>
+                <button class="btn btn-ghost" type="button" id="btn-clear">入力項目をリセットする</button>
+              </div>
+            </div>
+          </div>
+
+          <div style="margin-top:12px;">
+            <details>
+              <summary>テキスト形式として表示</summary>
+              <pre id="preview-text"></pre>
+            </details>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+  </div>
+
+  <script>
+    const STORAGE_KEY = "pa4fic_hearing_draft_v1";
+
+    const GOAL_ACTIONS = [
+      { value: "email",    label: "メール",             desc: "問い合わせフォーム送信など", inputLabel: "メールの宛先（受信メール）",   placeholder: "例）info@example.com" },
+      { value: "line",     label: "LINE",               desc: "LINE公式/友だち追加",         inputLabel: "LINEのURL",                   placeholder: "例）https://lin.ee/xxxx" },
+      { value: "phone",    label: "電話",               desc: "電話発信",                     inputLabel: "電話番号",                    placeholder: "例）0197-xx-xxxx" },
+      { value: "download", label: "資料ダウンロード",   desc: "PDF/資料DL",                  inputLabel: "資料ダウンロードURL",          placeholder: "例）https://example.com/download" },
+      { value: "external", label: "外部リンクに飛ばす", desc: "別サービス/予約サイト",        inputLabel: "外部リンクURL",               placeholder: "例）https://reserve.example.com" },
+      { value: "other",    label: "その他",             desc: "自由に記載",                   inputLabel: "その他（内容/URL）",           placeholder: "例）Instagramに飛ばす（https://instagram.com/...）" },
+    ];
+
+    const MOOD_STOPS = [
+      { value: -25, label: "シンプル" },
+      { value: 0, label: "クール" },
+      { value: 25, label: "きれいめ" },
+      { value: 50, label: "ナチュラル" },
+      { value: 75, label: "かわいい" },
+      { value: 100, label: "ポップ" },
+    ];
+
+    function moodLabel(num){
+      const n = Number(num);
+      let best = MOOD_STOPS[0];
+      let bestD = Infinity;
+      MOOD_STOPS.forEach(s => {
+        const d = Math.abs(s.value - n);
+        if(d < bestD){ bestD = d; best = s; }
+      });
+      return best.label;
+    }
+
+    const QUESTIONNAIRE = [
+      {
+        stepId: "basic",
+        title: "基本情報",
+        description: "基本情報の入力をお願いします。わかる範囲で大丈夫です。",
+        groups: [
+          {
+            title: "会社・担当者",
+            fields: [
+              { key: "companyName", label: "会社名 / 屋号", type: "text", placeholder: "例）〇〇〇〇株式会社", required: true },
+              { key: "personName", label: "ご担当者名", type: "text", placeholder: "例）山田 太郎", required: true },
+              { key: "email", label: "メール", type: "email", placeholder: "example@domain.com", required: true },
+              { key: "phoneNumber", label: "電話番号", type: "text", placeholder: "例）090-1234-5678" },
+              { key: "currentHpUrl", label: "御社のWebサイトURL", type: "text", placeholder: "例）https://example.com" },
+              {
+                key: "activeSns", label: "運用中のSNS（複数選択可）", type: "sns_checklist",
+                options: [
+                  { value: "instagram", label: "Instagram", placeholder: "例）https://www.instagram.com/xxx" },
+                  { value: "x", label: "X（旧Twitter）", placeholder: "例）https://x.com/xxx" },
+                  { value: "facebook", label: "Facebook", placeholder: "例）https://www.facebook.com/xxx" },
+                  { value: "line", label: "LINE公式", placeholder: "例）https://lin.ee/xxx" },
+                  { value: "youtube", label: "YouTube", placeholder: "例）https://www.youtube.com/@xxx" },
+                  { value: "tiktok", label: "TikTok", placeholder: "例）https://www.tiktok.com/@xxx" },
+                  { value: "other_sns", label: "その他", placeholder: "例）https://..." },
+                ]
+              },
+              {
+                key: "contactMethod", label: "ご連絡方法（優先）", type: "select",
+                options: [
+                  { value: "email", label: "メール" },
+                  { value: "chatwork", label: "Chatwork" },
+                  { value: "line", label: "LINE" },
+                  { value: "slack", label: "SLACK" },
+                  { value: "other", label: "その他" },
+                ]
+              },
+              {
+                key: "contactUrls",
+                label: "Chatwork / LINE / Slack のURL",
+                type: "urllist",
+                placeholder: "例）https://www.chatwork.com/..."
+              },
+            ]
+          },
+          {
+            title: "事業内容について",
+            fields: [
+              { key: "businessMain", label: "主な事業内容", type: "textarea", rows: 3, required: true, placeholder: "例）県内を中心に、住宅や店舗の新築・リフォームを手がける建設会社です" },
+              { key: "salesProducts", label: "サービス内容", type: "textarea", rows: 3, placeholder: "例）新築一戸建て、増改築・リフォーム、外壁や屋根のメンテナンス など" },
+              { key: "commonInquiries", label: "御社のお客様から、普段どのようなお問合せをいただくことが多いですか？", type: "textarea", rows: 3, placeholder: "例）リフォームの費用や工期の目安、築年数の古い家のリノベーション相談、外壁のひびやさびが気になるといった修繕のご相談" },
+              { key: "usp", label: "他社よりもここは負けないぞ！御社の推しポイント", type: "textarea", rows: 3, placeholder: "例）創業以来、地元密着で培ってきた信頼感／現場担当者が直接ヒアリングするので、細かい要望にもきちんと応えられます" },
+            ]
+          },
+          {
+            title: "案件の種別",
+            fields: [
+              {
+                key: "projectType", label: "依頼内容", type: "select", required: true,
+                options: [
+                  { value: "hp", label: "HP（コーポレート/店舗）" },
+                  { value: "lp", label: "LP（セールス/告知）" },
+                  { value: "hp_lp", label: "HP×LP 統合" },
+                  { value: "ec", label: "EC" },
+                  { value: "other", label: "その他" },
+                ]
+              },
+              { key: "deadline", label: "希望公開日", type: "date", fullWidth: false },
+              {
+                key: "pageCount", label: "制作ページ数", type: "select",
+                options: [
+                  { value: "under3",   label: "3ページ以内" },
+                  { value: "under10",  label: "10ページ以内" },
+                  { value: "10_30",    label: "10〜30ページ" },
+                  { value: "30_50",    label: "30〜50ページ" },
+                  { value: "over50",   label: "50ページ以上" },
+                  { value: "unknown",  label: "わからない" },
+                ]
+              },
+              {
+                key: "budget", label: "ご予算感", type: "select",
+                options: [
+                  { value: "under30",  label: "〜30万" },
+                  { value: "30_60",    label: "30〜60万" },
+                  { value: "60_100",   label: "60〜100万" },
+                  { value: "100_200",  label: "100〜200万" },
+                  { value: "over200",  label: "200万〜" },
+                  { value: "unknown",  label: "未定" },
+                ]
+              },
+              { key: "request", label: "メモ", type: "textarea", placeholder: "例）シンプルで使いやすいデザインにしたい、スマホ対応を重視したい など" },
+            ]
+          }
+        ]
+      },
+      {
+        stepId: "purpose",
+        title: "目的とゴール",
+        description: "Webサイトの目的とゴールを明確にしていきます。",
+        groups: [
+          {
+            title: "目的",
+            fields: [
+              {
+                key: "primaryGoal", label: "一番の目的", type: "select", required: true,
+                options: [
+                  { value: "inquiry", label: "問い合わせを増やしたい" },
+                  { value: "purchase", label: "購入/申込を増やしたい" },
+                  { value: "recruit", label: "採用を強化したい" },
+                  { value: "branding", label: "信頼・ブランディング" },
+                  { value: "support", label: "既存顧客サポート" },
+                ]
+              },
+              { key: "kpi", label: "達成したい数値", type: "text", placeholder: "例）月5件のお問い合わせ" },
+              { key: "successImage", label: "理想の状態（文章でOK）", type: "textarea", placeholder: "例）Webサイトから継続的に問い合わせがくる状態を作りたい など" },
+            ]
+          },
+          {
+            title: "ターゲット",
+            fields: [
+              {
+                key: "targetAge", label: "想定ターゲットの年齢", type: "select", required: true,
+                options: [
+                  { value: "10_20s", label: "10〜20代" },
+                  { value: "30_40s", label: "30〜40代" },
+                  { value: "50_60s", label: "50〜60代" },
+                  { value: "60plus", label: "60代以上" },
+                  { value: "wide", label: "幅広い" },
+                  { value: "other", label: "その他" },
+                ]
+              },
+              { key: "target", label: "想定するお客様", type: "textarea", required: true, placeholder: "例）県内でリフォームを検討している方、築年数がたち修繕か建て直しに悩んでいる方、二世帯住宅を検討している方 など" },
+            ]
+          },
+          {
+            title: "Webサイトのゴール",
+            fields: [
+              { key: "webGoalActions", label: "Webサイトの最終的なゴールは何に繋げますか？", type: "goal_checklist", options: GOAL_ACTIONS },
+            ]
+          }
+        ]
+      },
+      {
+        stepId: "design",
+        title: "デザイン",
+        description: "ご希望の『デザインテイスト』についてお伺いします。",
+        groups: [
+          {
+            title: "配色",
+            fields: [
+              { key: "brandColor", label: "ブランドカラー（メイン）", type: "color", default: "#0B1B3A", required: true },
+              { key: "subColor", label: "サブカラー（補助）", type: "color", default: "#FF6A2A", required: true },
+              { key: "designMood", label: "サイトの雰囲気", type: "mood", default: 50 },
+            ]
+          },
+          {
+            title: "フォント",
+            fields: [
+              { key: "fontStyle", label: "フォントの雰囲気はどちらが近いですか？", type: "font", options: [
+                { value: "gothic", label: "ゴシック体", meta: { desc: "読みやすく現代的" } },
+                { value: "mincho", label: "明朝体", meta: { desc: "上品で落ち着いた印象" } },
+              ] },
+            ]
+          },
+          {
+            title: "その他",
+            fields: [
+              { key: "designNotes", label: "デザインの希望やNG事項などを自由に記述して下さい", type: "textarea", placeholder: "例）派手すぎるのは苦手／写真は大きめが良い／余白多めが好き" },
+            ]
+          },
+          {
+            title: "参考サイト",
+            fields: [
+              { key: "referenceSites", label: "参考サイト", type: "reflist", required: true },
+            ]
+          }
+        ]
+      },
+      {
+        stepId: "server",
+        title: "サーバー関連",
+        description: "現在の環境を教えてください。わからなければ「未定・不明」でOKです。",
+        groups: [
+          { title: "ドメイン", fields: [
+            { key: "hasDomain", label: "ドメインの状況", type: "domain_checklist", required: true },
+          ] },
+          { title: "サーバー", fields: [
+            {
+              key: "hasServer", label: "サーバーの状況", type: "server_checklist", required: true,
+            },
+          ] }
+        ]
+      },
+      {
+        stepId: "functions",
+        title: "運用・保守",
+        description: "『作って終わり』にしないための仕組みを決めます。",
+        groups: [
+          { title: "制作後、活用していきたい機能", fields: [
+            { key: "blog", label: "ブログ/お知らせ（無料）", type: "toggle" },
+            { key: "reserve", label: "予約機能（有料）", type: "toggle" },
+            { key: "shop", label: "決済/EC（有料）", type: "toggle" },
+            { key: "members", label: "会員機能（有料）", type: "toggle" },
+          ] },
+          { title: "運用体制", fields: [
+            { key: "updateOwner", label: "更新担当", required: true, type: "select", options: [
+              { value: "client", label: "自社で更新" },
+              { value: "support", label: "運用サポート希望" },
+              { value: "unknown", label: "未定" },
+            ] },
+            { key: "notes", label: "補足 / 気になってること", type: "textarea", placeholder: "例）サイト公開後も保守・更新をお任せしたい。月額費用の目安が知りたい など" },
+          ] }
+        ]
+      },
+    ];
+
+    const defaultState = {
+      cms:false, blog:false, reserve:false, shop:false, members:false,
+      activeSns:[], snsUrls:{},
+      webGoalActions:[], goalInputs:{},
+      referenceSites:[{ url:'', note:'' }],
+      domainData:{ status:'', name:'', company:'', companyOther:'', id:'', pass:'', memo:'', candidate:'' },
+      serverData:{ status:'', name:'', nameOther:'', id:'', pass:'', memo:'', plan:'', domainCandidate:'', noMemo:'', unknownMemo:'' },
+    };
+
+    function safeParse(str){ try{ return JSON.parse(str); }catch(e){ return null; } }
+
+    function loadState(){
+      const raw = localStorage.getItem(STORAGE_KEY);
+      const parsed = raw ? safeParse(raw) : null;
+      return (parsed && parsed.value) ? { ...defaultState, ...parsed.value } : { ...defaultState };
+    }
+
+    let state = loadState();
+    let stepIndex = 0;
+
+    function findFieldByKey(key){
+      for(const s of QUESTIONNAIRE){
+        for(const g of s.groups){
+          for(const f of g.fields){
+            if(f.key === key) return f;
+          }
+        }
+      }
+      return null;
+    }
+
+    function ensureDefaults(){
+      const brandF = findFieldByKey('brandColor');
+      const subF = findFieldByKey('subColor');
+      const moodF = findFieldByKey('designMood');
+      if(brandF && !state.brandColor) state.brandColor = brandF.default || '#0B1B3A';
+      if(subF && !state.subColor) state.subColor = subF.default || '#FF6A2A';
+      if(moodF && (!Array.isArray(state.designMood))) state.designMood = [];
+      if(!Array.isArray(state.webGoalActions)) state.webGoalActions = [];
+    }
+
+    ensureDefaults();
+
+    let saveTimer = null;
+    function autosave(){
+      if(saveTimer) clearTimeout(saveTimer);
+      saveTimer = setTimeout(() => {
+        try{
+          localStorage.setItem(STORAGE_KEY, JSON.stringify({ value: state, savedAt: Date.now() }));
+          const chip = document.getElementById('chip-save');
+          chip.innerHTML = '<span class="dot"></span><span>保存済み</span>';
+        }catch(e){ /* ignore */ }
+      }, 450);
+    }
+
+    function isFieldVisible(field){
+      if(!field.showIf) return true;
+      const base = state[field.showIf.key];
+      if(field.showIf.includes){
+        return Array.isArray(base) && base.includes(field.showIf.includes);
+      }
+      if(field.showIf.equals){
+        return base === field.showIf.equals;
+      }
+      return true;
+    }
+
+    function isFilled(field, value){
+      if(field.type === 'toggle') return typeof value === 'boolean';
+      if(field.type === 'checklist') return Array.isArray(value) && value.length > 0;
+      if(field.type === 'sns_checklist') return Array.isArray(state.activeSns) && state.activeSns.length > 0;
+      if(field.type === 'goal_checklist') return Array.isArray(state.webGoalActions) && state.webGoalActions.length > 0;
+      if(field.type === 'domain_checklist') return !!(state.domainData && state.domainData.status);
+      if(field.type === 'server_checklist') return !!(state.serverData && state.serverData.status);
+      if(field.type === 'reflist') return Array.isArray(value) && value.some(v => v.url && v.url.trim());
+      if(field.type === 'mood') return Array.isArray(value) && value.length > 0;
+      if(field.type === 'color') return value !== undefined && value !== null && String(value).trim() !== '';
+      return value !== undefined && value !== null && String(value).trim() !== '';
+    }
+
+    function allFields(){
+      const out = [];
+      QUESTIONNAIRE.forEach(s => s.groups.forEach(g => g.fields.forEach(f => out.push({ ...f, stepId:s.stepId }))));
+      return out;
+    }
+
+    function progress(){
+      const fields = allFields().filter(f => isFieldVisible(f));
+      const required = fields.filter(f => f.required);
+      const requiredDone = required.filter(f => isFilled(f, state[f.key])).length;
+      const filled = fields.filter(f => isFilled(f, state[f.key])).length;
+      return { requiredTotal: required.length, requiredDone, allTotal: fields.length, allDone: filled };
+    }
+
+    function prettyValue(field, value){
+      if(!isFieldVisible(field)) return '—';
+      if(value === undefined || value === null || String(value).trim() === ''){
+        if(field.type === 'checklist' && Array.isArray(value) && value.length === 0) return '—';
+        return '—';
+      }
+      if(field.type === 'toggle') return value ? 'はい' : 'いいえ';
+      if(field.type === 'urllist'){
+        const vals = Array.isArray(value) ? value.filter(v => v.trim()) : [];
+        return vals.length ? vals.join('\n') : '—';
+      }
+      if(field.type === 'reflist'){
+        const vals = Array.isArray(value) ? value.filter(v => v.url || v.note) : [];
+        if(!vals.length) return '—';
+        return vals.map((v, i) => `[${i+1}] ${v.url || '（URL未入力）'}${v.note ? '\n　好き：' + v.note : ''}`).join('\n');
+      }
+      if(field.type === 'select'){
+        const opt = (field.options || []).find(o => o.value === value);
+        return opt ? opt.label : String(value);
+      }
+      if(field.type === 'font'){
+        const opt = (field.options || []).find(o => o.value === value);
+        return opt ? opt.label : String(value);
+      }
+      if(field.type === 'mood'){
+        if(!Array.isArray(value) || value.length === 0) return '—';
+        return value.map(v => moodLabel(v)).join('、');
+      }
+      if(field.type === 'color') return String(value).toUpperCase();
+      if(field.type === 'checklist'){
+        const vals = Array.isArray(value) ? value : [];
+        if(vals.length === 0) return '—';
+        return vals.map(v => {
+          const opt = (field.options || []).find(o => o.value === v);
+          const label = opt ? opt.label : v;
+          const url = (state.snsUrls || {})[v];
+          return url ? `${label}：${url}` : label;
+        }).join('\n');
+      }
+      if(field.type === 'sns_checklist'){
+        const vals = Array.isArray(state.activeSns) ? state.activeSns : [];
+        if(vals.length === 0) return '—';
+        return vals.map(v => {
+          const opt = (field.options || []).find(o => o.value === v);
+          const label = opt ? opt.label : v;
+          const url = (state.snsUrls || {})[v];
+          return url ? `${label}：${url}` : label;
+        }).join('\n');
+      }
+      if(field.type === 'goal_checklist'){
+        const vals = Array.isArray(state.webGoalActions) ? state.webGoalActions : [];
+        if(vals.length === 0) return '—';
+        return vals.map(v => {
+          const opt = (field.options || []).find(o => o.value === v);
+          const label = opt ? opt.label : v;
+          const input = (state.goalInputs || {})[v];
+          return input ? `${label}：${input}` : label;
+        }).join('\n');
+      }
+      if(field.type === 'domain_checklist'){
+        const d = state.domainData || {};
+        const statusMap = { yes:'持っている', no:'持っていない', unknown:'わからない' };
+        if(!d.status) return '—';
+        if(d.status === 'yes'){
+          const company = d.company === 'その他' ? (d.companyOther || 'その他') : (d.company || '');
+          return [ `状況：${statusMap[d.status]}`, d.name ? `ドメイン名：${d.name}` : '', company ? `ドメイン会社：${company}` : '', d.id ? `ID：${d.id}` : '', d.pass ? `パス：${d.pass}` : '', d.memo ? `メモ：${d.memo}` : '' ].filter(Boolean).join('\n');
+        }
+        if(d.status === 'no') return [`状況：${statusMap[d.status]}`, d.candidate ? `ドメイン候補：${d.candidate}` : ''].filter(Boolean).join('\n');
+        return [`状況：${statusMap[d.status]}`, d.memo ? `メモ：${d.memo}` : ''].filter(Boolean).join('\n');
+      }
+      if(field.type === 'server_checklist'){
+        const d = state.serverData || {};
+        const statusMap = { yes:'持っている', no:'持っていない', unknown:'わからない' };
+        if(!d.status) return '—';
+        if(d.status === 'yes'){
+          const name = d.name === 'その他' ? (d.nameOther || 'その他') : (d.name || '');
+          return [ `状況：${statusMap[d.status]}`, name ? `サーバー名：${name}` : '', d.id ? `ID：${d.id}` : '', d.pass ? `パス：${d.pass}` : '', d.memo ? `メモ：${d.memo}` : '' ].filter(Boolean).join('\n');
+        }
+        if(d.status === 'no'){
+          const planMap = { self:'新しく契約する', ask:'契約から全てお任せしたい', undecided:'まだ未定' };
+          return [ `状況：${statusMap[d.status]}`, d.plan ? `今後：${planMap[d.plan]}` : '', d.domainCandidate ? `サーバー候補：${d.domainCandidate}` : '', d.noMemo ? `メモ：${d.noMemo}` : '' ].filter(Boolean).join('\n');
+        }
+        return [ `状況：${statusMap[d.status]}`, d.unknownMemo ? `メモ：${d.unknownMemo}` : '' ].filter(Boolean).join('\n');
+      }
+      return String(value);
+    }
+
+    function exportAsText(){
+      let out = 'ヒアリング内容\n';
+      out += '='.repeat(30) + '\n';
+      QUESTIONNAIRE.forEach(s => {
+        out += `\n■ ${s.title}\n`;
+        out += '-'.repeat(20) + '\n';
+        s.groups.forEach(g => {
+          out += `\n【${g.title}】\n`;
+          g.fields.forEach(f => {
+            if(!isFieldVisible(f)) return;
+            let val;
+            if(f.type === 'domain_checklist') val = prettyValue(f, state.domainData);
+            else if(f.type === 'server_checklist') val = prettyValue(f, state.serverData);
+            else if(f.type === 'sns_checklist') val = prettyValue(f, state.activeSns);
+            else if(f.type === 'goal_checklist') val = prettyValue(f, state.webGoalActions);
+            else val = prettyValue(f, state[f.key]);
+            if(val === '—') return;
+            const lines = val.split('\n');
+            if(lines.length <= 1){
+              out += `${f.label}：${val}\n`;
+            } else {
+              out += `${f.label}：\n${val}\n`;
+            }
+          });
+        });
+      });
+      return out.trim();
+    }
+
+    function pdfByPrint(){
+      renderPreview();
+      const brand = state.brandColor || '#0B1B3A';
+      const sub = state.subColor || '#FF6A2A';
+      // summaryにグラデーション（横幅100%バナー）
+      const sum = document.getElementById('summary');
+      if(sum) sum.style.setProperty('background', `linear-gradient(135deg, ${brand} 55%, ${sub} 100%)`, 'important');
+      // nameの個別backgroundをリセット
+      const nameEl = document.getElementById('summary-name');
+      if(nameEl){ nameEl.style.removeProperty('background'); nameEl.style.color = '#fff'; }
+      // subをブランドカラーの文字色
+      const subEl = document.getElementById('summary-sub');
+      if(subEl) subEl.style.setProperty('color', brand, 'important');
+      setPane('preview');
+      setTimeout(() => {
+        window.print();
+        setTimeout(() => { setPane('form'); renderPreview(); }, 500);
+      }, 300);
+    }
+
+    function completedStepIds(){
+      const set = new Set();
+      QUESTIONNAIRE.forEach(s => {
+        const fields = s.groups.flatMap(g => g.fields).filter(f => isFieldVisible(f));
+        const req = fields.filter(f => f.required);
+        const done = req.filter(f => isFilled(f, state[f.key]));
+        if(req.length > 0 && done.length === req.length) set.add(s.stepId);
+      });
+      return set;
+    }
+
+    function renderStepPills(){
+      const host = document.getElementById('step-pills');
+      host.innerHTML = '';
+      const doneSet = completedStepIds();
+      QUESTIONNAIRE.forEach((s, idx) => {
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = 'step-pill';
+        btn.dataset.active = String(idx === stepIndex);
+        btn.innerHTML = `
+          <span class="num">${idx+1}</span>
+          <span>${s.title}</span>
+          ${doneSet.has(s.stepId) ? '<span class="ok">✓</span>' : ''}
+        `;
+        btn.addEventListener('click', () => { stepIndex = idx; rerender(); });
+        host.appendChild(btn);
+      });
+    }
+
+    function renderFontPicker(field){
+      const wrap = document.createElement('div');
+      const grid = document.createElement('div');
+      grid.className = 'font-grid';
+
+      (field.options || []).forEach(opt => {
+        const btn = document.createElement('div');
+        btn.className = 'pick';
+        btn.dataset.selected = String(state[field.key] === opt.value);
+
+        const desc = (opt.meta && opt.meta.desc) ? opt.meta.desc : '';
+
+        const t = document.createElement('div');
+        t.className = 'ptitle';
+        t.textContent = opt.label;
+
+        const p = document.createElement('div');
+        p.className = 'pdesc';
+        p.textContent = desc;
+
+        const sample = document.createElement('div');
+        sample.className = 'font-sample ' + (opt.value === 'mincho' ? 'mincho' : 'gothic');
+        sample.innerHTML = `
+          <div style="font-weight:900; font-size:16px;">見本：あなたのサービスが伝わるサイトに</div>
+          <div style="margin-top:6px; font-size:12px; color:#334155;">余白・見出し・読みやすさの印象が変わります</div>
+        `;
+
+        btn.appendChild(t);
+        btn.appendChild(p);
+        btn.appendChild(sample);
+
+        btn.addEventListener('click', () => {
+          state[field.key] = opt.value;
+          autosave();
+          rerenderPreviewOnly();
+          rerenderProgressOnly();
+          grid.querySelectorAll('.pick').forEach(el => el.dataset.selected = 'false');
+          btn.dataset.selected = 'true';
+        });
+
+        grid.appendChild(btn);
+      });
+
+      wrap.appendChild(grid);
+      return wrap;
+    }
+
+    const COLOR_PRESETS = {
+      main: [
+        { hex:'#f9fafb', label:'ホワイト系' },
+        { hex:'#111827', label:'ブラック系' },
+        { hex:'#9ca3af', label:'グレー系' },
+        { hex:'#FF3B5C', label:'レッド系' },
+        { hex:'#FF6A2A', label:'オレンジ系' },
+        { hex:'#FFD000', label:'イエロー系' },
+        { hex:'#1a9e3f', label:'グリーン系' },
+        { hex:'#00AAFF', label:'水色系' },
+        { hex:'#1A6FFF', label:'ブルー系' },
+        { hex:'#0B1B3A', label:'ネイビー系' },
+        { hex:'#7B2FFF', label:'パープル系' },
+        { hex:'#FF2D9B', label:'ピンク系' },
+        { hex:'#e8d5b7', label:'ベージュ系' },
+        { hex:'#92634a', label:'ブラウン系' },
+        { hex:'#e2e8f0', label:'未定' },
+      ],
+      sub: [
+        { hex:'#f9fafb', label:'ホワイト系' },
+        { hex:'#111827', label:'ブラック系' },
+        { hex:'#9ca3af', label:'グレー系' },
+        { hex:'#FF3B5C', label:'レッド系' },
+        { hex:'#FF6A2A', label:'オレンジ系' },
+        { hex:'#FFD000', label:'イエロー系' },
+        { hex:'#1a9e3f', label:'グリーン系' },
+        { hex:'#00AAFF', label:'水色系' },
+        { hex:'#1A6FFF', label:'ブルー系' },
+        { hex:'#0B1B3A', label:'ネイビー系' },
+        { hex:'#7B2FFF', label:'パープル系' },
+        { hex:'#FF2D9B', label:'ピンク系' },
+        { hex:'#e8d5b7', label:'ベージュ系' },
+        { hex:'#92634a', label:'ブラウン系' },
+        { hex:'#e2e8f0', label:'未定' },
+      ]
+    };
+
+    function renderColorPair(){
+      const wrap = document.createElement('div');
+      wrap.className = 'color-section';
+
+      const make = (key, title, presetKey) => {
+        const card = document.createElement('div');
+        card.className = 'group';
+        card.style.marginBottom = '0';
+
+        // ラベル
+        const lbl = document.createElement('div');
+        lbl.className = 'color-section-label';
+        lbl.textContent = title;
+        card.appendChild(lbl);
+
+        // プリセットパレット
+        const palette = document.createElement('div');
+        palette.className = 'preset-palette';
+
+        const swatches = [];
+        COLOR_PRESETS[presetKey].forEach(preset => {
+          const swWrap = document.createElement('div');
+          swWrap.className = 'preset-swatch-wrap';
+          swWrap.dataset.active = String(
+            (state[key] || '').toLowerCase() === preset.hex.toLowerCase()
+          );
+
+          const sw = document.createElement('div');
+          sw.className = 'preset-swatch';
+          sw.style.background = preset.hex;
+          sw.title = preset.label;
+
+          // ホワイト系は枠をつける
+          if(preset.hex === '#f9fafb' || preset.hex === '#fff'){
+            sw.style.border = '2px solid #e2e8f0';
+          }
+
+          const nameLbl = document.createElement('div');
+          nameLbl.className = 'preset-swatch-name';
+          nameLbl.textContent = preset.label;
+
+          swWrap.appendChild(sw);
+          swWrap.appendChild(nameLbl);
+
+          swWrap.addEventListener('click', () => {
+            state[key] = preset.hex;
+            autosave();
+            rerenderPreviewOnly();
+            rerenderProgressOnly();
+            swatches.forEach(s => s.dataset.active = 'false');
+            swWrap.dataset.active = 'true';
+            picker.value = preset.hex;
+            hexLabel.textContent = preset.hex.toUpperCase();
+          });
+
+          swatches.push(swWrap);
+          palette.appendChild(swWrap);
+        });
+        card.appendChild(palette);
+
+        // 区切り
+        const divider = document.createElement('div');
+        divider.className = 'color-divider';
+        divider.textContent = 'または、カスタムカラーを選ぶ';
+        card.appendChild(divider);
+
+        // カラーピッカー行
+        const pickerRow = document.createElement('div');
+        pickerRow.className = 'picker-row';
+
+        const pickerLabel = document.createElement('div');
+        pickerLabel.className = 'picker-label';
+        pickerLabel.textContent = 'ロゴカラー等をカラーピッカーで指定';
+
+        const pickerCustom = document.createElement('div');
+        pickerCustom.className = 'picker-custom';
+
+        const picker = document.createElement('input');
+        picker.type = 'color';
+        picker.value = state[key] || (key === 'brandColor' ? '#0B1B3A' : '#FF6A2A');
+        picker.style.cssText = 'width:36px;height:36px;border:0;padding:0;background:transparent;cursor:pointer;border-radius:8px;overflow:hidden;';
+
+        const hexLabel = document.createElement('div');
+        hexLabel.className = 'picker-hex';
+        hexLabel.textContent = (state[key] || (key === 'brandColor' ? '#0B1B3A' : '#FF6A2A')).toUpperCase();
+
+        picker.addEventListener('input', () => {
+          state[key] = picker.value;
+          hexLabel.textContent = picker.value.toUpperCase();
+          autosave();
+          rerenderPreviewOnly();
+          rerenderProgressOnly();
+          // プリセット選択解除
+          swatches.forEach(s => {
+            const sw = s.querySelector('.preset-swatch');
+            s.dataset.active = String(sw.style.background.toLowerCase() === picker.value.toLowerCase());
+          });
+        });
+
+        pickerCustom.appendChild(picker);
+        pickerCustom.appendChild(hexLabel);
+
+        pickerRow.appendChild(pickerLabel);
+        pickerRow.appendChild(pickerCustom);
+        card.appendChild(pickerRow);
+
+        return card;
+      };
+
+      wrap.appendChild(make('brandColor', 'ブランドカラー（メイン）', 'main'));
+      wrap.appendChild(make('subColor', 'サブカラー（補助）', 'sub'));
+      return wrap;
+    }
+
+    function renderRefList(field){
+      // state は [{url:'', note:''}] の配列で管理
+      if(!Array.isArray(state[field.key]) || state[field.key].length === 0){
+        state[field.key] = [{ url:'', note:'' }];
+      }
+
+      const wrap = document.createElement('div');
+      wrap.className = 'urllist';
+
+      const addRow = (idx) => {
+        const block = document.createElement('div');
+        block.className = 'reflist-block';
+
+        // URL入力
+        const urlRow = document.createElement('div');
+        urlRow.className = 'urllist-row';
+
+        const urlLabel = document.createElement('div');
+        urlLabel.className = 'reflist-label';
+        urlLabel.textContent = `参考URL ${idx + 1}`;
+
+        const urlInput = document.createElement('input');
+        urlInput.type = 'text';
+        urlInput.placeholder = '例）https://...';
+        urlInput.value = state[field.key][idx]?.url ?? '';
+        urlInput.addEventListener('input', () => {
+          state[field.key][idx].url = urlInput.value;
+          autosave(); rerenderPreviewOnly(); rerenderProgressOnly();
+        });
+
+        const delBtn = document.createElement('button');
+        delBtn.type = 'button';
+        delBtn.className = 'btn-del';
+        delBtn.innerHTML = '×';
+        delBtn.title = '削除';
+        delBtn.addEventListener('click', () => {
+          state[field.key].splice(idx, 1);
+          if(state[field.key].length === 0) state[field.key] = [{ url:'', note:'' }];
+          autosave(); rerenderPreviewOnly(); rerenderProgressOnly();
+          refreshList();
+        });
+
+        urlRow.appendChild(urlInput);
+        urlRow.appendChild(delBtn);
+
+        // 好きなポイント
+        const noteInput = document.createElement('textarea');
+        noteInput.placeholder = '例）余白感 / フォント / 導線 / アニメーション';
+        noteInput.style.cssText = 'min-height:64px; margin-top:6px;';
+        noteInput.value = state[field.key][idx]?.note ?? '';
+        noteInput.addEventListener('input', () => {
+          state[field.key][idx].note = noteInput.value;
+          autosave(); rerenderPreviewOnly(); rerenderProgressOnly();
+        });
+
+        const noteLabel = document.createElement('div');
+        noteLabel.className = 'reflist-label';
+        noteLabel.textContent = '好きなポイント';
+
+        block.appendChild(urlLabel);
+        block.appendChild(urlRow);
+        block.appendChild(noteLabel);
+        block.appendChild(noteInput);
+
+        wrap.insertBefore(block, addBtn);
+      };
+
+      const addBtn = document.createElement('button');
+      addBtn.type = 'button';
+      addBtn.className = 'urllist-add';
+      addBtn.innerHTML = '<span class="plus">＋</span><span>URLの入力欄を追加する</span>';
+      addBtn.addEventListener('click', () => {
+        state[field.key].push({ url:'', note:'' });
+        autosave();
+        refreshList();
+      });
+
+      wrap.appendChild(addBtn);
+
+      const refreshList = () => {
+        [...wrap.querySelectorAll('.reflist-block')].forEach(r => r.remove());
+        state[field.key].forEach((_, i) => addRow(i));
+      };
+
+      refreshList();
+      return wrap;
+    }
+
+    function makeOptButton(label, selected){
+      const btn = document.createElement('div');
+      btn.className = 'opt-btn';
+      btn.dataset.selected = String(selected);
+
+      const circle = document.createElement('div');
+      circle.className = 'opt-btn-circle';
+
+      const lbl = document.createElement('div');
+      lbl.className = 'opt-btn-label';
+      lbl.textContent = label;
+
+      btn.appendChild(circle);
+      btn.appendChild(lbl);
+      return btn;
+    }
+
+    function renderDomainChecklist(field){
+      if(!state.domainData || typeof state.domainData !== 'object') state.domainData = { status:'', name:'', company:'', companyOther:'', id:'', pass:'', memo:'', candidate:'' };
+
+      const DOMAIN_COMPANIES = ['お名前.com', 'ムームードメイン', 'エックスサーバードメイン', 'その他'];
+
+      const OPTIONS = [
+        { value:'yes', label:'持っている' },
+        { value:'no',  label:'持っていない' },
+        { value:'unknown', label:'わからない' },
+      ];
+
+      const wrap = document.createElement('div');
+      wrap.style.cssText = 'display:flex !important; flex-direction:column !important; gap:8px !important; width:100% !important;';
+
+      const makeLabel = (text) => {
+        const l = document.createElement('div');
+        l.style.cssText = 'font-size:12px;font-weight:800;color:var(--muted);margin-bottom:4px;';
+        l.textContent = text;
+        return l;
+      };
+
+      OPTIONS.forEach(opt => {
+        const item = document.createElement('div');
+        item.style.cssText = `display:block !important; border:1px solid ${state.domainData.status === opt.value ? 'var(--orange)' : 'var(--ring)'} !important; border-radius:14px !important; background:#fff !important; overflow:hidden !important;`;
+        item.dataset.checked = String(state.domainData.status === opt.value);
+
+        const checkRow = document.createElement('div');
+        checkRow.style.cssText = 'display:flex !important; align-items:center !important; gap:10px !important; padding:10px 14px !important; cursor:pointer !important; user-select:none !important;';
+
+        const dot = document.createElement('div');
+        dot.dataset.radioDot = '1';
+        dot.style.cssText = `width:18px !important; height:18px !important; min-width:18px !important; border-radius:50% !important; border:2px solid ${state.domainData.status === opt.value ? 'var(--orange)' : '#cbd5e1'} !important; background:${state.domainData.status === opt.value ? 'var(--orange)' : '#fff'} !important; display:flex !important; align-items:center !important; justify-content:center !important; box-sizing:border-box !important; flex-shrink:0 !important;`;
+
+        const dotInner = document.createElement('div');
+        dotInner.style.cssText = `width:6px !important; height:6px !important; border-radius:50% !important; background:#fff !important; opacity:${state.domainData.status === opt.value ? '1' : '0'} !important;`;
+        dot.appendChild(dotInner);
+
+        const lbl = document.createElement('div');
+        lbl.style.cssText = 'font-size:13px !important; font-weight:800 !important; color:var(--navy) !important;';
+        lbl.textContent = opt.label;
+
+        checkRow.appendChild(dot);
+        checkRow.appendChild(lbl);
+        item.appendChild(checkRow);
+
+        // 持っている → ドメイン名・会社・ID・パス・メモ
+        if(opt.value === 'yes'){
+          const inputWrap = document.createElement('div');
+          inputWrap.className = 'sns-url-wrap wrap-lg';
+          inputWrap.style.maxHeight = state.domainData.status === 'yes' ? '800px' : '0';
+
+          // ドメイン名
+          const nameInput = document.createElement('input');
+          nameInput.type = 'text';
+          nameInput.placeholder = '例）example.com';
+          nameInput.value = state.domainData.name || '';
+          nameInput.style.marginBottom = '8px';
+          nameInput.addEventListener('input', () => { state.domainData.name = nameInput.value; autosave(); rerenderPreviewOnly(); });
+
+          // ドメイン会社選択
+          const companySelect = document.createElement('select');
+          companySelect.style.marginBottom = '8px';
+          const opt0 = document.createElement('option');
+          opt0.value = ''; opt0.textContent = '選択してください';
+          companySelect.appendChild(opt0);
+          DOMAIN_COMPANIES.forEach(c => {
+            const o = document.createElement('option');
+            o.value = c; o.textContent = c;
+            if(state.domainData.company === c) o.selected = true;
+            companySelect.appendChild(o);
+          });
+
+          const otherWrap = document.createElement('div');
+          otherWrap.style.cssText = `display:${state.domainData.company === 'その他' ? 'block' : 'none'};margin-bottom:8px;`;
+          const otherInput = document.createElement('input');
+          otherInput.type = 'text';
+          otherInput.placeholder = 'ドメイン会社名を入力';
+          otherInput.value = state.domainData.companyOther || '';
+          otherInput.addEventListener('input', () => { state.domainData.companyOther = otherInput.value; autosave(); rerenderPreviewOnly(); });
+          otherWrap.appendChild(otherInput);
+
+          companySelect.addEventListener('change', function(){
+            state.domainData.company = this.value;
+            otherWrap.style.display = this.value === 'その他' ? 'block' : 'none';
+            autosave(); rerenderPreviewOnly();
+          });
+
+          // ID
+          const idInput = document.createElement('input');
+          idInput.type = 'text';
+          idInput.placeholder = '例）user123';
+          idInput.value = state.domainData.id || '';
+          idInput.style.marginBottom = '8px';
+          idInput.addEventListener('input', () => { state.domainData.id = idInput.value; autosave(); rerenderPreviewOnly(); });
+
+          // パスワード
+          const passInput = document.createElement('input');
+          passInput.type = 'text';
+          passInput.placeholder = '例）password123';
+          passInput.value = state.domainData.pass || '';
+          passInput.style.marginBottom = '8px';
+          passInput.addEventListener('input', () => { state.domainData.pass = passInput.value; autosave(); rerenderPreviewOnly(); });
+
+          // メモ
+          const memoInput = document.createElement('textarea');
+          memoInput.placeholder = '例）自動更新設定済み、次回更新は来年3月 など';
+          memoInput.style.minHeight = '64px';
+          memoInput.value = state.domainData.memo || '';
+          memoInput.addEventListener('input', () => { state.domainData.memo = memoInput.value; autosave(); rerenderPreviewOnly(); });
+
+          inputWrap.appendChild(makeLabel('ドメイン名'));
+          inputWrap.appendChild(nameInput);
+          inputWrap.appendChild(makeLabel('ドメイン会社'));
+          inputWrap.appendChild(companySelect);
+          inputWrap.appendChild(otherWrap);
+          inputWrap.appendChild(makeLabel('ID'));
+          inputWrap.appendChild(idInput);
+          inputWrap.appendChild(makeLabel('パスワード'));
+          inputWrap.appendChild(passInput);
+          inputWrap.appendChild(makeLabel('その他メモ'));
+          inputWrap.appendChild(memoInput);
+          item.appendChild(inputWrap);
+        }
+
+        // 持っていない → ドメイン候補入力
+        if(opt.value === 'no'){
+          const inputWrap = document.createElement('div');
+          inputWrap.className = 'sns-url-wrap';
+          inputWrap.style.maxHeight = state.domainData.status === 'no' ? '200px' : '0';
+
+          const candidateInput = document.createElement('input');
+          candidateInput.type = 'text';
+          candidateInput.placeholder = '例）example.com、my-shop.jp など';
+          candidateInput.value = state.domainData.candidate || '';
+          candidateInput.addEventListener('input', () => { state.domainData.candidate = candidateInput.value; autosave(); rerenderPreviewOnly(); });
+
+          inputWrap.appendChild(makeLabel('ドメイン候補'));
+          inputWrap.appendChild(candidateInput);
+          item.appendChild(inputWrap);
+        }
+
+        // わからない → メモ欄
+        if(opt.value === 'unknown'){
+          const inputWrap = document.createElement('div');
+          inputWrap.className = 'sns-url-wrap';
+          inputWrap.style.maxHeight = state.domainData.status === 'unknown' ? '200px' : '0';
+
+          const memoInput = document.createElement('textarea');
+          memoInput.placeholder = '例）確認中、担当者が不明 など';
+          memoInput.style.minHeight = '64px';
+          memoInput.value = state.domainData.memo || '';
+          memoInput.addEventListener('input', () => { state.domainData.memo = memoInput.value; autosave(); rerenderPreviewOnly(); });
+
+          inputWrap.appendChild(makeLabel('メモ・補足'));
+          inputWrap.appendChild(memoInput);
+          item.appendChild(inputWrap);
+        }
+
+        checkRow.addEventListener('click', () => {
+          state.domainData.status = opt.value;
+          wrap.querySelectorAll('div[data-checked]').forEach(el => {
+            el.dataset.checked = 'false';
+            el.style.borderColor = 'var(--ring)';
+            const w = el.querySelector('.sns-url-wrap');
+            if(w) w.style.maxHeight = '0';
+            const d = el.querySelector('[data-radio-dot]');
+            if(d){
+              d.style.setProperty('border-color', '#cbd5e1', 'important');
+              d.style.setProperty('background', '#fff', 'important');
+              const inner = d.querySelector('div');
+              if(inner) inner.style.setProperty('opacity', '0', 'important');
+            }
+          });
+          item.dataset.checked = 'true';
+          item.style.borderColor = 'var(--orange)';
+          dot.style.setProperty('border-color', 'var(--orange)', 'important');
+          dot.style.setProperty('background', 'var(--orange)', 'important');
+          dotInner.style.setProperty('opacity', '1', 'important');
+          const thisWrap = item.querySelector('.sns-url-wrap');
+          if(thisWrap) thisWrap.style.maxHeight = opt.value === 'yes' ? '800px' : '200px';
+          autosave(); rerenderPreviewOnly();
+        });
+
+        wrap.appendChild(item);
+      });
+
+      return wrap;
+    }
+
+    function renderServerChecklist(field){
+      if(!state.serverData || typeof state.serverData !== 'object') state.serverData = { status: '', name: '', nameOther: '', id: '', pass: '', memo: '', plan: '' };
+
+      const SERVER_OPTIONS = [
+        { value: 'yes', label: '持っている' },
+        { value: 'no', label: '持っていない' },
+        { value: 'unknown', label: 'わからない' },
+      ];
+      const SERVER_NAMES = [
+        'エックスサーバー','ConoHa WING','さくらインターネット','ロリポップ！','その他'
+      ];
+      const NO_PLANS = [
+        { value: 'self', label: '新しく契約する' },
+        { value: 'ask', label: '契約から全てお任せしたい' },
+        { value: 'undecided', label: 'まだ未定' },
+      ];
+
+      const wrap = document.createElement('div');
+      wrap.style.cssText = 'display:flex !important; flex-direction:column !important; gap:8px !important; width:100% !important;';
+
+      SERVER_OPTIONS.forEach(opt => {
+        const item = document.createElement('div');
+        item.style.cssText = `display:block !important; border:1px solid ${state.serverData.status === opt.value ? 'var(--orange)' : 'var(--ring)'} !important; border-radius:14px !important; background:#fff !important; overflow:hidden !important;`;
+        item.dataset.checked = String(state.serverData.status === opt.value);
+
+        const checkRow = document.createElement('div');
+        checkRow.style.cssText = 'display:flex !important; align-items:center !important; gap:10px !important; padding:10px 14px !important; cursor:pointer !important; user-select:none !important;';
+
+        const dot = document.createElement('div');
+        dot.dataset.radioDot = '1';
+        dot.style.cssText = `width:18px !important; height:18px !important; min-width:18px !important; border-radius:50% !important; border:2px solid ${state.serverData.status === opt.value ? 'var(--orange)' : '#cbd5e1'} !important; background:${state.serverData.status === opt.value ? 'var(--orange)' : '#fff'} !important; display:flex !important; align-items:center !important; justify-content:center !important; box-sizing:border-box !important; flex-shrink:0 !important;`;
+
+        const dotInner = document.createElement('div');
+        dotInner.style.cssText = `width:6px !important; height:6px !important; border-radius:50% !important; background:#fff !important; opacity:${state.serverData.status === opt.value ? '1' : '0'} !important;`;
+        dot.appendChild(dotInner);
+
+        const lbl = document.createElement('div');
+        lbl.style.cssText = 'font-size:13px !important; font-weight:800 !important; color:var(--navy) !important;';
+        lbl.textContent = opt.label;
+
+        checkRow.appendChild(dot);
+        checkRow.appendChild(lbl);
+        item.appendChild(checkRow);
+
+        // 「持っている」の詳細入力欄
+        if(opt.value === 'yes'){
+          const inputWrap = document.createElement('div');
+          inputWrap.className = 'sns-url-wrap';
+          inputWrap.style.maxHeight = state.serverData.status === 'yes' ? '600px' : '0';
+
+          const makeLabel = (text) => {
+            const l = document.createElement('div');
+            l.style.cssText = 'font-size:12px;font-weight:800;color:var(--muted);margin-bottom:4px;';
+            l.textContent = text;
+            return l;
+          };
+
+          // サーバー名選択
+          const nameSelect = document.createElement('select');
+          nameSelect.style.marginBottom = '8px';
+          const opt0 = document.createElement('option');
+          opt0.value = ''; opt0.textContent = '選択してください';
+          nameSelect.appendChild(opt0);
+          SERVER_NAMES.forEach(n => {
+            const o = document.createElement('option');
+            o.value = n; o.textContent = n;
+            if(state.serverData.name === n) o.selected = true;
+            nameSelect.appendChild(o);
+          });
+          nameSelect.addEventListener('change', function(){
+            state.serverData.name = this.value;
+            otherWrap.style.display = this.value === 'その他' ? 'block' : 'none';
+            autosave(); rerenderPreviewOnly();
+          });
+
+          const otherWrap = document.createElement('div');
+          otherWrap.style.cssText = `display:${state.serverData.name === 'その他' ? 'block' : 'none'};margin-bottom:8px;`;
+          const otherInput = document.createElement('input');
+          otherInput.type = 'text';
+          otherInput.placeholder = 'サーバー名を入力';
+          otherInput.value = state.serverData.nameOther || '';
+          otherInput.addEventListener('input', () => { state.serverData.nameOther = otherInput.value; autosave(); rerenderPreviewOnly(); });
+          otherWrap.appendChild(otherInput);
+
+          const idInput = document.createElement('input');
+          idInput.type = 'text';
+          idInput.placeholder = '例）user123';
+          idInput.value = state.serverData.id || '';
+          idInput.style.marginBottom = '8px';
+          idInput.addEventListener('input', () => { state.serverData.id = idInput.value; autosave(); rerenderPreviewOnly(); });
+
+          const passInput = document.createElement('input');
+          passInput.type = 'text';
+          passInput.placeholder = '例）password123';
+          passInput.value = state.serverData.pass || '';
+          passInput.style.marginBottom = '8px';
+          passInput.addEventListener('input', () => { state.serverData.pass = passInput.value; autosave(); rerenderPreviewOnly(); });
+
+          const memoInput = document.createElement('textarea');
+          memoInput.placeholder = '例）FTPアカウントあり、WordPressインストール済み など';
+          memoInput.style.minHeight = '64px';
+          memoInput.value = state.serverData.memo || '';
+          memoInput.addEventListener('input', () => { state.serverData.memo = memoInput.value; autosave(); rerenderPreviewOnly(); });
+
+          inputWrap.appendChild(makeLabel('サーバー名'));
+          inputWrap.appendChild(nameSelect);
+          inputWrap.appendChild(otherWrap);
+          inputWrap.appendChild(makeLabel('サーバーID'));
+          inputWrap.appendChild(idInput);
+          inputWrap.appendChild(makeLabel('サーバーパスワード'));
+          inputWrap.appendChild(passInput);
+          inputWrap.appendChild(makeLabel('その他メモ'));
+          inputWrap.appendChild(memoInput);
+          item.appendChild(inputWrap);
+        }
+
+        // 「持っていない」の今後の方針選択
+        if(opt.value === 'no'){
+          const planWrap = document.createElement('div');
+          planWrap.className = 'sns-url-wrap';
+          planWrap.style.maxHeight = state.serverData.status === 'no' ? '1000px' : '0';
+
+          const planLabel = document.createElement('div');
+          planLabel.style.cssText = 'font-size:12px;font-weight:800;color:var(--muted);margin-bottom:8px;';
+          planLabel.textContent = '今後どうしていきますか？';
+
+          const planOptions = document.createElement('div');
+          planOptions.style.cssText = 'display:grid;gap:6px;margin-bottom:12px;';
+
+          NO_PLANS.forEach(plan => {
+            const planItem = document.createElement('label');
+            planItem.style.cssText = 'display:flex;align-items:center;gap:8px;padding:8px 10px;border:1px solid var(--ring);border-radius:10px;cursor:pointer;background:#fff;';
+
+            const planRadio = document.createElement('input');
+            planRadio.type = 'radio';
+            planRadio.name = 'server_plan';
+            planRadio.value = plan.value;
+            planRadio.checked = state.serverData.plan === plan.value;
+            planRadio.style.cssText = 'width:16px;height:16px;accent-color:var(--orange);flex-shrink:0;';
+            planRadio.addEventListener('change', () => {
+              if(planRadio.checked){ state.serverData.plan = plan.value; autosave(); rerenderPreviewOnly(); }
+            });
+
+            const planLbl = document.createElement('div');
+            planLbl.style.cssText = 'font-size:13px;font-weight:800;';
+            planLbl.textContent = plan.label;
+
+            planItem.appendChild(planRadio);
+            planItem.appendChild(planLbl);
+            planOptions.appendChild(planItem);
+          });
+
+          // ドメイン候補
+          const domainLabel = document.createElement('div');
+          domainLabel.style.cssText = 'font-size:12px;font-weight:800;color:var(--muted);margin-bottom:4px;';
+          domainLabel.textContent = 'サーバーの候補';
+          const domainInput = document.createElement('input');
+          domainInput.type = 'text';
+          domainInput.placeholder = '例）エックスサーバー、ConoHa WING など';
+          domainInput.value = state.serverData.domainCandidate || '';
+          domainInput.style.marginBottom = '8px';
+          domainInput.addEventListener('input', () => { state.serverData.domainCandidate = domainInput.value; autosave(); rerenderPreviewOnly(); });
+
+          // 自由記入
+          const noMemoLabel = document.createElement('div');
+          noMemoLabel.style.cssText = 'font-size:12px;font-weight:800;color:var(--muted);margin-bottom:4px;';
+          noMemoLabel.textContent = 'その他メモ・ご要望';
+          const noMemoInput = document.createElement('textarea');
+          noMemoInput.placeholder = '例）費用を抑えたい、おすすめを教えてほしい など';
+          noMemoInput.style.minHeight = '64px';
+          noMemoInput.value = state.serverData.noMemo || '';
+          noMemoInput.addEventListener('input', () => { state.serverData.noMemo = noMemoInput.value; autosave(); rerenderPreviewOnly(); });
+
+          planWrap.appendChild(planLabel);
+          planWrap.appendChild(planOptions);
+          planWrap.appendChild(domainLabel);
+          planWrap.appendChild(domainInput);
+          planWrap.appendChild(noMemoLabel);
+          planWrap.appendChild(noMemoInput);
+          item.appendChild(planWrap);
+        }
+
+        // 「わからない」のメモ欄
+        if(opt.value === 'unknown'){
+          const unknownWrap = document.createElement('div');
+          unknownWrap.className = 'sns-url-wrap';
+          unknownWrap.style.maxHeight = state.serverData.status === 'unknown' ? '200px' : '0';
+
+          const unknownLabel = document.createElement('div');
+          unknownLabel.style.cssText = 'font-size:12px;font-weight:800;color:var(--muted);margin-bottom:4px;';
+          unknownLabel.textContent = 'メモ・補足';
+          const unknownMemo = document.createElement('textarea');
+          unknownMemo.placeholder = '例）担当者が変わって詳細不明、確認中 など';
+          unknownMemo.style.minHeight = '64px';
+          unknownMemo.value = state.serverData.unknownMemo || '';
+          unknownMemo.addEventListener('input', () => { state.serverData.unknownMemo = unknownMemo.value; autosave(); rerenderPreviewOnly(); });
+
+          unknownWrap.appendChild(unknownLabel);
+          unknownWrap.appendChild(unknownMemo);
+          item.appendChild(unknownWrap);
+        }
+
+        checkRow.addEventListener('click', () => {
+          state.serverData.status = opt.value;
+          if(opt.value !== 'no') state.serverData.plan = '';
+          wrap.querySelectorAll('div[data-checked]').forEach(el => {
+            el.dataset.checked = 'false';
+            el.style.borderColor = 'var(--ring)';
+            const w = el.querySelector('.sns-url-wrap');
+            if(w) w.style.maxHeight = '0';
+            const d = el.querySelector('[data-radio-dot]');
+            if(d){
+              d.style.setProperty('border-color', '#cbd5e1', 'important');
+              d.style.setProperty('background', '#fff', 'important');
+              const inner = d.querySelector('div');
+              if(inner) inner.style.setProperty('opacity', '0', 'important');
+            }
+          });
+          item.dataset.checked = 'true';
+          item.style.borderColor = 'var(--orange)';
+          dot.style.setProperty('border-color', 'var(--orange)', 'important');
+          dot.style.setProperty('background', 'var(--orange)', 'important');
+          dotInner.style.setProperty('opacity', '1', 'important');
+          const thisWrap = item.querySelector('.sns-url-wrap');
+          if(thisWrap) thisWrap.style.maxHeight = opt.value === 'yes' ? '600px' : opt.value === 'no' ? '1000px' : '300px';
+          autosave(); rerenderPreviewOnly();
+        });
+
+        wrap.appendChild(item);
+      });
+
+      return wrap;
+    }
+
+    function renderGoalChecklist(field){
+      if(!Array.isArray(state[field.key])) state[field.key] = [];
+      if(!state.goalInputs || typeof state.goalInputs !== 'object') state.goalInputs = {};
+
+      const box = document.createElement('div');
+      box.className = 'checklist';
+      box.style.cssText = 'display:grid; gap:6px;';
+
+      (field.options || []).forEach(opt => {
+        const item = document.createElement('div');
+        item.className = 'sns-item';
+        const isChecked = state[field.key].includes(opt.value);
+        item.dataset.checked = String(isChecked);
+        item.style.cssText = `border-radius:14px; overflow:hidden; border:1px solid ${isChecked ? 'var(--orange)' : 'var(--ring)'}; background:#fff;`;
+
+        // チェック行（クリックでトグル）
+        const checkRow = document.createElement('label');
+        checkRow.className = 'sns-check-row';
+        checkRow.style.cssText = 'display:flex; align-items:flex-start; gap:10px; padding:8px 14px; cursor:pointer; user-select:none;';
+
+        const checkbox = document.createElement('input');
+        checkbox.type = 'checkbox';
+        checkbox.checked = isChecked;
+        checkbox.style.cssText = 'width:16px; height:16px; accent-color:var(--orange); cursor:pointer; flex-shrink:0; margin:0; padding:0; vertical-align:middle;';
+
+        const texts = document.createElement('div');
+        texts.style.cssText = 'flex:1; display:flex; flex-direction:column; gap:0; line-height:1.8;';
+        const lbl = document.createElement('div');
+        lbl.className = 'lbl';
+        lbl.textContent = opt.label;
+        const desc = document.createElement('div');
+        desc.style.cssText = 'font-size:11px; font-weight:400; color:var(--muted2); line-height:1.4;';
+        desc.textContent = opt.desc || '';
+        texts.appendChild(lbl);
+        if(opt.desc) texts.appendChild(desc);
+
+        checkRow.appendChild(checkbox);
+        checkRow.appendChild(texts);
+
+        // 入力欄（チェックしたら下に展開）
+        const inputWrap = document.createElement('div');
+        inputWrap.style.cssText = `overflow:hidden; max-height:${isChecked ? '120px' : '0'}; transition: max-height .25s ease, padding .25s ease; padding:${isChecked ? '0 14px 10px' : '0 14px'};`;
+
+        const inputLabel = document.createElement('div');
+        inputLabel.style.cssText = 'font-size:12px;font-weight:800;color:var(--muted);margin-bottom:2px;line-height:1.8;';
+        inputLabel.textContent = opt.inputLabel || '';
+
+        const inputEl = opt.value === 'other'
+          ? document.createElement('textarea')
+          : document.createElement('input');
+        if(inputEl.tagName === 'INPUT') inputEl.type = 'text';
+        else inputEl.style.minHeight = '64px';
+        inputEl.placeholder = opt.placeholder || '';
+        inputEl.value = state.goalInputs[opt.value] || '';
+        inputEl.addEventListener('input', () => {
+          state.goalInputs[opt.value] = inputEl.value;
+          autosave(); rerenderPreviewOnly(); rerenderProgressOnly();
+        });
+
+        inputWrap.appendChild(inputLabel);
+        inputWrap.appendChild(inputEl);
+        item.appendChild(checkRow);
+        item.appendChild(inputWrap);
+
+        checkbox.addEventListener('change', () => {
+          const next = new Set(Array.isArray(state[field.key]) ? state[field.key] : []);
+          if(checkbox.checked) next.add(opt.value);
+          else next.delete(opt.value);
+          state[field.key] = Array.from(next);
+          item.dataset.checked = String(checkbox.checked);
+          item.style.borderColor = checkbox.checked ? 'var(--orange)' : 'var(--ring)';
+          inputWrap.style.maxHeight = checkbox.checked ? '120px' : '0';
+          inputWrap.style.padding = checkbox.checked ? '0 14px 10px' : '0 14px';
+          autosave(); rerenderPreviewOnly(); rerenderProgressOnly();
+        });
+
+        box.appendChild(item);
+      });
+
+      return box;
+    }
+
+    function renderSnsChecklist(field){
+      // state.activeSns = ['instagram', 'x', ...]
+      // state.snsUrls = { instagram: '...', x: '...', ... }
+      if(!Array.isArray(state[field.key])) state[field.key] = [];
+      if(!state.snsUrls || typeof state.snsUrls !== 'object') state.snsUrls = {};
+
+      const wrap = document.createElement('div');
+      wrap.className = 'sns-list';
+
+      (field.options || []).forEach(opt => {
+        const item = document.createElement('div');
+        item.className = 'sns-item';
+        const isChecked = state[field.key].includes(opt.value);
+        item.dataset.checked = String(isChecked);
+
+        // チェック行
+        const checkRow = document.createElement('label');
+        checkRow.className = 'sns-check-row';
+
+        const checkbox = document.createElement('input');
+        checkbox.type = 'checkbox';
+        checkbox.checked = isChecked;
+
+        const lbl = document.createElement('div');
+        lbl.className = 'sns-check-label';
+        lbl.textContent = opt.label;
+
+        checkRow.appendChild(checkbox);
+        checkRow.appendChild(lbl);
+
+        // URL入力欄
+        const urlWrap = document.createElement('div');
+        urlWrap.className = 'sns-url-wrap';
+
+        const urlInput = document.createElement('input');
+        urlInput.type = 'text';
+        urlInput.placeholder = opt.placeholder || 'https://...';
+        urlInput.value = state.snsUrls[opt.value] || '';
+        urlInput.addEventListener('input', () => {
+          state.snsUrls[opt.value] = urlInput.value;
+          autosave(); rerenderPreviewOnly(); rerenderProgressOnly();
+        });
+
+        urlWrap.appendChild(urlInput);
+        item.appendChild(checkRow);
+        item.appendChild(urlWrap);
+
+        checkbox.addEventListener('change', () => {
+          const next = new Set(Array.isArray(state[field.key]) ? state[field.key] : []);
+          if(checkbox.checked) next.add(opt.value);
+          else next.delete(opt.value);
+          state[field.key] = Array.from(next);
+          item.dataset.checked = String(checkbox.checked);
+          autosave(); rerenderPreviewOnly(); rerenderProgressOnly();
+        });
+
+        wrap.appendChild(item);
+      });
+
+      return wrap;
+    }
+
+    function renderUrlList(field){
+      // stateはstring[]で管理
+      if(!Array.isArray(state[field.key])) state[field.key] = [''];
+
+      const wrap = document.createElement('div');
+      wrap.className = 'urllist';
+
+      const addRow = (idx) => {
+        const row = document.createElement('div');
+        row.className = 'urllist-row';
+
+        const input = document.createElement('input');
+        input.type = 'text';
+        input.placeholder = field.placeholder || 'https://...';
+        input.value = state[field.key][idx] ?? '';
+
+        input.addEventListener('input', () => {
+          state[field.key][idx] = input.value;
+          autosave();
+          rerenderPreviewOnly();
+          rerenderProgressOnly();
+        });
+
+        const delBtn = document.createElement('button');
+        delBtn.type = 'button';
+        delBtn.className = 'btn-del';
+        delBtn.innerHTML = '×';
+        delBtn.title = '削除';
+        delBtn.addEventListener('click', () => {
+          state[field.key].splice(idx, 1);
+          if(state[field.key].length === 0) state[field.key] = [''];
+          autosave();
+          rerenderPreviewOnly();
+          rerenderProgressOnly();
+          // 再描画
+          refreshList();
+        });
+
+        row.appendChild(input);
+        row.appendChild(delBtn);
+        wrap.insertBefore(row, addBtn);
+      };
+
+      const addBtn = document.createElement('button');
+      addBtn.type = 'button';
+      addBtn.className = 'urllist-add';
+      addBtn.innerHTML = '<span class="plus">＋</span><span>入力項目を追加する</span>';
+      addBtn.addEventListener('click', () => {
+        state[field.key].push('');
+        autosave();
+        refreshList();
+      });
+
+      wrap.appendChild(addBtn);
+
+      const refreshList = () => {
+        // addBtn以外を全削除して再描画
+        [...wrap.querySelectorAll('.urllist-row')].forEach(r => r.remove());
+        state[field.key].forEach((_, i) => addRow(i));
+      };
+
+      refreshList();
+      return wrap;
+    }
+
+    function renderMoodSlider(field){
+      const wrap = document.createElement('div');
+      wrap.className = 'mood-wrap';
+
+      const top = document.createElement('div');
+      top.className = 'mood-top';
+
+      const hint = document.createElement('div');
+      hint.className = 'mhint';
+      hint.textContent = '2つまで選べます';
+      top.appendChild(hint);
+      wrap.appendChild(top);
+
+      const options = document.createElement('div');
+      options.className = 'mood-options';
+
+      // stateを配列に統一
+      if(!Array.isArray(state[field.key])) state[field.key] = [];
+      const currentVals = state[field.key];
+
+      MOOD_STOPS.forEach(stop => {
+        const opt = document.createElement('div');
+        opt.className = 'mood-option';
+        opt.dataset.selected = String(currentVals.includes(stop.value));
+
+        const dot = document.createElement('div');
+        dot.className = 'mood-dot';
+
+        const name = document.createElement('div');
+        name.className = 'mood-name';
+        name.textContent = stop.label;
+
+        opt.appendChild(dot);
+        opt.appendChild(name);
+
+        opt.addEventListener('click', () => {
+          const vals = Array.isArray(state[field.key]) ? [...state[field.key]] : [];
+          if(vals.includes(stop.value)){
+            // 選択解除（全解除OK）
+            state[field.key] = vals.filter(v => v !== stop.value);
+            opt.dataset.selected = 'false';
+          } else {
+            // 最大2つ
+            if(vals.length >= 2){
+              // 一番古いものを外す
+              const removed = vals.shift();
+              options.querySelectorAll('.mood-option').forEach(el => {
+                const s = MOOD_STOPS.find(m => m.label === el.querySelector('.mood-name').textContent);
+                if(s && s.value === removed) el.dataset.selected = 'false';
+              });
+            }
+            vals.push(stop.value);
+            state[field.key] = vals;
+            opt.dataset.selected = 'true';
+          }
+          autosave();
+          rerenderPreviewOnly();
+          rerenderProgressOnly();
+        });
+
+        options.appendChild(opt);
+      });
+
+      wrap.appendChild(options);
+      return wrap;
+    }
+
+    function renderChecklist(field){
+      const box = document.createElement('div');
+      box.className = 'checklist';
+
+      const current = Array.isArray(state[field.key]) ? state[field.key] : [];
+
+      (field.options || []).forEach(opt => {
+        const row = document.createElement('div');
+        row.className = 'check';
+
+        const left = document.createElement('div');
+        left.className = 'left';
+
+        const input = document.createElement('input');
+        input.type = 'checkbox';
+        input.checked = current.includes(opt.value);
+
+        const texts = document.createElement('div');
+        const lbl = document.createElement('div');
+        lbl.className = 'lbl';
+        lbl.textContent = opt.label;
+        const desc = document.createElement('div');
+        desc.className = 'desc';
+        desc.textContent = opt.desc || '';
+        texts.appendChild(lbl);
+        if(opt.desc) texts.appendChild(desc);
+
+        left.appendChild(input);
+        left.appendChild(texts);
+        row.appendChild(left);
+
+        input.addEventListener('change', () => {
+          const next = new Set(Array.isArray(state[field.key]) ? state[field.key] : []);
+          if(input.checked) next.add(opt.value);
+          else next.delete(opt.value);
+          state[field.key] = Array.from(next);
+          autosave();
+          // conditional fields depend on this
+          rerender();
+        });
+
+        box.appendChild(row);
+      });
+
+      return box;
+    }
+
+    function renderForm(){
+      const step = QUESTIONNAIRE[stepIndex];
+      document.getElementById('form-step-title').textContent = step.title;
+      document.getElementById('form-step-desc').textContent = step.description;
+
+      const host = document.getElementById('form-groups');
+      host.innerHTML = '';
+
+      step.groups.forEach(group => {
+        const g = document.createElement('div');
+        g.className = 'group';
+        g.innerHTML = `
+          <div class="group-head"><div class="gtitle">${group.title}</div></div>
+          <div class="fields"></div>
+        `;
+
+        const fieldsWrap = g.querySelector('.fields');
+
+        group.fields.forEach(field => {
+          if(!isFieldVisible(field)) return;
+
+          // brandColor + subColor combined
+          if(field.type === 'color' && (field.key === 'brandColor' || field.key === 'subColor')){
+            if(field.key !== 'brandColor') return;
+            const f = document.createElement('div');
+            f.className = 'field full';
+            const label = document.createElement('label');
+            label.innerHTML = `<span>ブランドカラー（メイン）＋サブカラー（補助）</span>`;
+            f.appendChild(label);
+            f.appendChild(renderColorPair());
+            fieldsWrap.appendChild(f);
+            return;
+          }
+
+          const f = document.createElement('div');
+          const isFull = (field.type === 'textarea' || field.type === 'font' || field.type === 'mood' || field.type === 'checklist' || field.type === 'urllist' || field.type === 'reflist' || field.type === 'sns_checklist' || field.type === 'goal_checklist' || field.type === 'server_checklist' || field.type === 'domain_checklist');
+          f.className = 'field' + (isFull ? ' full':'' );
+
+          const req = field.required ? '<span class="req">*</span>' : '';
+          
+
+          const label = document.createElement('label');
+          label.innerHTML = `<span>${field.label}${req}</span>`;
+
+          let control;
+          const onAnyChange = () => {
+            autosave();
+            rerenderPreviewOnly();
+            rerenderProgressOnly();
+          };
+
+          if(field.type === 'font'){
+            control = renderFontPicker(field);
+          } else if(field.type === 'mood'){
+            control = renderMoodSlider(field);
+          } else if(field.type === 'sns_checklist'){
+            control = renderSnsChecklist(field);
+          } else if(field.type === 'goal_checklist'){
+            control = renderGoalChecklist(field);
+          } else if(field.type === 'server_checklist'){
+            control = renderServerChecklist(field);
+          } else if(field.type === 'domain_checklist'){
+            control = renderDomainChecklist(field);
+          } else if(field.type === 'checklist'){
+            control = renderChecklist(field);
+          } else if(field.type === 'urllist'){
+            control = renderUrlList(field);
+          } else if(field.type === 'reflist'){
+            control = renderRefList(field);
+          } else if(field.type === 'textarea'){
+            control = document.createElement('textarea');
+            control.placeholder = field.placeholder || '';
+            control.value = state[field.key] ?? '';
+            if(field.rows) control.rows = field.rows;
+            control.addEventListener('input', (e) => { state[field.key] = e.target.value; onAnyChange(); });
+          } else if(field.type === 'select'){
+            control = document.createElement('select');
+            const opt0 = document.createElement('option');
+            opt0.value = '';
+            opt0.textContent = '選択してください';
+            control.appendChild(opt0);
+            (field.options || []).forEach(o => {
+              const opt = document.createElement('option');
+              opt.value = o.value;
+              opt.textContent = o.label;
+              control.appendChild(opt);
+            });
+            control.value = state[field.key] ?? '';
+            control.addEventListener('change', function() {
+              state[field.key] = this.value;
+              autosave();
+              rerender();
+            });
+          } else if(field.type === 'toggle'){
+            control = document.createElement('div');
+            control.className = 'toggle';
+            const checked = typeof state[field.key] === 'boolean' ? state[field.key] : false;
+            control.innerHTML = `
+              <div class="state">${checked ? 'ON' : 'OFF'}</div>
+              <label class="switch" aria-label="toggle">
+                <input type="checkbox" ${checked ? 'checked':''} />
+                <span class="track"></span>
+                <span class="thumb"></span>
+              </label>
+            `;
+            const input = control.querySelector('input');
+            input.addEventListener('change', () => {
+              state[field.key] = input.checked;
+              control.querySelector('.state').textContent = input.checked ? 'ON' : 'OFF';
+              onAnyChange();
+            });
+          } else if(field.type === 'date'){
+            control = document.createElement('input');
+            control.type = 'date';
+            control.value = state[field.key] ?? '';
+            control.addEventListener('change', (e) => { state[field.key] = e.target.value; onAnyChange(); });
+          } else {
+            control = document.createElement('input');
+            control.type = (field.type === 'email') ? 'email' : 'text';
+            control.placeholder = field.placeholder || '';
+            control.value = state[field.key] ?? '';
+            control.addEventListener('input', (e) => { state[field.key] = e.target.value; onAnyChange(); });
+          }
+
+          f.appendChild(label);
+          f.appendChild(control);
+          fieldsWrap.appendChild(f);
+        });
+
+        host.appendChild(g);
+      });
+
+      const divider = document.createElement('div');
+      divider.className = 'divider';
+      host.appendChild(divider);
+
+      const nav = document.createElement('div');
+      nav.className = 'navline';
+      nav.innerHTML = `
+        <div class="note">わからない項目は空欄で大丈夫です!ヒアリングしながら埋めていきます。</div>
+        <div class="actions">
+          <button class="btn btn-outline" type="button" id="btn-prev">← 戻る</button>
+          <button class="btn btn-solid" type="button" id="btn-next">次へ →</button>
+        </div>
+      `;
+      host.appendChild(nav);
+
+      const btnPrev = nav.querySelector('#btn-prev');
+      const btnNext = nav.querySelector('#btn-next');
+      btnPrev.disabled = stepIndex <= 0;
+      const isLastStep = stepIndex >= QUESTIONNAIRE.length - 1;
+      btnNext.style.setProperty('display', isLastStep ? 'none' : 'inline-flex', 'important');
+
+      btnPrev.addEventListener('click', () => { stepIndex = Math.max(0, stepIndex - 1); rerender(); softScrollTop(); });
+      btnNext.addEventListener('click', () => { stepIndex = Math.min(QUESTIONNAIRE.length - 1, stepIndex + 1); rerender(); softScrollTop(); });
+    }
+
+    function renderPreview(){
+      const name = state.companyName ? String(state.companyName).trim() : '';
+      document.getElementById('summary-name').textContent = name || '（会社名未入力）';
+
+      const projectField = QUESTIONNAIRE[0].groups.find(g => g.title === '案件の種別').fields.find(f => f.key === 'projectType');
+      const projectLabel = state.projectType ? prettyValue(projectField, state.projectType) : '—';
+      document.getElementById('summary-sub').textContent = `依頼：${projectLabel}`;
+
+      // selected colors to header
+      const sum = document.getElementById('summary');
+      const brand = state.brandColor || '#0B1B3A';
+      const sub = state.subColor || '#FF6A2A';
+      sum.style.background = `linear-gradient(135deg, ${brand} 55%, ${sub} 100%)`;
+
+      const box = document.getElementById('preview-box');
+      box.innerHTML = '';
+
+      QUESTIONNAIRE.forEach(step => {
+        const sec = document.createElement('div');
+        sec.className = 'p-sec';
+        sec.innerHTML = `<div class="p-sec-head"><div class="t">${step.title}</div></div>`;
+
+        step.groups.forEach(group => {
+          const pg = document.createElement('div');
+          pg.className = 'p-group';
+          const gt = document.createElement('div');
+          gt.className = 'gt';
+          gt.textContent = group.title;
+          pg.appendChild(gt);
+
+          group.fields.forEach(field => {
+            if(!isFieldVisible(field)) return;
+            if(field.type === 'color' && field.key === 'subColor') return;
+
+            let label = field.label;
+            let pv = '';
+            if(field.type === 'color' && field.key === 'brandColor'){
+              label = 'ブランドカラー（メイン）＋サブカラー（補助）';
+              const bc = (state.brandColor||'').toUpperCase();
+              const sc = (state.subColor||'').toUpperCase();
+              pv = bc && sc ? `${bc} / ${sc}` : '—';
+
+              // 色見本を含むカスタムv要素を作る
+              const v2 = document.createElement('div');
+              v2.className = 'v' + (!bc && !sc ? ' empty' : '');
+              v2.style.cssText = 'display:flex;align-items:center;gap:8px;justify-content:flex-end;flex-wrap:wrap;';
+
+              if(bc){
+                const swatch1 = document.createElement('span');
+                swatch1.style.cssText = `display:inline-block;width:16px;height:16px;border-radius:4px;background:${bc};border:1px solid rgba(0,0,0,.12);flex-shrink:0;`;
+                const t1 = document.createElement('span');
+                t1.textContent = bc;
+                v2.appendChild(swatch1);
+                v2.appendChild(t1);
+              }
+              if(bc && sc){
+                const sep = document.createElement('span');
+                sep.textContent = '/';
+                sep.style.color = '#94a3b8';
+                v2.appendChild(sep);
+              }
+              if(sc){
+                const swatch2 = document.createElement('span');
+                swatch2.style.cssText = `display:inline-block;width:16px;height:16px;border-radius:4px;background:${sc};border:1px solid rgba(0,0,0,.12);flex-shrink:0;`;
+                const t2 = document.createElement('span');
+                t2.textContent = sc;
+                v2.appendChild(swatch2);
+                v2.appendChild(t2);
+              }
+
+              const row2 = document.createElement('div');
+              row2.className = 'p-row';
+              const k2 = document.createElement('div');
+              k2.className = 'k';
+              k2.textContent = label;
+              row2.appendChild(k2);
+              row2.appendChild(v2);
+              pg.appendChild(row2);
+              return;
+            } else if(field.type === 'server_checklist'){
+              pv = prettyValue(field, state.serverData);
+            } else if(field.type === 'domain_checklist'){
+              pv = prettyValue(field, state.domainData);
+            } else if(field.type === 'sns_checklist'){
+              pv = prettyValue(field, state.activeSns);
+            } else if(field.type === 'goal_checklist'){
+              pv = prettyValue(field, state.webGoalActions);
+            } else {
+              pv = prettyValue(field, state[field.key]);
+            }
+
+            const row = document.createElement('div');
+            row.className = 'p-row';
+
+            const k = document.createElement('div');
+            k.className = 'k';
+            k.textContent = label;
+
+            const v = document.createElement('div');
+            v.className = 'v' + (pv === '—' ? ' empty':'' );
+            v.textContent = pv;
+
+            row.appendChild(k);
+            row.appendChild(v);
+            pg.appendChild(row);
+          });
+
+          sec.appendChild(pg);
+        });
+
+        box.appendChild(sec);
+        const sep = document.createElement('div');
+        sep.className = 'divider';
+        box.appendChild(sep);
+      });
+
+      document.getElementById('preview-text').textContent = exportAsText();
+    }
+
+    function renderProgress(){
+      const p = progress();
+      const pct = p.requiredTotal ? Math.round((p.requiredDone / p.requiredTotal) * 100) : 0;
+      const chipReq = document.getElementById('chip-required');
+      if(chipReq) chipReq.textContent = `必須 ${p.requiredDone}/${p.requiredTotal}`;
+      document.getElementById('step-label').textContent = `Step ${stepIndex+1} / ${QUESTIONNAIRE.length}`;
+      document.getElementById('pct-label').textContent = `進捗 ${pct}%`;
+      document.getElementById('bar').style.width = pct + '%';
+      renderStepPills();
+    }
+
+    function rerenderPreviewOnly(){ renderPreview(); }
+    function rerenderProgressOnly(){ renderProgress(); }
+
+    function rerender(){
+      ensureDefaults();
+      const chip = document.getElementById('chip-save');
+      chip.innerHTML = '<span class="dot"></span><span>自動保存</span>';
+      renderProgress();
+      renderForm();
+      renderPreview();
+    }
+
+    function softScrollTop(){
+      try{ window.scrollTo({ top: 0, behavior: 'smooth' }); }catch(e){ window.scrollTo(0,0); }
+    }
+
+    function setPane(pane){
+      const app = document.getElementById('app');
+      app.dataset.pane = pane;
+
+      const tabForm = document.getElementById('tab-form');
+      const tabPrev = document.getElementById('tab-preview');
+      if(pane === 'form'){
+        tabForm.style.cssText = 'flex:1; padding:10px 0; border-radius:999px; font-size:13px; font-weight:800; z-index:1; background:var(--navy)!important; color:#fff!important; box-shadow:0 2px 8px rgba(11,27,58,.18)!important;';
+        tabPrev.style.cssText = 'flex:1; padding:10px 0; border-radius:999px; font-size:13px; font-weight:800; z-index:1; background:transparent!important; color:var(--muted)!important; box-shadow:none!important;';
+      }else{
+        tabForm.style.cssText = 'flex:1; padding:10px 0; border-radius:999px; font-size:13px; font-weight:800; z-index:1; background:transparent!important; color:var(--muted)!important; box-shadow:none!important;';
+        tabPrev.style.cssText = 'flex:1; padding:10px 0; border-radius:999px; font-size:13px; font-weight:800; z-index:1; background:var(--orange)!important; color:#fff!important; box-shadow:0 2px 8px rgba(255,106,42,.3)!important;';
+      }
+    }
+
+    // Events
+    document.getElementById('btn-reset').addEventListener('click', () => {
+      if(!confirm('入力内容をリセットします。よろしいですか？')) return;
+      state = { ...defaultState };
+      stepIndex = 0;
+      try{ localStorage.removeItem(STORAGE_KEY); }catch(e){}
+      rerender();
+    });
+
+    document.getElementById('btn-clear').addEventListener('click', () => {
+      if(!confirm('入力内容を全消しします。よろしいですか？')) return;
+      state = { ...defaultState };
+      stepIndex = 0;
+      try{ localStorage.removeItem(STORAGE_KEY); }catch(e){}
+      rerender();
+    });
+
+    document.getElementById('btn-copy').addEventListener('click', async () => {
+      const text = exportAsText();
+      const btn = document.getElementById('btn-copy');
+      const originalText = btn.textContent;
+
+      const showSuccess = () => {
+        btn.innerHTML = '✓ コピーしました！';
+        btn.style.setProperty('background', 'var(--navy)', 'important');
+        btn.style.setProperty('color', '#fff', 'important');
+        btn.style.setProperty('border-color', 'transparent', 'important');
+        setTimeout(() => {
+          btn.textContent = originalText;
+          btn.style.removeProperty('background');
+          btn.style.removeProperty('color');
+          btn.style.removeProperty('border-color');
+        }, 1800);
+      };
+
+      try{ await navigator.clipboard.writeText(text); showSuccess(); }
+      catch(e){
+        const ta = document.createElement('textarea');
+        ta.value = text;
+        document.body.appendChild(ta);
+        ta.select();
+        try{ document.execCommand('copy'); showSuccess(); }
+        catch(err){ alert('コピーに失敗しました（ブラウザの権限をご確認ください）'); }
+        ta.remove();
+      }
+    });
+
+    document.getElementById('btn-pdf').addEventListener('click', () => pdfByPrint());
+
+    document.getElementById('btn-consult').addEventListener('click', () => {
+      pdfByPrint();
+    });
+
+    document.getElementById('tab-form').addEventListener('click', () => setPane('form'));
+    document.getElementById('tab-preview').addEventListener('click', () => setPane('preview'));
+
+    // iOS zoom prevention on input focus
+    (function preventiOSZoom(){
+      // Intercept touchstart on inputs and reset scale before focus fires
+      document.addEventListener('touchstart', function(e){
+        const el = e.target;
+        if(!el) return;
+        const tag = el.tagName;
+        if(tag === 'INPUT' || tag === 'TEXTAREA' || tag === 'SELECT'){
+          const meta = document.querySelector('meta[name="viewport"]');
+          if(meta){
+            meta.setAttribute('content', 'width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no');
+          }
+        }
+      }, { passive: true });
+    })();
+
+    // keyboard layout stability on mobile
+    (function mobileKeyboardFix(){
+      const vv = window.visualViewport;
+      if(!vv) return;
+      const setVh = () => document.documentElement.style.setProperty('--vvh', `${vv.height}px`);
+      setVh();
+      vv.addEventListener('resize', setVh);
+      vv.addEventListener('scroll', setVh);
+      window.addEventListener('focusin', (e) => {
+        const el = e.target;
+        if(!el) return;
+        const tag = el.tagName;
+        if(tag === 'INPUT' || tag === 'TEXTAREA' || el.getAttribute?.('role') === 'combobox'){
+          setTimeout(() => {
+            try{ el.scrollIntoView({ block:'center', behavior:'smooth' }); }catch(err){}
+          }, 60);
+        }
+      });
+    })();
+
+    // Init
+    setPane('form');
+    rerender();
+
+    // Dev sanity checks
+    (function runSelfTestsOnce(){
+      if(window.__PA4FIC_HEARING_TESTS_RAN__) return;
+      window.__PA4FIC_HEARING_TESTS_RAN__ = true;
+
+      console.assert(Array.isArray(QUESTIONNAIRE) && QUESTIONNAIRE.length >= 3, 'QUESTIONNAIRE should exist');
+      const all = QUESTIONNAIRE.flatMap(s => s.groups.flatMap(g => g.fields));
+      const keys = new Set(all.map(f => f.key));
+      ['businessMain','commonInquiries','targetAge','deadline','brandColor','subColor','designMood','webGoalActions'].forEach(k => console.assert(keys.has(k), `${k} should exist`));
+    })();
+  </script>
+
+</body>
+</html>
