@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>CREATIVE GOLD ― ENTER THE VOID</title>
+  <meta name="description" content="CREATIVE GOLD - 没入型クリエイティブ体験。">
+  <link rel="stylesheet" href="css/reset.css">
+  <link rel="stylesheet" href="css/top-b4.css">
+</head>
+<body class="top-b4">
+
+  <!-- ── Canvases ── -->
+  <canvas id="particle-canvas"></canvas>
+  <canvas id="trail-canvas"></canvas>
+
+  <!-- ── Custom Cursor ── -->
+  <div class="b4-cursor" id="cursor"><span class="b4-cursor-text">EXPLORE</span></div>
+  <div class="b4-cursor-follower" id="cursor-follower"></div>
+
+  <!-- ── Scroll Progress ── -->
+  <div class="b4-scroll-progress" id="scroll-progress"></div>
+
+  <!-- ── Easter Egg Overlay ── -->
+  <div class="b4-easter" id="easter-egg">
+    <div class="b4-easter-content">
+      <p>🥚 YOU FOUND THE SECRET</p>
+      <p class="b4-easter-sub">↑↑↓↓←→←→BA</p>
+    </div>
+  </div>
+
+  <!-- ── Intro: Access Sequence ── -->
+  <div class="b4-intro" id="intro">
+    <div class="b4-intro-terminal">
+      <div class="b4-intro-line" id="intro-line-0">> INITIATING CONNECTION...</div>
+      <div class="b4-intro-line" id="intro-line-1">> SCANNING CREATIVE FREQUENCY...</div>
+      <div class="b4-intro-line b4-intro-warn" id="intro-line-2">> WARNING: HIGH VOLTAGE CREATIVITY DETECTED</div>
+      <div class="b4-intro-line b4-intro-success" id="intro-line-3">> ACCESS GRANTED_</div>
+    </div>
+    <div class="b4-intro-flash" id="intro-flash"></div>
+  </div>
+
+  <!-- ── Header ── -->
+  <header class="b4-header" id="header">
+    <a href="top-b4.html" class="b4-logo"><img src="img/logo_w.png" alt="CREATIVE GOLD"></a>
+    <button class="b4-hamburger" id="nav-toggle" aria-label="ナビゲーション">
+      <span></span><span></span><span></span>
+    </button>
+  </header>
+
+  <!-- ── Overlay Nav ── -->
+  <nav class="b4-overlay-nav" id="overlay-nav">
+    <ul class="b4-nav-list">
+      <li><a href="service/index.html" data-text="SERVICE">SERVICE</a></li>
+      <li><a href="about/index.html" data-text="ABOUT">ABOUT</a></li>
+      <li><a href="works/index.html" data-text="WORKS">WORKS</a></li>
+      <li><a href="contact/index.html" data-text="CONTACT">CONTACT</a></li>
+    </ul>
+  </nav>
+
+  <main>
+
+    <!-- ══════ HERO ══════ -->
+    <section class="b4-hero" id="hero">
+      <div class="b4-hero-bg-text" aria-hidden="true">CREATIVE</div>
+
+      <div class="b4-hero-content">
+        <h1 class="b4-hero-title" id="hero-title">
+          <span class="b4-char-wrap" data-char="C">C</span><span class="b4-char-wrap" data-char="R">R</span><span class="b4-char-wrap" data-char="E">E</span><span class="b4-char-wrap" data-char="A">A</span><span class="b4-char-wrap" data-char="T">T</span><span class="b4-char-wrap" data-char="I">I</span><span class="b4-char-wrap" data-char="V">V</span><span class="b4-char-wrap" data-char="E">E</span>
+          <br>
+          <span class="b4-char-wrap b4-gold" data-char="G">G</span><span class="b4-char-wrap b4-gold" data-char="O">O</span><span class="b4-char-wrap b4-gold" data-char="L">L</span><span class="b4-char-wrap b4-gold" data-char="D">D</span><span class="b4-char-wrap b4-gold" data-char=".">.</span>
+        </h1>
+        <p class="b4-hero-hint" id="hero-hint">↑ CLICK THE TITLE ↑</p>
+        <p class="b4-hero-sub" id="hero-sub">
+          ありきたりじゃない、でもちゃんと機能する。<br>
+          そんなクリエイティブを、裏方からメインステージまで。
+        </p>
+        <a href="service/index.html" class="b4-hero-cta magnetic" id="hero-cta">
+          <span>EXPLORE</span>
+          <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+    </section>
+
+    <!-- ══════ MARQUEE ══════ -->
+    <div class="b4-marquee">
+      <div class="b4-marquee-track">
+        <span>THINK DIFFERENT ✦ MAKE DIFFERENT ✦ THINK DIFFERENT ✦ MAKE DIFFERENT ✦ THINK DIFFERENT ✦ MAKE DIFFERENT ✦ </span>
+        <span>THINK DIFFERENT ✦ MAKE DIFFERENT ✦ THINK DIFFERENT ✦ MAKE DIFFERENT ✦ THINK DIFFERENT ✦ MAKE DIFFERENT ✦ </span>
+      </div>
+    </div>
+
+    <!-- ══════ MANIFESTO (Flashlight Effect) ══════ -->
+    <section class="b4-manifesto" id="manifesto">
+      <div class="b4-manifesto-inner">
+        <h2 class="b4-reveal-text" data-reveal>THE MANIFESTO</h2>
+        <div class="b4-flashlight-zone" id="flashlight-zone">
+          <p class="b4-manifesto-body b4-fl-text">
+            世界は同じようなデザインで溢れている。
+            誰かが作ったテンプレート、角の丸いボタン、
+            無難で安全なコピーライティング。
+          </p>
+          <p class="b4-manifesto-body b4-manifesto-highlight b4-fl-text">
+            私たちは、それを破壊するためにここにいる。
+          </p>
+          <p class="b4-manifesto-body b4-fl-text">
+            退屈なクリエイティブは、ここで終わりにしよう。
+            もし「黄金」のように輝く唯一無二の価値を求めているなら、
+            このままスクロールを続けてくれ。
+          </p>
+          <p class="b4-flashlight-hint">← マウスを動かして照らそう →</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════ SERVICES (3D Flip Cards + Gravity Drop) ══════ -->
+    <section class="b4-services" id="services">
+      <h2 class="b4-section-title" data-reveal>SERVICES</h2>
+
+      <div class="b4-service-grid">
+        <div class="b4-flip-card b4-gravity-card" data-tilt>
+          <div class="b4-flip-inner">
+            <div class="b4-flip-front">
+              <img src="img/servicelogo_ghost.svg" alt="CREATIVE GHOST" class="b4-service-logo">
+              <h3>01<br>GHOST</h3>
+            </div>
+            <div class="b4-flip-back">
+              <h3>CREATIVE GHOST</h3>
+              <p>貴社の見えないクリエイター。</p>
+              <p class="b4-small">クライアント名義での制作、外注や業務委託としての実務。表には出ないけれど、確実に御社のクリエイティブを底上げする。</p>
+              <a href="service/ghost/index.html" class="b4-card-link magnetic">ENTER →</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="b4-flip-card b4-gravity-card" data-tilt>
+          <div class="b4-flip-inner">
+            <div class="b4-flip-front">
+              <img src="img/servicelogo_gold.svg" alt="CREATIVE GOLD" class="b4-service-logo">
+              <h3>02<br>GOLD</h3>
+            </div>
+            <div class="b4-flip-back">
+              <h3>CREATIVE GOLD</h3>
+              <p>王道のクリエイティブ制作。</p>
+              <p class="b4-small">WEBサイト構築、DTPデザイン、映像制作。屋号を冠する王道サービスとして、幅広い実務をこなす。</p>
+              <a href="service/gold/index.html" class="b4-card-link magnetic">ENTER →</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="b4-flip-card b4-gravity-card" data-tilt>
+          <div class="b4-flip-inner">
+            <div class="b4-flip-front">
+              <img src="img/servicelogo_webgunshi.svg" alt="WEB GUNSHI" class="b4-service-logo">
+              <h3>03<br>GUNSHI</h3>
+            </div>
+            <div class="b4-flip-back">
+              <h3>WEB GUNSHI</h3>
+              <p>月額制のWEB戦略パートナー。</p>
+              <p class="b4-small">WEB解析に基づく戦略立案、AIを用いた業務効率化。データとロジックで、クリエイティブを武器に変える。</p>
+              <a href="service/gunshi/index.html" class="b4-card-link magnetic">ENTER →</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="b4-service-all">
+        <a href="service/index.html" class="b4-pill-link magnetic">VIEW ALL SERVICES</a>
+      </div>
+    </section>
+
+    <!-- ══════ WORKS (Horizontal Scroll) ══════ -->
+    <section class="b4-works" id="works">
+      <h2 class="b4-section-title" data-reveal>WORKS</h2>
+
+      <div class="b4-works-scroller" id="works-scroller">
+        <div class="b4-works-track">
+          <article class="b4-work-card" data-tilt>
+            <div class="b4-work-visual" style="--hue:80"></div>
+            <div class="b4-work-info">
+              <span class="b4-work-cat">Web Design</span>
+              <h3>ブランドサイト制作</h3>
+            </div>
+          </article>
+          <article class="b4-work-card" data-tilt>
+            <div class="b4-work-visual" style="--hue:160"></div>
+            <div class="b4-work-info">
+              <span class="b4-work-cat">Art Direction</span>
+              <h3>ビジュアルアイデンティティ</h3>
+            </div>
+          </article>
+          <article class="b4-work-card" data-tilt>
+            <div class="b4-work-visual" style="--hue:240"></div>
+            <div class="b4-work-info">
+              <span class="b4-work-cat">Movie</span>
+              <h3>コンセプトムービー</h3>
+            </div>
+          </article>
+          <article class="b4-work-card" data-tilt>
+            <div class="b4-work-visual" style="--hue:320"></div>
+            <div class="b4-work-info">
+              <span class="b4-work-cat">DTP</span>
+              <h3>エディトリアルデザイン</h3>
+            </div>
+          </article>
+        </div>
+      </div>
+
+      <div class="b4-works-all">
+        <a href="works/index.html" class="b4-pill-link magnetic">VIEW ALL WORKS</a>
+      </div>
+    </section>
+
+    <!-- ══════ NOTE BANNER ══════ -->
+    <a href="https://note.com/" target="_blank" rel="noopener" class="b4-note-banner magnetic">
+      <div class="b4-note-marquee">
+        <span>NOTE 更新中 ✦ READ OUR MINDS ✦ NOTE 更新中 ✦ READ OUR MINDS ✦ NOTE 更新中 ✦ READ OUR MINDS ✦ </span>
+        <span>NOTE 更新中 ✦ READ OUR MINDS ✦ NOTE 更新中 ✦ READ OUR MINDS ✦ NOTE 更新中 ✦ READ OUR MINDS ✦ </span>
+      </div>
+    </a>
+
+    <!-- ══════ CONTACT FOOTER ══════ -->
+    <footer class="b4-footer" id="contact">
+      <div class="b4-footer-bg-text" aria-hidden="true">CONTACT</div>
+      <h2 class="b4-footer-title" data-reveal>LET'S<br>CREATE.</h2>
+      <p class="b4-footer-sub" data-reveal>面白いこと、一緒にやりませんか。</p>
+      <a href="contact/index.html" class="b4-footer-cta magnetic" data-reveal>
+        <span>IGNITE THE FIRE</span>
+      </a>
+      <p class="b4-copyright">© 2025 CREATIVE GOLD.</p>
+    </footer>
+
+  </main>
+
+  <script>
+  (() => {
+    'use strict';
+
+    const lerp = (a, b, t) => a + (b - a) * t;
+    let mx = window.innerWidth / 2, my = window.innerHeight / 2;
+    document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; });
+
+    // ════════════════════════════════════════
+    // 1. PARTICLE CANVAS
+    // ════════════════════════════════════════
+    const cvs = document.getElementById('particle-canvas');
+    const ctx = cvs.getContext('2d');
+    let particles = [];
+
+    function resizeCanvas() {
+      cvs.width = window.innerWidth;
+      cvs.height = document.body.scrollHeight;
+    }
+    resizeCanvas();
+    window.addEventListener('resize', resizeCanvas);
+
+    class Particle {
+      constructor() { this.reset(); }
+      reset() {
+        this.x = Math.random() * cvs.width;
+        this.y = Math.random() * cvs.height;
+        this.size = Math.random() * 2 + 0.5;
+        this.speedX = (Math.random() - 0.5) * 0.3;
+        this.speedY = (Math.random() - 0.5) * 0.3;
+        this.opacity = Math.random() * 0.5 + 0.1;
+      }
+      update() {
+        this.x += this.speedX;
+        this.y += this.speedY;
+        const scrollY = window.scrollY;
+        const dx = this.x - mx;
+        const dy = this.y - (my + scrollY);
+        const dist = Math.sqrt(dx * dx + dy * dy);
+        if (dist < 150) {
+          const force = (150 - dist) / 150;
+          this.x += (dx / dist) * force * 2;
+          this.y += (dy / dist) * force * 2;
+        }
+        if (this.x < 0 || this.x > cvs.width) this.speedX *= -1;
+        if (this.y < 0 || this.y > cvs.height) this.speedY *= -1;
+      }
+      draw() {
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(204, 255, 0, ${this.opacity})`;
+        ctx.fill();
+      }
+    }
+
+    for (let i = 0; i < 120; i++) particles.push(new Particle());
+
+    function animateParticles() {
+      ctx.clearRect(0, 0, cvs.width, cvs.height);
+      particles.forEach(p => { p.update(); p.draw(); });
+      for (let i = 0; i < particles.length; i++) {
+        for (let j = i + 1; j < particles.length; j++) {
+          const dx = particles[i].x - particles[j].x;
+          const dy = particles[i].y - particles[j].y;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+          if (dist < 100) {
+            ctx.strokeStyle = `rgba(204, 255, 0, ${0.08 * (1 - dist / 100)})`;
+            ctx.lineWidth = 0.5;
+            ctx.beginPath();
+            ctx.moveTo(particles[i].x, particles[i].y);
+            ctx.lineTo(particles[j].x, particles[j].y);
+            ctx.stroke();
+          }
+        }
+      }
+      requestAnimationFrame(animateParticles);
+    }
+    animateParticles();
+
+    // ════════════════════════════════════════
+    // 2. MOUSE TRAIL CANVAS
+    // ════════════════════════════════════════
+    const trailCvs = document.getElementById('trail-canvas');
+    const trailCtx = trailCvs.getContext('2d');
+    const trailPoints = [];
+    const TRAIL_LENGTH = 30;
+
+    function resizeTrail() {
+      trailCvs.width = window.innerWidth;
+      trailCvs.height = window.innerHeight;
+    }
+    resizeTrail();
+    window.addEventListener('resize', resizeTrail);
+
+    document.addEventListener('mousemove', e => {
+      trailPoints.push({ x: e.clientX, y: e.clientY, life: 1 });
+      if (trailPoints.length > TRAIL_LENGTH) trailPoints.shift();
+    });
+
+    function drawTrail() {
+      trailCtx.clearRect(0, 0, trailCvs.width, trailCvs.height);
+
+      for (let i = 1; i < trailPoints.length; i++) {
+        const p = trailPoints[i];
+        const prev = trailPoints[i - 1];
+        const progress = i / trailPoints.length;
+
+        trailCtx.beginPath();
+        trailCtx.moveTo(prev.x, prev.y);
+        trailCtx.lineTo(p.x, p.y);
+        trailCtx.strokeStyle = `rgba(204, 255, 0, ${progress * 0.4})`;
+        trailCtx.lineWidth = progress * 4;
+        trailCtx.lineCap = 'round';
+        trailCtx.stroke();
+      }
+
+      // Fade old points
+      trailPoints.forEach(p => { p.life -= 0.02; });
+      requestAnimationFrame(drawTrail);
+    }
+    drawTrail();
+
+    // ════════════════════════════════════════
+    // 3. INTRO SEQUENCE
+    // ════════════════════════════════════════
+    const intro = document.getElementById('intro');
+    const introFlash = document.getElementById('intro-flash');
+    const lines = document.querySelectorAll('.b4-intro-line');
+    document.body.style.overflow = 'hidden';
+
+    const delays = [300, 900, 1500, 2200];
+    lines.forEach((line, i) => {
+      setTimeout(() => line.classList.add('visible'), delays[i]);
+    });
+
+    setTimeout(() => {
+      introFlash.classList.add('flash');
+      setTimeout(() => {
+        intro.classList.add('done');
+        document.body.style.overflow = '';
+        document.querySelectorAll('.b4-char-wrap').forEach((c, i) => {
+          setTimeout(() => c.classList.add('visible'), i * 60);
+        });
+        setTimeout(() => {
+          document.getElementById('hero-sub').classList.add('visible');
+          document.getElementById('hero-cta').classList.add('visible');
+          document.getElementById('hero-hint').classList.add('visible');
+        }, 900);
+      }, 600);
+    }, 3000);
+
+    // ════════════════════════════════════════
+    // 4. CUSTOM CURSOR
+    // ════════════════════════════════════════
+    const cursor = document.getElementById('cursor');
+    const follower = document.getElementById('cursor-follower');
+    const cursorText = cursor.querySelector('.b4-cursor-text');
+    let cursorX = 0, cursorY = 0, fX = 0, fY = 0;
+
+    document.addEventListener('mousemove', e => {
+      cursorX = e.clientX;
+      cursorY = e.clientY;
+      cursor.style.left = cursorX + 'px';
+      cursor.style.top = cursorY + 'px';
+    });
+
+    function cursorLoop() {
+      fX = lerp(fX, cursorX, 0.12);
+      fY = lerp(fY, cursorY, 0.12);
+      follower.style.left = fX + 'px';
+      follower.style.top = fY + 'px';
+      requestAnimationFrame(cursorLoop);
+    }
+    cursorLoop();
+
+    // Cursor state changes on hover
+    document.querySelectorAll('a, button').forEach(el => {
+      el.addEventListener('mouseenter', () => {
+        cursor.classList.add('expand');
+        follower.classList.add('expand');
+      });
+      el.addEventListener('mouseleave', () => {
+        cursor.classList.remove('expand');
+        cursor.classList.remove('show-text');
+        follower.classList.remove('expand');
+      });
+    });
+
+    // Show "VIEW" text on cards
+    document.querySelectorAll('.b4-flip-card, .b4-work-card').forEach(el => {
+      el.addEventListener('mouseenter', () => {
+        cursor.classList.add('expand', 'show-text');
+        cursorText.textContent = 'VIEW';
+        follower.classList.add('expand');
+      });
+      el.addEventListener('mouseleave', () => {
+        cursor.classList.remove('expand', 'show-text');
+        cursorText.textContent = 'EXPLORE';
+        follower.classList.remove('expand');
+      });
+    });
+
+    // ════════════════════════════════════════
+    // 5. MAGNETIC ELEMENTS
+    // ════════════════════════════════════════
+    document.querySelectorAll('.magnetic').forEach(el => {
+      el.addEventListener('mousemove', e => {
+        const rect = el.getBoundingClientRect();
+        const x = e.clientX - rect.left - rect.width / 2;
+        const y = e.clientY - rect.top - rect.height / 2;
+        el.style.transform = `translate(${x * 0.3}px, ${y * 0.3}px)`;
+      });
+      el.addEventListener('mouseleave', () => {
+        el.style.transform = 'translate(0, 0)';
+      });
+    });
+
+    // ════════════════════════════════════════
+    // 6. 3D TILT EFFECT
+    // ════════════════════════════════════════
+    document.querySelectorAll('[data-tilt]').forEach(card => {
+      card.addEventListener('mousemove', e => {
+        const rect = card.getBoundingClientRect();
+        const x = (e.clientX - rect.left) / rect.width;
+        const y = (e.clientY - rect.top) / rect.height;
+        const tiltX = (y - 0.5) * 20;
+        const tiltY = (x - 0.5) * -20;
+        card.style.transform = `perspective(600px) rotateX(${tiltX}deg) rotateY(${tiltY}deg) scale(1.03)`;
+      });
+      card.addEventListener('mouseleave', () => {
+        card.style.transform = 'perspective(600px) rotateX(0) rotateY(0) scale(1)';
+      });
+    });
+
+    // ════════════════════════════════════════
+    // 7. SCROLL REVEALS
+    // ════════════════════════════════════════
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('revealed');
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15, rootMargin: '0px 0px -80px 0px' });
+    document.querySelectorAll('[data-reveal]').forEach(el => revealObserver.observe(el));
+
+    // ════════════════════════════════════════
+    // 8. SCROLL PROGRESS + DISTORTION
+    // ════════════════════════════════════════
+    const scrollProgress = document.getElementById('scroll-progress');
+    let lastScroll = 0;
+    const mainEl = document.querySelector('main');
+
+    window.addEventListener('scroll', () => {
+      const scrollTop = window.scrollY;
+      const docHeight = document.body.scrollHeight - window.innerHeight;
+      const percent = (scrollTop / docHeight) * 100;
+      scrollProgress.style.height = percent + '%';
+
+      // Scroll distortion effect
+      const velocity = Math.abs(scrollTop - lastScroll);
+      const skew = Math.min(velocity * 0.15, 5);
+      mainEl.style.transform = `skewY(${scrollTop > lastScroll ? skew : -skew}deg)`;
+      lastScroll = scrollTop;
+    });
+
+    // Reset distortion when scroll stops
+    let scrollTimeout;
+    window.addEventListener('scroll', () => {
+      clearTimeout(scrollTimeout);
+      scrollTimeout = setTimeout(() => {
+        mainEl.style.transform = 'skewY(0)';
+      }, 150);
+    });
+
+    // ════════════════════════════════════════
+    // 9. HORIZONTAL SCROLL for Works
+    // ════════════════════════════════════════
+    const worksScroller = document.getElementById('works-scroller');
+    if (worksScroller) {
+      worksScroller.addEventListener('wheel', (e) => {
+        if (Math.abs(e.deltaY) > Math.abs(e.deltaX)) {
+          e.preventDefault();
+          worksScroller.scrollLeft += e.deltaY;
+        }
+      }, { passive: false });
+    }
+
+    // ════════════════════════════════════════
+    // 10. NAVIGATION
+    // ════════════════════════════════════════
+    const navToggle = document.getElementById('nav-toggle');
+    const overlayNav = document.getElementById('overlay-nav');
+    navToggle.addEventListener('click', () => {
+      navToggle.classList.toggle('is-active');
+      overlayNav.classList.toggle('is-active');
+    });
+    overlayNav.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        navToggle.classList.remove('is-active');
+        overlayNav.classList.remove('is-active');
+      });
+    });
+
+    // ════════════════════════════════════════
+    // 11. HERO BG PARALLAX
+    // ════════════════════════════════════════
+    const heroBg = document.querySelector('.b4-hero-bg-text');
+    window.addEventListener('scroll', () => {
+      if (heroBg) heroBg.style.transform = `translateY(${window.scrollY * 0.4}px)`;
+    });
+
+    // ════════════════════════════════════════
+    // 12. HERO TITLE EXPLOSION
+    // ════════════════════════════════════════
+    const heroTitle = document.getElementById('hero-title');
+    let exploded = false;
+
+    heroTitle.addEventListener('click', () => {
+      const chars = heroTitle.querySelectorAll('.b4-char-wrap');
+
+      if (!exploded) {
+        // EXPLODE
+        chars.forEach(c => {
+          const rx = (Math.random() - 0.5) * window.innerWidth * 1.2;
+          const ry = (Math.random() - 0.5) * window.innerHeight * 1.2;
+          const rot = (Math.random() - 0.5) * 720;
+          const scale = Math.random() * 2 + 0.5;
+          c.style.transition = 'transform 0.8s cubic-bezier(0.23, 1, 0.32, 1), opacity 0.8s';
+          c.style.transform = `translate(${rx}px, ${ry}px) rotate(${rot}deg) scale(${scale})`;
+          c.style.opacity = '0.3';
+        });
+        // shake screen
+        document.body.classList.add('b4-shake');
+        setTimeout(() => document.body.classList.remove('b4-shake'), 500);
+        exploded = true;
+      } else {
+        // REASSEMBLE
+        chars.forEach(c => {
+          c.style.transition = 'transform 1.2s cubic-bezier(0.23, 1, 0.32, 1), opacity 0.6s';
+          c.style.transform = 'translate(0, 0) rotate(0) scale(1)';
+          c.style.opacity = '1';
+        });
+        exploded = false;
+      }
+    });
+
+    // ════════════════════════════════════════
+    // 13. FLASHLIGHT EFFECT on Manifesto
+    // ════════════════════════════════════════
+    const flashlightZone = document.getElementById('flashlight-zone');
+    if (flashlightZone) {
+      flashlightZone.addEventListener('mousemove', e => {
+        const rect = flashlightZone.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        flashlightZone.style.setProperty('--fl-x', x + 'px');
+        flashlightZone.style.setProperty('--fl-y', y + 'px');
+      });
+    }
+
+    // ════════════════════════════════════════
+    // 14. GRAVITY DROP for Service Cards
+    // ════════════════════════════════════════
+    const gravityObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const card = entry.target;
+          const delay = Array.from(card.parentElement.children).indexOf(card) * 200;
+          setTimeout(() => {
+            card.classList.add('b4-dropped');
+          }, delay);
+          gravityObserver.unobserve(card);
+        }
+      });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.b4-gravity-card').forEach(c => gravityObserver.observe(c));
+
+    // ════════════════════════════════════════
+    // 15. KONAMI CODE EASTER EGG
+    // ════════════════════════════════════════
+    const konamiCode = [38,38,40,40,37,39,37,39,66,65]; // ↑↑↓↓←→←→BA
+    let konamiIndex = 0;
+    const easterEgg = document.getElementById('easter-egg');
+
+    document.addEventListener('keydown', (e) => {
+      if (e.keyCode === konamiCode[konamiIndex]) {
+        konamiIndex++;
+        if (konamiIndex === konamiCode.length) {
+          // ACTIVATE
+          easterEgg.classList.add('active');
+          document.body.classList.add('b4-rainbow');
+          setTimeout(() => {
+            easterEgg.classList.remove('active');
+            // keep rainbow for a bit
+            setTimeout(() => document.body.classList.remove('b4-rainbow'), 5000);
+          }, 3000);
+          konamiIndex = 0;
+        }
+      } else {
+        konamiIndex = 0;
+      }
+    });
+
+    // ════════════════════════════════════════
+    // 16. RESIZE
+    // ════════════════════════════════════════
+    window.addEventListener('resize', resizeCanvas);
+
+  })();
+  </script>
+</body>
+</html>
