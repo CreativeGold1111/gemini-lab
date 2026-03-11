@@ -1,0 +1,125 @@
+/* ============================================
+   CSS Custom Properties / Design Tokens
+   CREATIVE GOLD
+   
+   テーマカラーはJSによって動的に書き換えられる。
+   ここではデフォルト値（ニュートラル）を定義。
+   ============================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700;900&family=Outfit:wght@300;400;500;600;700;800;900&display=swap');
+
+:root {
+  /* ── Theme Colors（JSで動的に書き換え） ── */
+  --theme-primary: #888888;
+  --theme-primary-rgb: 136, 136, 136;
+  --theme-dark: #1A1A1A;
+  --theme-accent: #AAAAAA;
+
+  /* ── Typography ── */
+  --font-heading: 'Noto Sans JP', 'Hiragino Kaku Gothic ProN', 'Yu Gothic', sans-serif;
+  --font-sans: 'Noto Sans JP', 'Hiragino Kaku Gothic ProN', 'Yu Gothic', sans-serif;
+  --font-display: 'Outfit', 'Noto Sans JP', sans-serif;
+
+  /* ── Route A: 誠実さ（Blue） ── */
+  --blue-primary: #003cb9;
+  --blue-primary-rgb: 0, 60, 185;
+  --blue-dark: #0A1628;
+  --blue-accent: #3366e0;
+  --blue-light: #E8EEFF;
+
+  /* ── Route B: ユニークさ（Green） ── */
+  --green-primary: #84ff00;
+  --green-primary-rgb: 132, 255, 0;
+  --green-dark: #0A2818;
+  --green-accent: #9aff33;
+  --green-light: #F0FFE0;
+
+  /* ── Route C: 実績（Red） ── */
+  --red-primary: #E84040;
+  --red-primary-rgb: 232, 64, 64;
+  --red-dark: #280A0A;
+  --red-accent: #F06060;
+  --red-light: #FFE8E6;
+
+  /* ── Base Colors ── */
+  --black: #0A0A0A;
+  --black-soft: #111111;
+  --black-mute: #1A1A1A;
+  --gray-900: #222222;
+  --gray-800: #333333;
+  --gray-700: #444444;
+  --gray-600: #666666;
+  --gray-500: #888888;
+  --gray-400: #AAAAAA;
+  --gray-300: #CCCCCC;
+  --gray-200: #E0E0E0;
+  --gray-100: #F0F0F0;
+  --white: #FAFAFA;
+  --white-pure: #FFFFFF;
+
+  /* ── Typography（※ --font-serif の参照先もゴシックにしている） ── */
+  --font-serif: var(--font-heading); /* 後方互換：既存のfont-serif参照をゴシックに */
+
+  --fs-xs: clamp(0.7rem, 0.65rem + 0.25vw, 0.8rem);
+  --fs-sm: clamp(0.8rem, 0.75rem + 0.25vw, 0.9rem);
+  --fs-base: clamp(0.9rem, 0.85rem + 0.25vw, 1rem);
+  --fs-md: clamp(1rem, 0.9rem + 0.5vw, 1.2rem);
+  --fs-lg: clamp(1.2rem, 1rem + 1vw, 1.6rem);
+  --fs-xl: clamp(1.6rem, 1.2rem + 2vw, 2.4rem);
+  --fs-2xl: clamp(2rem, 1.4rem + 3vw, 3.2rem);
+  --fs-3xl: clamp(2.4rem, 1.6rem + 4vw, 4.8rem);
+  --fs-hero: clamp(3rem, 2rem + 5vw, 7rem);
+
+  --fw-light: 300;
+  --fw-regular: 400;
+  --fw-medium: 500;
+  --fw-semibold: 600;
+  --fw-bold: 700;
+  --fw-heavy: 800;
+  --fw-black: 900;
+
+  --lh-tight: 1.2;
+  --lh-snug: 1.4;
+  --lh-normal: 1.8;
+  --lh-relaxed: 2.0;
+
+  --ls-tight: -0.02em;
+  --ls-normal: 0;
+  --ls-wide: 0.05em;
+  --ls-wider: 0.1em;
+  --ls-widest: 0.2em;
+
+  /* ── Spacing ── */
+  --space-xs: clamp(0.25rem, 0.2rem + 0.25vw, 0.5rem);
+  --space-sm: clamp(0.5rem, 0.4rem + 0.5vw, 1rem);
+  --space-md: clamp(1rem, 0.8rem + 1vw, 2rem);
+  --space-lg: clamp(2rem, 1.5rem + 2.5vw, 4rem);
+  --space-xl: clamp(3rem, 2rem + 5vw, 6rem);
+  --space-2xl: clamp(4rem, 3rem + 5vw, 8rem);
+  --space-3xl: clamp(6rem, 4rem + 8vw, 12rem);
+
+  /* ── Layout ── */
+  --container-sm: 640px;
+  --container-md: 768px;
+  --container-lg: 1024px;
+  --container-xl: 1200px;
+  --container-full: 1440px;
+  --side-padding: clamp(1.5rem, 1rem + 2vw, 4rem);
+
+  /* ── Animation ── */
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-out-quart: cubic-bezier(0.25, 1, 0.5, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --duration-fast: 200ms;
+  --duration-normal: 400ms;
+  --duration-slow: 800ms;
+  --duration-slower: 1200ms;
+
+  /* ── Border ── */
+  --border-thin: 1px solid var(--gray-800);
+  --border-medium: 2px solid var(--gray-700);
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 16px;
+  --radius-full: 9999px;
+}

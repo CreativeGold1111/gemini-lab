@@ -1,0 +1,796 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>【ワイヤーフレーム】太陽光パネル リサイクルLP - よねざわ工業</title>
+  <style>
+    /* ===== ワイヤーフレーム用スタイル ===== */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: "Hiragino Kaku Gothic ProN", "Noto Sans JP", sans-serif;
+      color: #333;
+      background: #f5f5f5;
+      line-height: 1.7;
+    }
+
+    /* ワイヤーフレーム共通 */
+    .wire-section {
+      max-width: 960px;
+      margin: 0 auto 20px;
+      background: #fff;
+      border: 2px solid #999;
+      padding: 40px 30px;
+      position: relative;
+    }
+    .wire-section::before {
+      content: attr(data-section);
+      position: absolute;
+      top: 0;
+      left: 0;
+      background: #333;
+      color: #fff;
+      font-size: 11px;
+      padding: 3px 10px;
+      font-weight: bold;
+    }
+    .section-title {
+      text-align: center;
+      font-size: 22px;
+      font-weight: bold;
+      margin-bottom: 30px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #ccc;
+    }
+    .placeholder-box {
+      background: #e0e0e0;
+      border: 1px dashed #999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #777;
+      font-size: 13px;
+      text-align: center;
+    }
+    .annotation {
+      background: #fffde0;
+      border: 1px solid #e0d800;
+      padding: 8px 12px;
+      font-size: 12px;
+      color: #666;
+      margin-top: 15px;
+    }
+    .annotation::before {
+      content: "📝 注釈: ";
+      font-weight: bold;
+    }
+
+    /* ===== ① ファーストビュー ===== */
+    .fv {
+      background: #fff;
+      text-align: center;
+      padding: 50px 30px 40px;
+    }
+    .fv .catchcopy {
+      font-size: 28px;
+      font-weight: bold;
+      line-height: 1.5;
+      margin-bottom: 15px;
+      border: 2px solid #333;
+      padding: 15px;
+    }
+    .fv .subcopy {
+      font-size: 16px;
+      color: #555;
+      margin-bottom: 25px;
+      padding: 10px;
+      border: 1px dashed #aaa;
+    }
+    .fv .offer-box {
+      background: #fff3f3;
+      border: 3px solid #cc0000;
+      padding: 20px;
+      margin-bottom: 25px;
+    }
+    .fv .offer-box .offer-label {
+      display: inline-block;
+      background: #cc0000;
+      color: #fff;
+      font-weight: bold;
+      padding: 3px 15px;
+      font-size: 14px;
+      margin-bottom: 10px;
+    }
+    .fv .offer-box .offer-text {
+      font-size: 18px;
+      font-weight: bold;
+      line-height: 1.6;
+    }
+    .fv .offer-box .offer-highlight {
+      color: #cc0000;
+      font-size: 24px;
+    }
+    .cta-button {
+      display: inline-block;
+      background: #cc0000;
+      color: #fff;
+      font-size: 20px;
+      font-weight: bold;
+      padding: 18px 50px;
+      border: none;
+      cursor: pointer;
+      text-decoration: none;
+      margin-top: 10px;
+    }
+    .cta-button::after {
+      content: " ▶";
+    }
+    .cta-note {
+      font-size: 12px;
+      color: #888;
+      margin-top: 8px;
+    }
+
+    /* ===== ② 共感・課題喚起 ===== */
+    .problems {
+      padding: 40px 30px;
+    }
+    .problems .problem-category {
+      margin-bottom: 25px;
+    }
+    .problems .problem-category h3 {
+      font-size: 18px;
+      margin-bottom: 10px;
+      padding: 5px 10px;
+      background: #f0f0f0;
+      border-left: 4px solid #333;
+    }
+    .problems .problem-list {
+      list-style: none;
+      padding-left: 0;
+    }
+    .problems .problem-list li {
+      padding: 10px 15px;
+      border: 1px solid #ddd;
+      margin-bottom: 8px;
+      font-size: 15px;
+      position: relative;
+      padding-left: 35px;
+    }
+    .problems .problem-list li::before {
+      content: "☑";
+      position: absolute;
+      left: 10px;
+      top: 10px;
+      font-size: 16px;
+    }
+    .risk-box {
+      background: #fff8f0;
+      border: 2px solid #e08000;
+      padding: 20px;
+      margin-top: 20px;
+    }
+    .risk-box h4 {
+      color: #e08000;
+      margin-bottom: 10px;
+      font-size: 16px;
+    }
+    .risk-box ul {
+      padding-left: 20px;
+    }
+    .risk-box li {
+      margin-bottom: 5px;
+      font-size: 14px;
+    }
+
+    /* ===== ③ 選ばれる理由 ===== */
+    .reasons {
+      padding: 40px 30px;
+    }
+    .reason-cards {
+      display: flex;
+      gap: 20px;
+    }
+    .reason-card {
+      flex: 1;
+      border: 2px solid #ccc;
+      padding: 25px 20px;
+      text-align: center;
+    }
+    .reason-card .reason-number {
+      display: inline-block;
+      width: 40px;
+      height: 40px;
+      line-height: 40px;
+      border-radius: 50%;
+      background: #333;
+      color: #fff;
+      font-weight: bold;
+      font-size: 18px;
+      margin-bottom: 12px;
+    }
+    .reason-card h3 {
+      font-size: 16px;
+      margin-bottom: 10px;
+      line-height: 1.5;
+    }
+    .reason-card p {
+      font-size: 13px;
+      color: #666;
+      line-height: 1.6;
+    }
+    .reason-card .img-placeholder {
+      width: 100%;
+      height: 120px;
+      margin-bottom: 15px;
+    }
+
+    /* ===== ④ サービス内容と料金 ===== */
+    .service-price {
+      padding: 40px 30px;
+    }
+    .price-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 20px;
+    }
+    .price-table th,
+    .price-table td {
+      border: 1px solid #ccc;
+      padding: 12px 15px;
+      text-align: left;
+      font-size: 15px;
+    }
+    .price-table th {
+      background: #f0f0f0;
+      font-weight: bold;
+      width: 30%;
+    }
+    .price-table .price-value {
+      font-size: 20px;
+      font-weight: bold;
+      color: #cc0000;
+    }
+    .campaign-recap {
+      background: #fff3f3;
+      border: 2px dashed #cc0000;
+      padding: 15px 20px;
+      text-align: center;
+      font-weight: bold;
+    }
+    .note-text {
+      font-size: 13px;
+      color: #888;
+      margin-top: 10px;
+    }
+
+    /* ===== ⑤ ご利用の流れ ===== */
+    .flow {
+      padding: 40px 30px;
+    }
+    .flow-steps {
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      gap: 10px;
+    }
+    .flow-step {
+      flex: 1;
+      text-align: center;
+      border: 2px solid #ccc;
+      padding: 20px 10px;
+    }
+    .flow-step .step-number {
+      display: inline-block;
+      background: #333;
+      color: #fff;
+      width: 30px;
+      height: 30px;
+      line-height: 30px;
+      border-radius: 50%;
+      font-size: 14px;
+      font-weight: bold;
+      margin-bottom: 8px;
+    }
+    .flow-step .step-label {
+      font-size: 14px;
+      font-weight: bold;
+      display: block;
+      margin-bottom: 5px;
+    }
+    .flow-step .step-desc {
+      font-size: 12px;
+      color: #777;
+    }
+    .flow-arrow {
+      font-size: 24px;
+      color: #999;
+      display: flex;
+      align-items: center;
+      padding-top: 20px;
+    }
+
+    /* ===== ⑥ FAQ ===== */
+    .faq {
+      padding: 40px 30px;
+    }
+    .faq-item {
+      border: 1px solid #ddd;
+      margin-bottom: 10px;
+    }
+    .faq-q {
+      background: #f7f7f7;
+      padding: 15px 20px;
+      font-weight: bold;
+      font-size: 15px;
+      cursor: pointer;
+    }
+    .faq-q::before {
+      content: "Q. ";
+      color: #cc0000;
+      font-size: 18px;
+    }
+    .faq-a {
+      padding: 15px 20px;
+      font-size: 14px;
+      color: #555;
+      border-top: 1px solid #eee;
+    }
+    .faq-a::before {
+      content: "A. ";
+      color: #0066cc;
+      font-weight: bold;
+      font-size: 16px;
+    }
+
+    /* ===== ⑦ お問い合わせフォーム ===== */
+    .contact-form {
+      padding: 40px 30px;
+    }
+    .form-group {
+      margin-bottom: 20px;
+    }
+    .form-group label {
+      display: block;
+      font-weight: bold;
+      font-size: 14px;
+      margin-bottom: 6px;
+    }
+    .form-group label .required {
+      background: #cc0000;
+      color: #fff;
+      font-size: 11px;
+      padding: 1px 6px;
+      margin-left: 6px;
+      border-radius: 2px;
+    }
+    .form-group label .optional {
+      background: #999;
+      color: #fff;
+      font-size: 11px;
+      padding: 1px 6px;
+      margin-left: 6px;
+      border-radius: 2px;
+    }
+    .form-group input[type="text"],
+    .form-group input[type="email"],
+    .form-group input[type="tel"],
+    .form-group input[type="number"],
+    .form-group textarea {
+      width: 100%;
+      padding: 10px 12px;
+      border: 1px solid #ccc;
+      font-size: 15px;
+      background: #fafafa;
+    }
+    .form-group textarea {
+      height: 120px;
+      resize: vertical;
+    }
+    .form-group .radio-group {
+      padding: 10px 0;
+    }
+    .form-group .radio-group label {
+      font-weight: normal;
+      display: block;
+      padding: 8px 12px;
+      border: 1px solid #ddd;
+      margin-bottom: 8px;
+      cursor: pointer;
+      font-size: 14px;
+    }
+    .form-group .radio-group label:hover {
+      background: #f5f5f5;
+    }
+    .form-group .radio-group input[type="radio"] {
+      margin-right: 8px;
+    }
+    .form-note {
+      font-size: 12px;
+      color: #888;
+      margin-top: 4px;
+    }
+    .form-submit {
+      text-align: center;
+      margin-top: 30px;
+    }
+    .form-submit .cta-button {
+      font-size: 18px;
+      padding: 16px 60px;
+    }
+    .auto-reply-note {
+      text-align: center;
+      font-size: 13px;
+      color: #888;
+      margin-top: 15px;
+      padding: 10px;
+      background: #f9f9f9;
+      border: 1px solid #eee;
+    }
+
+    /* フッター */
+    .wire-footer {
+      max-width: 960px;
+      margin: 0 auto 40px;
+      background: #333;
+      color: #fff;
+      text-align: center;
+      padding: 25px;
+      font-size: 13px;
+    }
+
+    /* レスポンシブ（ワイヤーフレーム確認用） */
+    @media (max-width: 768px) {
+      .reason-cards { flex-direction: column; }
+      .flow-steps { flex-direction: column; align-items: center; }
+      .flow-arrow { transform: rotate(90deg); padding-top: 0; }
+      .fv .catchcopy { font-size: 20px; }
+      .fv .offer-box .offer-highlight { font-size: 18px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ==========================================
+  ① ファーストビュー（FV）
+=========================================== -->
+<section class="wire-section fv" data-section="① ファーストビュー（FV）">
+
+  <div class="placeholder-box" style="height:60px;margin-bottom:20px;">
+    ロゴ / ヘッダーナビゲーション
+  </div>
+
+  <div class="placeholder-box" style="height:200px;margin-bottom:20px;">
+    FV メインビジュアル画像<br>（太陽光パネル・リサイクル設備 等）
+  </div>
+
+  <div class="catchcopy">
+    増え続ける太陽光パネルの処分課題を解決！<br>
+    解体・撤去から再製品化まで<br>ワンストップ対応
+  </div>
+
+  <div class="subcopy">
+    ご自宅からメガソーラーまで。<br>
+    創業73年のよねざわ工業が、道内希少のリサイクル設備で適正処理します。
+  </div>
+
+  <div class="offer-box">
+    <span class="offer-label">期間限定 2026年3月31日まで</span>
+    <div class="offer-text">
+      先行予約スタートキャンペーン！<br>
+      「持ち込み」に限り、今なら<br>
+      <span class="offer-highlight">買い取り 10円/枚</span>
+    </div>
+  </div>
+
+  <a href="#contact" class="cta-button">無料お見積り・お問い合わせはこちら</a>
+  <div class="cta-note">※ お見積りは無料です。お気軽にご相談ください。</div>
+
+  <div class="annotation">
+    FV全体は画面いっぱいに表示。オファー部分は赤系の配色で目立たせる。CTAボタンは大きく配置。
+  </div>
+</section>
+
+
+<!-- ==========================================
+  ② 共感・課題喚起
+=========================================== -->
+<section class="wire-section problems" data-section="② 共感・課題喚起">
+
+  <div class="section-title">こんなお悩み・不安はありませんか？</div>
+
+  <div class="problem-category">
+    <h3>🏢 法人のお客様</h3>
+    <ul class="problem-list">
+      <li>複数の業者（解体・運搬・処分）を管理する手間やコストを削減したい</li>
+      <li>確実な環境対策（SDGs）を求められている</li>
+    </ul>
+  </div>
+
+  <div class="problem-category">
+    <h3>🏠 個人のお客様</h3>
+    <ul class="problem-list">
+      <li>パネルにヒビ・汚れがある</li>
+      <li>発電量が落ちてきた</li>
+      <li>老朽化による火災や飛散などの災害リスクが不安</li>
+    </ul>
+  </div>
+
+  <div class="risk-box">
+    <h4>⚠ 放置すると、こんなリスクが…</h4>
+    <ul>
+      <li><strong>火災リスク：</strong>劣化したパネルが発火する可能性</li>
+      <li><strong>飛散リスク：</strong>台風・強風によるパネル飛散事故</li>
+      <li><strong>土壌汚染：</strong>有害物質が流出するリスク</li>
+      <li><strong>地域住民との対立：</strong>景観悪化・安全性への不安</li>
+    </ul>
+    <p style="margin-top: 12px; font-weight: bold; color: #e08000; font-size: 15px;">
+      → 早めの対処が安心です。まずはご相談ください。
+    </p>
+  </div>
+
+  <div class="annotation">
+    法人・個人で悩みを分けて表示。放置リスクはアラート風のデザインで危機感を訴求。
+  </div>
+</section>
+
+
+<!-- ==========================================
+  ③ 選ばれる3つの理由
+=========================================== -->
+<section class="wire-section reasons" data-section="③ 選ばれる3つの理由">
+
+  <div class="section-title">よねざわ工業が選ばれる3つの理由</div>
+
+  <div class="reason-cards">
+
+    <div class="reason-card">
+      <div class="img-placeholder placeholder-box">イメージ画像<br>（ワンストップ体制）</div>
+      <span class="reason-number">1</span>
+      <h3>解体から処理まで<br>「丸投げOK」の<br>ワンストップ体制</h3>
+      <p>解体・撤去・運搬・処分まで、すべてよねざわ工業にお任せください。複数業者への手配が不要で、窓口ひとつで完結します。</p>
+    </div>
+
+    <div class="reason-card">
+      <div class="img-placeholder placeholder-box">イメージ画像<br>（リサイクル工程）</div>
+      <span class="reason-number">2</span>
+      <h3>「埋め立てない」<br>高リサイクル率</h3>
+      <p>パネルのガラスを自社のコンクリート製品に再利用。最終処分場の負担を軽減し、環境保護に直結します。</p>
+    </div>
+
+    <div class="reason-card">
+      <div class="img-placeholder placeholder-box">イメージ画像<br>（設備・アクセス）</div>
+      <span class="reason-number">3</span>
+      <h3>道央圏から<br>好アクセス</h3>
+      <p>北海道内で希少なリサイクル実用設備を完備。道央圏からのアクセスが良く、持ち込みも便利です。</p>
+    </div>
+
+  </div>
+
+  <div class="annotation">
+    3カラムレイアウト。各カードにはアイコンまたは写真を配置。SP時は縦1列に。
+  </div>
+</section>
+
+
+<!-- ==========================================
+  ④ サービス内容と料金目安
+=========================================== -->
+<section class="wire-section service-price" data-section="④ サービス内容と料金目安">
+
+  <div class="section-title">サービス内容と料金目安</div>
+
+  <h3 style="margin-bottom: 10px;">■ 対象</h3>
+  <p style="margin-bottom: 5px;">住宅用パネル 〜 メガソーラーまで対応可能</p>
+  <p class="note-text" style="margin-bottom: 25px;">※ ポータブルパネル等の小型製品は受け入れ不可となります。</p>
+
+  <h3 style="margin-bottom: 10px;">■ 料金目安</h3>
+  <table class="price-table">
+    <tr>
+      <th>持ち込み</th>
+      <td>
+        <span class="price-value">1枚 3,000円〜</span>
+      </td>
+    </tr>
+    <tr>
+      <th>引き取り</th>
+      <td>
+        <span class="price-value">1枚 3,000円〜</span><br>
+        <span style="font-size: 13px; color: #888;">＋ 解体・撤去費、運送費等が別途かかります</span>
+      </td>
+    </tr>
+  </table>
+
+  <div class="campaign-recap">
+    🎉 キャンペーン再掲：「持ち込み」に限り <span style="color:#cc0000;font-size:20px;">買い取り10円/枚</span>（2026年3月31日まで）
+  </div>
+
+  <div class="annotation">
+    料金は表組みで明確に。キャンペーン情報はFVと同様の赤系配色で再掲し、訴求力を高める。
+  </div>
+</section>
+
+
+<!-- ==========================================
+  ⑤ ご利用の流れ
+=========================================== -->
+<section class="wire-section flow" data-section="⑤ ご利用の流れ">
+
+  <div class="section-title">ご利用の流れ</div>
+
+  <div class="flow-steps">
+    <div class="flow-step">
+      <span class="step-number">1</span>
+      <span class="step-label">現地調査</span>
+      <span class="step-desc">現場の状況を<br>確認します</span>
+    </div>
+    <div class="flow-arrow">▶</div>
+    <div class="flow-step">
+      <span class="step-number">2</span>
+      <span class="step-label">お見積り</span>
+      <span class="step-desc">調査結果をもとに<br>お見積りを作成</span>
+    </div>
+    <div class="flow-arrow">▶</div>
+    <div class="flow-step">
+      <span class="step-number">3</span>
+      <span class="step-label">ご契約</span>
+      <span class="step-desc">内容にご納得<br>いただけたら契約</span>
+    </div>
+    <div class="flow-arrow">▶</div>
+    <div class="flow-step">
+      <span class="step-number">4</span>
+      <span class="step-label">撤去・交換工事</span>
+      <span class="step-desc">専門スタッフが<br>施工します</span>
+    </div>
+    <div class="flow-arrow">▶</div>
+    <div class="flow-step">
+      <span class="step-number">5</span>
+      <span class="step-label">完成・お引き渡し</span>
+      <span class="step-desc">最終確認後<br>お引き渡し</span>
+    </div>
+  </div>
+
+  <div class="annotation">
+    横並びのステップ表示。各ステップにアイコンを付ける想定。SP時は縦並びに。
+  </div>
+</section>
+
+
+<!-- ==========================================
+  ⑥ よくあるご質問（FAQ）
+=========================================== -->
+<section class="wire-section faq" data-section="⑥ よくあるご質問（FAQ）">
+
+  <div class="section-title">よくあるご質問</div>
+
+  <div class="faq-item">
+    <div class="faq-q">どの地域まで引き取り対応可能ですか？</div>
+    <div class="faq-a">北海道内全域で対応可能です。詳細はお問い合わせください。（回答内容は要確認）</div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-q">少量の持ち込みは可能ですか？</div>
+    <div class="faq-a">はい、1枚から持ち込み可能です。お気軽にご利用ください。（回答内容は要確認）</div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-q">戸建て住宅の引き取りは可能ですか？</div>
+    <div class="faq-a">はい、戸建て住宅のパネル撤去・引き取りにも対応しております。（回答内容は要確認）</div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-q">キャンペーンの適用条件を教えてください。</div>
+    <div class="faq-a">2026年3月31日までに「持ち込み」でお持ちいただいた場合に適用されます。（回答内容は要確認）</div>
+  </div>
+
+  <div class="annotation">
+    アコーディオン形式を想定。回答内容はクライアント確認が必要。必要に応じてFAQ追加。
+  </div>
+</section>
+
+
+<!-- ==========================================
+  ⑦ お問い合わせフォーム（CTA）
+=========================================== -->
+<section class="wire-section contact-form" data-section="⑦ お問い合わせフォーム（CTA）" id="contact">
+
+  <div class="section-title">無料お見積り・お問い合わせ</div>
+
+  <div class="campaign-recap" style="margin-bottom: 25px;">
+    🎉 キャンペーン実施中：「持ち込み」で <span style="color:#cc0000;font-size:18px;">買い取り10円/枚</span>（2026年3月31日まで）
+  </div>
+
+  <form>
+
+    <!-- 1. お名前 または 会社名 -->
+    <div class="form-group">
+      <label>お名前 または 会社名 <span class="required">必須</span></label>
+      <input type="text" placeholder="例：よねざわ工業 株式会社 / 米沢 太郎">
+    </div>
+
+    <!-- 2. ご担当者名 -->
+    <div class="form-group">
+      <label>ご担当者名 <span class="optional">任意</span></label>
+      <input type="text" placeholder="例：田中 一郎（法人の場合）">
+      <div class="form-note">※ 法人のお客様はご担当者名をご記入ください。</div>
+    </div>
+
+    <!-- 3. 電話番号 -->
+    <div class="form-group">
+      <label>電話番号 <span class="required">必須</span></label>
+      <input type="tel" placeholder="例：011-123-4567">
+    </div>
+
+    <!-- 4. メールアドレス -->
+    <div class="form-group">
+      <label>メールアドレス <span class="required">必須</span></label>
+      <input type="email" placeholder="例：info@example.com">
+    </div>
+
+    <!-- 5. パネルの枚数 -->
+    <div class="form-group">
+      <label>パネルの枚数（概算） <span class="required">必須</span></label>
+      <input type="number" placeholder="例：20" min="1"> 枚
+      <div class="form-note">※ 概算で構いません。</div>
+    </div>
+
+    <!-- 6. ご希望のお引渡し方法 -->
+    <div class="form-group">
+      <label>ご希望のお引渡し方法 <span class="required">必須</span></label>
+      <div class="radio-group">
+        <label>
+          <input type="radio" name="delivery" value="持ち込み">
+          持ち込み希望（キャンペーン適用：買い取り10円/枚）
+        </label>
+        <label>
+          <input type="radio" name="delivery" value="引き取り">
+          引き取り希望（通常価格：別途、運賃や解体・撤去費等がかかります）
+        </label>
+      </div>
+    </div>
+
+    <!-- 7. 現在の状況 -->
+    <div class="form-group">
+      <label>現在の状況 <span class="optional">任意</span></label>
+      <input type="text" placeholder="例：屋根の上にある、地上にある、すでに取り外し済み など">
+    </div>
+
+    <!-- 8. お問い合わせ内容 -->
+    <div class="form-group">
+      <label>お問い合わせ内容・ご相談 <span class="optional">任意</span></label>
+      <textarea placeholder="ご質問やご要望がございましたらご記入ください。"></textarea>
+    </div>
+
+    <!-- 送信ボタン -->
+    <div class="form-submit">
+      <button type="submit" class="cta-button">この内容で送信する</button>
+    </div>
+
+    <div class="auto-reply-note">
+      ※ フォーム送信後、3営業日以内に担当者よりご連絡差し上げます。<br>
+      ※ 自動返信メールをお送りいたしますので、受信設定をご確認ください。
+    </div>
+
+  </form>
+
+  <div class="annotation">
+    「持ち込み」選択時はキャンペーン適用の旨を強調。バリデーションは必須項目のみ。
+    送信後は自動返信メール＋サンクスページへ遷移する想定。
+  </div>
+</section>
+
+
+<!-- ==========================================
+  フッター
+=========================================== -->
+<div class="wire-footer">
+  <p>© よねざわ工業 株式会社　All Rights Reserved.</p>
+  <p style="margin-top:5px;font-size:11px;">〒XXX-XXXX 北海道○○市○○町 X-X-X ／ TEL: 0XX-XXX-XXXX</p>
+</div>
+
+</body>
+</html>

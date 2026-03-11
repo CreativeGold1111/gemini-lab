@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>CREATIVE GOLD ― Think Different, Make Different.</title>
+  <meta name="description" content="CREATIVE GOLD - 型破りなクリエイティブで、御社のプロジェクトを加速する。">
+  <link rel="stylesheet" href="css/reset.css">
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/top-b2.css">
+</head>
+<body class="top-b2">
+
+  <!-- ██ BOOT SEQUENCE ██ -->
+  <div class="boot-screen" id="bootScreen">
+    <div class="boot-line info" id="boot-0">BIOS v3.14.159 — Memory Check: 65536K OK</div>
+    <div class="boot-line info" id="boot-1">Detecting hardware... <span style="color:#84ff00">DONE</span></div>
+    <div class="boot-line info" id="boot-2">Loading kernel modules...</div>
+    <div class="boot-line success" id="boot-3">[  OK  ] Started Creative Engine v2025.3</div>
+    <div class="boot-line success" id="boot-4">[  OK  ] Mounted /dev/imagination</div>
+    <div class="boot-line success" id="boot-5">[  OK  ] Started Design Subsystem</div>
+    <div class="boot-line warning" id="boot-6">[WARN ] Boring mode: DISABLED</div>
+    <div class="boot-line success" id="boot-7">[  OK  ] Loaded typeface: Outfit-Black</div>
+    <div class="boot-line success" id="boot-8">[  OK  ] Network: creative.gold — ONLINE</div>
+    <div class="boot-line highlight" id="boot-9">CREATIVE GOLD — SYSTEM READY_</div>
+    <div class="boot-progress" id="bootProgress">
+      <div class="boot-progress-bar" id="bootProgressBar"></div>
+    </div>
+  </div>
+
+  <!-- ██ MATRIX RAIN ██ -->
+  <canvas id="matrix-canvas"></canvas>
+
+  <!-- Header -->
+  <header class="site-header">
+    <a href="top-b2.html" class="header-logo">CREATIVE_GOLD</a>
+    <nav class="header-nav" aria-label="メインナビゲーション">
+      <a href="service/index.html">service</a>
+      <a href="about/index.html">about</a>
+      <a href="works/index.html">works</a>
+      <a href="contact/index.html">contact</a>
+    </nav>
+  </header>
+
+  <main>
+
+    <!-- Hero -->
+    <section class="hero" id="hero">
+      <div class="system-info" aria-hidden="true">
+        PID: 1337<br>
+        CPU: 4.2%<br>
+        MEM: 128MB<br>
+        UPTIME: 24/7<br>
+        STATUS: ACTIVE<br>
+        ──────────<br>
+        v2025.03.11
+      </div>
+
+      <h1 class="hero-title" data-text="Creative Gold.">
+        <span class="hero-title-line">Creative</span>
+        <span class="hero-title-line">Gold<span class="accent">.</span></span>
+      </h1>
+      <div class="hero-sub">
+        <p class="hero-desc">
+          ありきたりじゃない、でもちゃんと機能する。<br>
+          そんなクリエイティブを、裏方からメインステージまで。
+        </p>
+        <a href="service/index.html" class="hero-cta">
+          <span>explore</span>
+          <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+    </section>
+
+    <!-- Service — Process Monitor Style -->
+    <section class="section fade-in" id="service">
+      <div class="terminal-window">
+        <div class="terminal-titlebar">
+          <div class="terminal-dots">
+            <div class="terminal-dot"></div>
+            <div class="terminal-dot"></div>
+            <div class="terminal-dot"></div>
+          </div>
+          <span>services.sh — 3 processes running</span>
+        </div>
+        <div class="terminal-body">
+          <h2 class="big-title">service</h2>
+
+          <div class="service-list">
+            <!-- CREATIVE GHOST -->
+            <div class="service-item">
+              <div class="service-num">01</div>
+              <div class="service-visual">
+                <img src="img/servicelogo_ghost.svg" alt="CREATIVE GHOST" class="service-visual-logo">
+              </div>
+              <div class="service-info">
+                <h3 class="service-name-large">CREATIVE GHOST</h3>
+                <p class="service-title-ja">貴社の見えないクリエイター</p>
+                <p class="service-desc">
+                  クライアント名義での制作、外注や業務委託としての実務、社内向けのクローズドなデザイン指導。表には出ないけれど、確実に御社のクリエイティブを底上げします。
+                </p>
+                <a href="service/ghost/index.html" class="service-link">
+                  open --detail
+                  <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                </a>
+              </div>
+            </div>
+
+            <!-- CREATIVE GOLD -->
+            <div class="service-item">
+              <div class="service-num">02</div>
+              <div class="service-visual">
+                <img src="img/servicelogo_gold.svg" alt="CREATIVE GOLD" class="service-visual-logo">
+              </div>
+              <div class="service-info">
+                <h3 class="service-name-large">CREATIVE GOLD</h3>
+                <p class="service-title-ja">王道のクリエイティブ制作</p>
+                <p class="service-desc">
+                  WEBサイト構築、DTPデザイン、映像制作など。屋号を冠する王道サービスとして、幅広いクリエイティブの実務をこなします。
+                </p>
+                <a href="service/gold/index.html" class="service-link">
+                  open --detail
+                  <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                </a>
+              </div>
+            </div>
+
+            <!-- WEB軍師 -->
+            <div class="service-item">
+              <div class="service-num">03</div>
+              <div class="service-visual">
+                <img src="img/servicelogo_webgunshi.svg" alt="WEB軍師" class="service-visual-logo">
+              </div>
+              <div class="service-info">
+                <h3 class="service-name-large">WEB GUNSHI</h3>
+                <p class="service-title-ja">月額制のWEB戦略パートナー</p>
+                <p class="service-desc">
+                  WEB解析に基づく戦略立案、GASやAIを用いた業務効率化、制作物全体の設計。データとロジックで、クリエイティブをもっと面白く。
+                </p>
+                <a href="service/gunshi/index.html" class="service-link">
+                  open --detail
+                  <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <div class="service-viewall">
+            <a href="service/index.html" class="service-link">
+              ls --all services
+              <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Works -->
+    <section class="works-section fade-in" id="works">
+      <div class="works-header">
+        <h2 class="big-title">works</h2>
+        <a href="works/index.html" class="works-more">
+          view_all
+          <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+      <div class="works-marquee">
+        <div class="works-marquee-track">
+          <div class="works-card">
+            <div class="works-card-thumb"></div>
+            <div class="works-card-info">
+              <p class="works-card-cat">Web Design</p>
+              <p class="works-card-title">ブランドサイト制作</p>
+            </div>
+          </div>
+          <div class="works-card">
+            <div class="works-card-thumb"></div>
+            <div class="works-card-info">
+              <p class="works-card-cat">Art Direction</p>
+              <p class="works-card-title">ビジュアルアイデンティティ</p>
+            </div>
+          </div>
+          <div class="works-card">
+            <div class="works-card-thumb"></div>
+            <div class="works-card-info">
+              <p class="works-card-cat">Movie</p>
+              <p class="works-card-title">コンセプトムービー</p>
+            </div>
+          </div>
+          <div class="works-card">
+            <div class="works-card-thumb"></div>
+            <div class="works-card-info">
+              <p class="works-card-cat">DTP</p>
+              <p class="works-card-title">エディトリアルデザイン</p>
+            </div>
+          </div>
+          <!-- Duplicate for seamless loop -->
+          <div class="works-card">
+            <div class="works-card-thumb"></div>
+            <div class="works-card-info">
+              <p class="works-card-cat">Web Design</p>
+              <p class="works-card-title">ブランドサイト制作</p>
+            </div>
+          </div>
+          <div class="works-card">
+            <div class="works-card-thumb"></div>
+            <div class="works-card-info">
+              <p class="works-card-cat">Art Direction</p>
+              <p class="works-card-title">ビジュアルアイデンティティ</p>
+            </div>
+          </div>
+          <div class="works-card">
+            <div class="works-card-thumb"></div>
+            <div class="works-card-info">
+              <p class="works-card-cat">Movie</p>
+              <p class="works-card-title">コンセプトムービー</p>
+            </div>
+          </div>
+          <div class="works-card">
+            <div class="works-card-thumb"></div>
+            <div class="works-card-info">
+              <p class="works-card-cat">DTP</p>
+              <p class="works-card-title">エディトリアルデザイン</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- About -->
+    <section class="section fade-in" id="about">
+      <h2 class="big-title">about</h2>
+
+      <div class="about-layout">
+        <div class="about-main">
+          <p class="about-text">
+            <span>メッセージテキストが入ります。ここにはCREATIVE GOLDの想いや姿勢を伝える文章が入ります。</span><br>
+            <span>たとえば、なぜこの仕事をしているのか。何を大切にしているのか。</span><br>
+            <span>クライアントと一緒に何を実現したいのか。</span><br>
+            <span>そういった、少し踏み込んだ言葉を、</span><br>
+            <span>飾らずに、でも力強く、ここに置きたいと思います。</span>
+          </p>
+          <a href="about/index.html" class="service-link about-link">
+            cat readme.md
+            <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact -->
+    <section class="contact-section fade-in" id="contact">
+      <h2 class="big-title big-title--light">contact</h2>
+      <div class="contact-inner">
+        <p class="contact-copy">
+          面白いこと、<br>
+          一緒にやりませんか。
+        </p>
+        <a href="contact/index.html" class="contact-btn">INITIATE_CONTACT</a>
+      </div>
+    </section>
+
+    <!-- Note -->
+    <section class="note-banner fade-in">
+      <a href="https://note.com/" class="note-banner-link" target="_blank" rel="noopener">
+        <span class="note-banner-label">note 更新中</span>
+        <span class="note-banner-arrow">→</span>
+      </a>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-logo">// CREATIVE GOLD</div>
+      <p class="footer-copy">&copy; 2025 CREATIVE GOLD — All systems operational</p>
+    </div>
+  </footer>
+
+  <script src="js/theme.js"></script>
+  <script>
+    // ========================================
+    // 1. BOOT SEQUENCE
+    // ========================================
+    (() => {
+      const bootScreen = document.getElementById('bootScreen');
+      const lines = document.querySelectorAll('.boot-line');
+      const progress = document.getElementById('bootProgress');
+      const progressBar = document.getElementById('bootProgressBar');
+      document.body.style.overflow = 'hidden';
+      
+      const delays = [200, 400, 600, 900, 1100, 1300, 1600, 1800, 2100, 2500];
+      
+      lines.forEach((line, i) => {
+        setTimeout(() => {
+          line.classList.add('visible');
+          // Show progress bar after a few lines
+          if (i === 3) {
+            progress.classList.add('visible');
+          }
+          if (progress.classList.contains('visible')) {
+            progressBar.style.width = `${((i - 2) / (lines.length - 3)) * 100}%`;
+          }
+        }, delays[i] || i * 250);
+      });
+
+      // Fade out boot screen
+      setTimeout(() => {
+        bootScreen.classList.add('fade-out');
+        document.body.style.overflow = '';
+        // Remove boot screen from DOM after animation
+        setTimeout(() => {
+          bootScreen.remove();
+        }, 1500);
+      }, 3200);
+    })();
+
+    // ========================================
+    // 2. MATRIX RAIN (Canvas)
+    // ========================================
+    (() => {
+      const canvas = document.getElementById('matrix-canvas');
+      const ctx = canvas.getContext('2d');
+      
+      function resize() {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+      }
+      resize();
+      window.addEventListener('resize', resize);
+
+      const chars = 'CREATIVEGOLD0123456789@#$%^&*クリエイティブゴールド'.split('');
+      const fontSize = 14;
+      let columns = Math.floor(canvas.width / fontSize);
+      let drops = new Array(columns).fill(1);
+      
+      function draw() {
+        ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        
+        ctx.fillStyle = '#84ff00';
+        ctx.font = `${fontSize}px 'JetBrains Mono', monospace`;
+        
+        for (let i = 0; i < drops.length; i++) {
+          const text = chars[Math.floor(Math.random() * chars.length)];
+          ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+          
+          if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+            drops[i] = 0;
+          }
+          drops[i]++;
+        }
+      }
+
+      // Recalculate columns on resize
+      window.addEventListener('resize', () => {
+        columns = Math.floor(canvas.width / fontSize);
+        drops = new Array(columns).fill(1);
+      });
+      
+      setInterval(draw, 50);
+    })();
+
+    // ========================================
+    // 3. SCROLL ANIMATIONS
+    // ========================================
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+        }
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+
+    document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+    // ========================================
+    // 4. GLITCH on Hero Title (random trigger)
+    // ========================================
+    (() => {
+      const title = document.querySelector('.hero-title');
+      if (!title) return;
+
+      function triggerGlitch() {
+        title.style.animation = 'none';
+        title.offsetHeight; // force reflow
+        title.style.animation = '';
+        
+        const next = 3000 + Math.random() * 8000;
+        setTimeout(triggerGlitch, next);
+      }
+      
+      setTimeout(triggerGlitch, 5000);
+    })();
+
+    // ========================================
+    // 5. CURSOR GLOW (retained from v1)
+    // ========================================
+    (() => {
+      const glow = document.createElement('div');
+      glow.style.cssText = `
+        position: fixed;
+        width: 250px;
+        height: 250px;
+        border-radius: 50%;
+        background: radial-gradient(circle, rgba(132,255,0,0.08) 0%, transparent 70%);
+        pointer-events: none;
+        z-index: 98;
+        transform: translate(-50%, -50%);
+        transition: opacity 0.3s;
+        mix-blend-mode: screen;
+      `;
+      document.body.appendChild(glow);
+
+      document.addEventListener('mousemove', (e) => {
+        glow.style.left = e.clientX + 'px';
+        glow.style.top = e.clientY + 'px';
+      });
+      document.addEventListener('mouseleave', () => glow.style.opacity = '0');
+      document.addEventListener('mouseenter', () => glow.style.opacity = '1');
+    })();
+
+    // ========================================
+    // 6. TEXT SCRAMBLE EFFECT on section titles
+    // ========================================
+    (() => {
+      const scrambleChars = '!@#$%^&*()_+-={}[]|;:,./<>?0123456789';
+      
+      function scrambleText(element) {
+        const original = element.textContent;
+        let iteration = 0;
+        const maxIterations = original.length;
+        
+        const interval = setInterval(() => {
+          element.textContent = original
+            .split('')
+            .map((char, index) => {
+              if (index < iteration) return original[index];
+              return scrambleChars[Math.floor(Math.random() * scrambleChars.length)];
+            })
+            .join('');
+          
+          iteration += 1/2;
+          if (iteration >= maxIterations) {
+            element.textContent = original;
+            clearInterval(interval);
+          }
+        }, 40);
+      }
+
+      // Observe service names for scramble
+      const scrambleObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            scrambleText(entry.target);
+            scrambleObserver.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.5 });
+
+      document.querySelectorAll('.service-name-large').forEach(el => {
+        scrambleObserver.observe(el);
+      });
+    })();
+
+    // ========================================
+    // 7. TYPING EFFECT on hero description
+    // ========================================
+    (() => {
+      const desc = document.querySelector('.hero-desc');
+      if (!desc) return;
+      
+      const originalHTML = desc.innerHTML;
+      const textContent = desc.textContent.trim();
+      desc.textContent = '';
+      desc.style.borderRight = '2px solid #84ff00';
+      
+      let i = 0;
+      function typeChar() {
+        if (i < textContent.length) {
+          desc.textContent += textContent[i];
+          i++;
+          const delay = textContent[i-1] === '。' ? 300 : 
+                        textContent[i-1] === '、' ? 150 : 
+                        30 + Math.random() * 30;
+          setTimeout(typeChar, delay);
+        } else {
+          // Restore original HTML with line breaks
+          desc.innerHTML = originalHTML;
+          desc.style.borderRight = 'none';
+        }
+      }
+
+      // Start typing after boot sequence
+      setTimeout(typeChar, 3500);
+    })();
+
+    // ========================================
+    // 8. RANDOM STATUS UPDATES in system info
+    // ========================================
+    (() => {
+      const sysInfo = document.querySelector('.system-info');
+      if (!sysInfo) return;
+
+      function updateStatus() {
+        const cpu = (2 + Math.random() * 8).toFixed(1);
+        const mem = Math.floor(100 + Math.random() * 128);
+        sysInfo.innerHTML = `
+          PID: ${1000 + Math.floor(Math.random() * 9000)}<br>
+          CPU: ${cpu}%<br>
+          MEM: ${mem}MB<br>
+          UPTIME: 24/7<br>
+          STATUS: <span style="color:#84ff00">ACTIVE</span><br>
+          ──────────<br>
+          v2025.03.11
+        `;
+      }
+
+      setInterval(updateStatus, 2000);
+    })();
+  </script>
+</body>
+</html>

@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>CREATIVE GOLD</title>
+  <link rel="stylesheet" href="css/reset.css">
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/entry.css">
+</head>
+<body>
+
+  <div class="transition-page" id="transition-page">
+    <div class="transition-bg" id="transition-bg"></div>
+    <div class="transition-particles" id="transition-particles"></div>
+    <div style="text-align:center;">
+      <p class="transition-text" id="transition-text"></p>
+      <img src="img/logo_w.png" alt="CREATIVE GOLD" class="transition-subtext" id="transition-subtext" style="max-width:160px; height:auto; margin:var(--space-md) auto 0;">
+    </div>
+  </div>
+
+  <script src="js/theme.js"></script>
+  <script>
+    (function () {
+      'use strict';
+
+      const messages = {
+        a: {
+          text: 'どうも、誠実さがウリな\n金田一です。',
+          redirect: 'top-a.html',
+          color: '#003cb9',
+          colorRgb: '0, 60, 185',
+        },
+        b: {
+          text: 'どうも、ユニークさがウリな\n金田一です。',
+          redirect: 'top-b.html',
+          color: '#84ff00',
+          colorRgb: '132, 255, 0',
+        },
+        c: {
+          text: 'どうも、実績がウリな\n金田一です。',
+          redirect: 'top-c.html',
+          color: '#E84040',
+          colorRgb: '232, 64, 64',
+        },
+      };
+
+      const route = ThemeManager.getRoute();
+
+      // ルートが未選択ならエントリーに戻す
+      if (!route || !messages[route]) {
+        window.location.href = 'index.html';
+        return;
+      }
+
+      const msg = messages[route];
+      const bgEl = document.getElementById('transition-bg');
+      const textEl = document.getElementById('transition-text');
+      const subtextEl = document.getElementById('transition-subtext');
+      const particlesEl = document.getElementById('transition-particles');
+
+      // テキストを設定（改行をbrに変換）
+      textEl.innerHTML = msg.text.replace(/\n/g, '<br>');
+
+      // 背景色を設定
+      bgEl.style.background = msg.color;
+
+      // テーマを適用
+      ThemeManager.applyTheme(route);
+
+      // パーティクルを生成
+      function createParticles() {
+        for (let i = 0; i < 20; i++) {
+          const particle = document.createElement('div');
+          particle.className = 'particle';
+          particle.style.left = Math.random() * 100 + '%';
+          particle.style.top = Math.random() * 100 + '%';
+          particle.style.width = (Math.random() * 4 + 2) + 'px';
+          particle.style.height = particle.style.width;
+          particle.style.background = `rgba(255, 255, 255, ${Math.random() * 0.3 + 0.1})`;
+          particle.style.animation = `particleFloat ${Math.random() * 2 + 1.5}s ${Math.random() * 1}s var(--ease-out-expo) forwards`;
+          particlesEl.appendChild(particle);
+        }
+      }
+
+      // アニメーションシーケンス
+      // Step 1: 背景を拡大
+      setTimeout(() => {
+        bgEl.classList.add('expand');
+      }, 200);
+
+      // Step 2: パーティクル
+      setTimeout(() => {
+        createParticles();
+      }, 800);
+
+      // Step 3: テキストをフェードイン
+      setTimeout(() => {
+        textEl.classList.add('show');
+      }, 1000);
+
+      // Step 4: サブテキストをフェードイン
+      setTimeout(() => {
+        subtextEl.classList.add('show');
+      }, 1600);
+
+      // Step 5: トップページへ遷移
+      setTimeout(() => {
+        // フェードアウト
+        document.body.style.transition = 'opacity 0.6s var(--ease-out-expo)';
+        document.body.style.opacity = '0';
+
+        setTimeout(() => {
+          window.location.href = msg.redirect;
+        }, 600);
+      }, 3500);
+
+    })();
+  </script>
+</body>
+</html>

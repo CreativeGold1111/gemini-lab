@@ -1,0 +1,847 @@
+/* ============================================
+   Top Page A - 誠実さルート（Blue）
+   サントリーSIC風 — 白背景×ネイビー×有機的ブロブ
+   明朝見出し + ゴシック本文の上質コーポレート
+   
+   ※ CMS組み込み時の干渉防止のため下層CSSとは完全分離
+   ============================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;500;600;700;900&display=swap');
+
+/* ── Base ── */
+.top-a {
+  background: #FFFFFF;
+  color: #1A1A1A;
+  font-family: var(--font-sans);
+  overflow-x: hidden;
+}
+
+/* Grid pattern background */
+.top-a::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(0, 60, 185, 0.14) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 60, 185, 0.14) 1px, transparent 1px);
+  background-size: 48px 48px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ── Header ── */
+.top-a .site-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.2rem var(--side-padding);
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  transition: all var(--duration-normal) var(--ease-out-expo);
+}
+
+.top-a .header-logo {
+  font-family: var(--font-display);
+  font-size: 0.95rem;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: #1A1A1A;
+}
+
+.top-a .header-nav {
+  display: flex;
+  gap: 2.5rem;
+  align-items: center;
+}
+
+.top-a .header-nav a {
+  font-family: var(--font-display);
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #666;
+  transition: color var(--duration-fast) ease;
+  position: relative;
+}
+
+.top-a .header-nav a::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: #003cb9;
+  transition: width var(--duration-normal) var(--ease-out-expo);
+}
+
+.top-a .header-nav a:hover {
+  color: #003cb9;
+}
+
+.top-a .header-nav a:hover::after {
+  width: 100%;
+}
+
+/* ── Hero ── */
+.top-a .hero {
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  align-items: center;
+  padding: 0 var(--side-padding);
+  position: relative;
+  overflow: hidden;
+  background: #FFFFFF;
+}
+
+/* Giant background typography */
+.top-a .hero-bg-typo {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-35%, -50%);
+  font-family: 'Noto Serif JP', serif;
+  font-size: clamp(6rem, 4rem + 10vw, 16rem);
+  font-weight: 900;
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+  color: rgba(0, 60, 185, 0.04);
+  white-space: nowrap;
+  pointer-events: none;
+  user-select: none;
+  z-index: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.top-a .hero-bg-typo span:nth-child(2) {
+  padding-left: 0.2em;
+}
+.top-a .hero::before {
+  content: '';
+  position: absolute;
+  top: -15%;
+  right: -10%;
+  width: clamp(400px, 50vw, 800px);
+  height: clamp(400px, 50vw, 800px);
+  background: radial-gradient(ellipse at 40% 40%, rgba(0, 60, 185, 0.08) 0%, rgba(0, 60, 185, 0.03) 50%, transparent 70%);
+  border-radius: 60% 40% 55% 45% / 50% 65% 35% 50%;
+  pointer-events: none;
+  animation: blobMorph 20s ease-in-out infinite;
+}
+
+.top-a .hero::after {
+  content: '';
+  position: absolute;
+  bottom: -20%;
+  left: -5%;
+  width: clamp(300px, 35vw, 600px);
+  height: clamp(300px, 35vw, 600px);
+  background: radial-gradient(ellipse at 60% 60%, rgba(100, 130, 200, 0.06) 0%, transparent 70%);
+  border-radius: 45% 55% 40% 60% / 55% 40% 60% 45%;
+  pointer-events: none;
+  animation: blobMorph 25s ease-in-out infinite reverse;
+}
+
+@keyframes blobMorph {
+  0%, 100% {
+    border-radius: 60% 40% 55% 45% / 50% 65% 35% 50%;
+    transform: translate(0, 0) rotate(0deg);
+  }
+  33% {
+    border-radius: 45% 55% 65% 35% / 60% 40% 55% 45%;
+    transform: translate(15px, -20px) rotate(3deg);
+  }
+  66% {
+    border-radius: 55% 45% 40% 60% / 45% 55% 50% 50%;
+    transform: translate(-10px, 10px) rotate(-2deg);
+  }
+}
+
+.top-a .hero-content {
+  max-width: var(--container-xl);
+  width: 100%;
+  margin: 0 auto;
+  padding: var(--space-3xl) 0;
+  position: relative;
+  z-index: 1;
+}
+
+.top-a .hero-label {
+  font-family: var(--font-display);
+  font-size: 0.65rem;
+  font-weight: 500;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: #003cb9;
+  margin-bottom: 2.5rem;
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+  opacity: 0.6;
+}
+
+.top-a .hero-label::before {
+  content: '';
+  width: 40px;
+  height: 1px;
+  background: #003cb9;
+}
+
+.top-a .hero-title {
+  font-family: 'Noto Serif JP', serif;
+  font-size: clamp(2.2rem, 1.6rem + 3vw, 4rem);
+  font-weight: 600;
+  line-height: 1.5;
+  letter-spacing: 0.04em;
+  color: #003cb9;
+  margin-bottom: 2.5rem;
+  max-width: 700px;
+}
+
+.top-a .hero-title em {
+  font-style: normal;
+  position: relative;
+  display: inline;
+}
+
+.top-a .hero-title em::after {
+  content: '';
+  position: absolute;
+  bottom: 2px;
+  left: 0;
+  width: 100%;
+  height: 8px;
+  background: rgba(0, 60, 185, 0.08);
+  z-index: -1;
+}
+
+.top-a .hero-desc {
+  font-size: 0.9rem;
+  font-weight: 300;
+  line-height: 2.2;
+  color: #666;
+  max-width: 520px;
+  margin-bottom: 3.5rem;
+}
+
+.top-a .hero-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 1rem;
+  font-family: var(--font-display);
+  font-size: 0.78rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #FFF;
+  background: #003cb9;
+  padding: 1.1rem 2.8rem;
+  border: none;
+  border-radius: var(--radius-full);
+  transition: all var(--duration-normal) var(--ease-out-expo);
+  box-shadow: 0 4px 16px rgba(0, 60, 185, 0.2);
+}
+
+.top-a .hero-cta:hover {
+  background: #2A3F7A;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0, 60, 185, 0.25);
+}
+
+.top-a .hero-cta svg {
+  width: 16px;
+  height: 16px;
+  stroke: currentColor;
+  fill: none;
+  stroke-width: 2;
+}
+
+.top-a .hero-scroll {
+  position: absolute;
+  bottom: 3rem;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: var(--font-display);
+  font-size: 0.6rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #AAA;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  z-index: 1;
+}
+
+.top-a .hero-scroll::after {
+  content: '';
+  width: 1px;
+  height: 40px;
+  background: linear-gradient(to bottom, #AAA, transparent);
+  animation: scrollLine 2s ease-in-out infinite;
+}
+
+@keyframes scrollLine {
+  0%, 100% { opacity: 0.3; transform: scaleY(0.5); }
+  50% { opacity: 1; transform: scaleY(1); }
+}
+
+/* ── Section Common ── */
+.top-a .section {
+  padding: clamp(5rem, 4rem + 4vw, 8rem) var(--side-padding);
+  max-width: var(--container-xl);
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+}
+
+.top-a .section-header {
+  margin-bottom: clamp(2.5rem, 2rem + 2vw, 4rem);
+}
+
+.top-a .section-label {
+  font-family: var(--font-display);
+  font-size: 0.65rem;
+  font-weight: 500;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: #003cb9;
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  opacity: 0.5;
+}
+
+.top-a .section-label::before {
+  content: '';
+  width: 24px;
+  height: 1px;
+  background: #003cb9;
+}
+
+.top-a .section-title {
+  font-family: 'Noto Serif JP', serif;
+  font-size: clamp(1.6rem, 1.2rem + 2vw, 2.8rem);
+  font-weight: 600;
+  line-height: 1.5;
+  letter-spacing: 0.04em;
+  color: #003cb9;
+}
+
+/* ── Service Section（WEB軍師フル幅 + GOLD/GHOST 2カラム） ── */
+
+/* --- Featured (WEB軍師) --- */
+.top-a .service-featured {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(2rem, 1.5rem + 3vw, 5rem);
+  align-items: center;
+  padding: clamp(3rem, 2rem + 3vw, 5rem);
+  background: #F8F9FC;
+  border-radius: 24px;
+  margin-bottom: 1.5rem;
+  position: relative;
+  overflow: hidden;
+  transition: box-shadow var(--duration-slow) ease;
+}
+
+/* Decorative blob inside featured card */
+.top-a .service-featured::before {
+  content: '';
+  position: absolute;
+  top: -30%;
+  right: -20%;
+  width: 60%;
+  height: 120%;
+  background: radial-gradient(ellipse, rgba(0, 60, 185, 0.04) 0%, transparent 70%);
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.top-a .service-featured:hover {
+  box-shadow: 0 16px 48px rgba(0, 60, 185, 0.08);
+}
+
+.top-a .service-featured-logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(2rem, 1.5rem + 2vw, 4rem);
+  position: relative;
+  z-index: 1;
+}
+
+.top-a .service-featured-logo .service-logo-img {
+  width: 100%;
+  max-width: 400px;
+  height: auto;
+  opacity: 0.8;
+  transition: opacity var(--duration-normal) ease, transform var(--duration-slow) var(--ease-out-expo);
+}
+
+.top-a .service-featured:hover .service-logo-img {
+  opacity: 1;
+  transform: scale(1.02);
+}
+
+.top-a .service-featured-body {
+  min-width: 0;
+  position: relative;
+  z-index: 1;
+}
+
+/* --- Duo (GOLD + GHOST 2カラム) --- */
+.top-a .service-duo {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+}
+
+.top-a .service-card-a {
+  background: #F8F9FC;
+  border-radius: 24px;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  transition: box-shadow var(--duration-slow) ease, transform var(--duration-normal) var(--ease-out-expo);
+}
+
+.top-a .service-card-a:hover {
+  box-shadow: 0 16px 48px rgba(0, 60, 185, 0.08);
+  transform: translateY(-4px);
+}
+
+.top-a .service-card-a-logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(2rem, 1.5rem + 2vw, 3.5rem) clamp(1.5rem, 1rem + 2vw, 3rem);
+  background: linear-gradient(135deg, #F0F2F8, #F8F9FC);
+  position: relative;
+}
+
+/* Decorative blob inside card */
+.top-a .service-card-a-logo::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 80%;
+  height: 80%;
+  background: radial-gradient(ellipse, rgba(0, 60, 185, 0.04) 0%, transparent 70%);
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.top-a .service-card-a-logo .service-logo-img {
+  width: 100%;
+  max-width: 400px;
+  height: auto;
+  opacity: 0.75;
+  transition: opacity var(--duration-normal) ease, transform var(--duration-slow) var(--ease-out-expo);
+  position: relative;
+  z-index: 1;
+}
+
+.top-a .service-card-a:hover .service-logo-img {
+  opacity: 1;
+  transform: scale(1.02);
+}
+
+.top-a .service-card-a-body {
+  flex: 1;
+  padding: clamp(1.5rem, 1rem + 1vw, 2.5rem);
+}
+
+/* --- 共通テキストスタイル --- */
+.top-a .service-name {
+  font-family: var(--font-display);
+  font-size: clamp(1.1rem, 0.8rem + 1vw, 1.6rem);
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #003cb9;
+  margin-bottom: 0.4rem;
+}
+
+.top-a .service-title {
+  font-family: 'Noto Serif JP', serif;
+  font-size: clamp(0.8rem, 0.75rem + 0.25vw, 0.95rem);
+  font-weight: 400;
+  color: #888;
+  margin-bottom: 1.2rem;
+  letter-spacing: 0.04em;
+}
+
+.top-a .service-desc {
+  font-size: 0.95rem;
+  font-weight: 300;
+  line-height: 2;
+  color: #888;
+  max-width: 560px;
+}
+
+.top-a .service-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-family: var(--font-display);
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #003cb9;
+  margin-top: 1.5rem;
+  padding-bottom: 0.3rem;
+  border-bottom: 1px solid rgba(0, 60, 185, 0.2);
+  transition: gap var(--duration-normal) var(--ease-out-expo), border-color var(--duration-normal) ease;
+}
+
+.top-a .service-link:hover {
+  gap: 1.2rem;
+  border-color: #003cb9;
+}
+
+.top-a .service-link svg {
+  width: 16px;
+  height: 16px;
+  stroke: currentColor;
+  fill: none;
+  stroke-width: 2;
+}
+
+/* ── About Section ── */
+.top-a #about {
+  background: #F8F9FC;
+  border-radius: 40px;
+  padding: clamp(4rem, 3rem + 3vw, 7rem) var(--side-padding);
+  max-width: var(--container-full);
+  margin: 0 auto clamp(3rem, 2rem + 2vw, 5rem);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Decorative blob in About section */
+.top-a #about::before {
+  content: '';
+  position: absolute;
+  bottom: -20%;
+  right: -10%;
+  width: 50%;
+  height: 80%;
+  background: radial-gradient(ellipse at 60% 60%, rgba(0, 60, 185, 0.04) 0%, transparent 70%);
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.top-a .about-content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-xl);
+  align-items: start;
+  max-width: var(--container-xl);
+  margin: 0 auto;
+}
+
+.top-a .about-text {
+  font-size: 0.95rem;
+  font-weight: 300;
+  line-height: 2.2;
+  color: #555;
+}
+
+.top-a .about-text strong {
+  font-weight: 500;
+  color: #003cb9;
+}
+
+.top-a .about-stats {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  padding: 2.5rem;
+  background: #FFF;
+  border-radius: 20px;
+  box-shadow: 0 4px 24px rgba(0, 60, 185, 0.06);
+}
+
+.top-a .stat-number {
+  font-family: var(--font-display);
+  font-size: 2.4rem;
+  font-weight: 700;
+  color: #003cb9;
+  line-height: 1;
+  margin-bottom: 0.3rem;
+}
+
+.top-a .stat-label {
+  font-size: 0.75rem;
+  font-weight: 400;
+  color: #999;
+  letter-spacing: 0.05em;
+}
+
+/* ── Works Section ── */
+.top-a .works-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.5rem;
+}
+
+.top-a .works-item {
+  position: relative;
+  aspect-ratio: 4/3;
+  background: #F0F2F8;
+  border-radius: 16px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform var(--duration-normal) var(--ease-out-expo), box-shadow var(--duration-slow) ease;
+}
+
+.top-a .works-item:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 48px rgba(0, 60, 185, 0.1);
+}
+
+.top-a .works-item-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 60, 185, 0.88);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 2rem;
+  opacity: 0;
+  transition: opacity var(--duration-normal) var(--ease-out-expo);
+  border-radius: 16px;
+}
+
+.top-a .works-item:hover .works-item-overlay {
+  opacity: 1;
+}
+
+.top-a .works-item-cat {
+  font-family: var(--font-display);
+  font-size: 0.65rem;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.6);
+  margin-bottom: 0.5rem;
+}
+
+.top-a .works-item-title {
+  font-family: 'Noto Serif JP', serif;
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: #FFF;
+}
+
+/* ── Contact Section ── */
+.top-a .contact-section {
+  background: #003cb9;
+  color: #FFF;
+  padding: clamp(5rem, 4rem + 4vw, 8rem) var(--side-padding);
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Decorative blob in Contact */
+.top-a .contact-section::before {
+  content: '';
+  position: absolute;
+  top: -30%;
+  right: -10%;
+  width: 60%;
+  height: 140%;
+  background: radial-gradient(ellipse, rgba(100, 140, 255, 0.1) 0%, transparent 70%);
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.top-a .contact-section .section-label {
+  justify-content: center;
+  color: rgba(255, 255, 255, 0.5);
+  opacity: 1;
+}
+
+.top-a .contact-section .section-label::before {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.top-a .contact-section .section-title {
+  color: #FFF;
+  margin-bottom: 1.5rem;
+}
+
+.top-a .contact-desc {
+  font-size: 0.95rem;
+  font-weight: 300;
+  line-height: 2;
+  color: rgba(255, 255, 255, 0.5);
+  max-width: 520px;
+  margin: 0 auto 3rem;
+}
+
+.top-a .contact-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.8rem;
+  font-family: var(--font-display);
+  font-size: 0.8rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #003cb9;
+  background: #FFF;
+  padding: 1.2rem 3rem;
+  border-radius: var(--radius-full);
+  transition: all var(--duration-normal) var(--ease-out-expo);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+}
+
+.top-a .contact-btn:hover {
+  background: #F0F2F8;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+}
+
+.top-a .contact-btn svg {
+  width: 16px;
+  height: 16px;
+  stroke: currentColor;
+  fill: none;
+  stroke-width: 2;
+}
+
+/* ── Footer ── */
+.top-a .site-footer {
+  padding: 2rem var(--side-padding);
+  text-align: center;
+  font-family: var(--font-display);
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+  color: #AAA;
+  background: #FFF;
+  border-top: 1px solid #F0F0F0;
+}
+
+/* ── Note Banner ── */
+.top-a .note-banner {
+  padding: clamp(3rem, 2rem + 2vw, 5rem) var(--side-padding);
+  background: #F8F9FC;
+}
+
+.top-a .note-banner-inner {
+  max-width: var(--container-xl);
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
+.top-a .note-banner-label {
+  font-family: var(--font-display);
+  font-size: 0.65rem;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #003cb9;
+  opacity: 0.5;
+  flex-shrink: 0;
+}
+
+.top-a .note-banner-text {
+  font-family: 'Noto Serif JP', serif;
+  font-size: 0.88rem;
+  font-weight: 400;
+  color: #666;
+  flex: 1;
+}
+
+.top-a .note-banner-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-display);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  color: #003cb9;
+  white-space: nowrap;
+  padding: 0.7rem 1.5rem;
+  border: 1.5px solid #003cb9;
+  border-radius: var(--radius-full);
+  transition: all var(--duration-normal) var(--ease-out-expo);
+}
+
+.top-a .note-banner-link:hover {
+  background: #003cb9;
+  color: #FFF;
+}
+
+/* ── Scroll Animation ── */
+.top-a .fade-in {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.8s var(--ease-out-expo), transform 0.8s var(--ease-out-expo);
+}
+
+.top-a .fade-in.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ── Responsive ── */
+@media (max-width: 768px) {
+  .top-a .header-nav {
+    display: none;
+  }
+
+  .top-a .about-content {
+    grid-template-columns: 1fr;
+  }
+
+  .top-a .service-featured {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .top-a .service-duo {
+    grid-template-columns: 1fr;
+  }
+
+  .top-a .works-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .top-a .hero::before,
+  .top-a .hero::after {
+    display: none;
+  }
+
+  .top-a .hero-bg-typo {
+    display: none;
+  }
+
+  .top-a #about {
+    border-radius: 24px;
+    margin-left: 1rem;
+    margin-right: 1rem;
+  }
+}

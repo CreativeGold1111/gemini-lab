@@ -1,0 +1,696 @@
+/* ============================================
+   WEB軍師 Service Detail Page
+   孫子の兵法 × WEB戦略
+   和テイスト — 筆文字・ベージュ・墨
+   ============================================ */
+
+/* ── Page Base Override ── */
+.sub-page:has(.gunshi-hero) {
+  background: #F5F0E8;
+}
+
+/* Fallback for browsers without :has() */
+.gunshi-page-wrap {
+  background: #F5F0E8;
+  min-height: 100vh;
+}
+
+/* ── Hero ── */
+.gunshi-hero {
+  padding: clamp(10rem, 8rem + 8vw, 18rem) var(--side-padding) clamp(4rem, 3rem + 3vw, 6rem);
+  max-width: var(--container-xl);
+  margin: 0 auto;
+  border-bottom: none;
+  position: relative;
+  overflow: hidden;
+  text-align: center;
+}
+
+.gunshi-hero::before {
+  content: '兵法';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -55%);
+  font-family: 'Noto Serif JP', serif;
+  font-size: clamp(12rem, 8rem + 16vw, 28rem);
+  font-weight: 900;
+  color: rgba(0, 0, 0, 0.03);
+  line-height: 1;
+  white-space: nowrap;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.gunshi-hero-label {
+  font-family: var(--font-display);
+  font-size: 0.6rem;
+  font-weight: 500;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: #8B7355;
+  margin-bottom: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  position: relative;
+  z-index: 1;
+}
+
+.gunshi-hero-label::before {
+  content: '';
+  width: 30px;
+  height: 1.5px;
+  background: #8B7355;
+}
+
+.gunshi-hero-title {
+  font-family: 'Noto Serif JP', serif;
+  font-size: clamp(1.2rem, 0.9rem + 1.2vw, 1.8rem);
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  color: #2A2218;
+  line-height: 1.3;
+  margin-bottom: 0.8rem;
+  margin-top: clamp(2rem, 1.5rem + 1.5vw, 3rem);
+  position: relative;
+  z-index: 1;
+}
+
+.gunshi-hero-subtitle {
+  font-family: 'Noto Serif JP', serif;
+  font-size: clamp(0.82rem, 0.72rem + 0.5vw, 1rem);
+  font-weight: 400;
+  color: #8B7355;
+  letter-spacing: 0.15em;
+  position: relative;
+  z-index: 1;
+}
+
+/* ── Decorative vertical text ── */
+.gunshi-hero::after {
+  content: '孫子曰く';
+  position: absolute;
+  right: var(--side-padding);
+  top: clamp(6rem, 5rem + 4vw, 10rem);
+  writing-mode: vertical-rl;
+  font-family: 'Noto Serif JP', serif;
+  font-size: clamp(0.7rem, 0.6rem + 0.3vw, 0.85rem);
+  font-weight: 400;
+  letter-spacing: 0.5em;
+  color: rgba(139, 115, 85, 0.25);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ── Lead Section ── */
+.gunshi-lead {
+  padding: clamp(3rem, 2rem + 3vw, 5rem) var(--side-padding);
+  max-width: var(--container-xl);
+  margin: 0 auto;
+  border-top: 1px solid rgba(139, 115, 85, 0.15);
+}
+
+.gunshi-lead-text {
+  font-family: 'Noto Serif JP', serif;
+  font-size: clamp(0.95rem, 0.85rem + 0.4vw, 1.1rem);
+  font-weight: 400;
+  line-height: 2.6;
+  color: #4A3F32;
+  max-width: 700px;
+  letter-spacing: 0.03em;
+}
+
+.gunshi-lead-text strong {
+  font-weight: 700;
+  color: #2A2218;
+}
+
+/* ── Phase Section (守 / 攻 / 制) ── */
+.gunshi-phase {
+  padding: clamp(4rem, 3rem + 3vw, 6rem) var(--side-padding);
+  max-width: var(--container-xl);
+  margin: 0 auto;
+  border-top: 1px solid rgba(139, 115, 85, 0.15);
+  position: relative;
+}
+
+.gunshi-phase::before {
+  content: attr(data-bg-text);
+  position: absolute;
+  right: var(--side-padding);
+  top: clamp(2rem, 1rem + 3vw, 4rem);
+  font-family: 'Noto Serif JP', serif;
+  font-size: clamp(16rem, 10rem + 20vw, 40rem);
+  font-weight: 900;
+  color: rgba(0, 0, 0, 0.025);
+  line-height: 1;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.gunshi-phase-header {
+  display: flex;
+  align-items: baseline;
+  gap: 1.5rem;
+  margin-bottom: 1rem;
+  position: relative;
+  z-index: 1;
+}
+
+.gunshi-phase-kanji {
+  font-family: 'Noto Serif JP', serif;
+  font-size: clamp(3.5rem, 2.5rem + 4vw, 7rem);
+  font-weight: 900;
+  line-height: 1;
+  color: #8B7355;
+  opacity: 0.2;
+}
+
+.gunshi-phase-title {
+  font-family: 'Noto Serif JP', serif;
+  font-size: clamp(1.3rem, 1rem + 1.2vw, 1.8rem);
+  font-weight: 700;
+  color: #2A2218;
+  letter-spacing: 0.05em;
+}
+
+.gunshi-phase-desc {
+  font-family: 'Noto Serif JP', serif;
+  font-size: 0.85rem;
+  font-weight: 400;
+  line-height: 2.2;
+  color: #6B5E4F;
+  max-width: 650px;
+  margin-bottom: clamp(2rem, 1.5rem + 1.5vw, 3.5rem);
+  position: relative;
+  z-index: 1;
+  letter-spacing: 0.02em;
+}
+
+/* ── Article (各条) ── */
+.gunshi-articles {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  position: relative;
+  z-index: 1;
+}
+
+.gunshi-article {
+  width: calc(33.333% - 1rem);
+  padding: clamp(1.5rem, 1rem + 1vw, 2.5rem);
+  background: rgba(255, 255, 255, 0.6);
+  border: 1px solid rgba(139, 115, 85, 0.1);
+  border-radius: 6px;
+  box-sizing: border-box;
+  transition: box-shadow var(--duration-normal) ease;
+}
+
+.gunshi-article:hover {
+  box-shadow: 0 8px 32px rgba(139, 115, 85, 0.08);
+}
+
+.gunshi-article:last-child {
+  border-bottom: none;
+}
+
+.gunshi-article-header {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  margin-bottom: 1.2rem;
+}
+
+.gunshi-article-num {
+  font-family: 'Noto Serif JP', serif;
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  color: #8B7355;
+}
+
+.gunshi-article-name {
+  font-family: 'Noto Serif JP', serif;
+  font-size: clamp(1.2rem, 1rem + 0.8vw, 1.6rem);
+  font-weight: 700;
+  color: #2A2218;
+  letter-spacing: 0.08em;
+}
+
+.gunshi-article-name-reading {
+  font-family: 'Noto Serif JP', serif;
+  font-size: 0.68rem;
+  font-weight: 400;
+  color: #B8A88A;
+  margin-left: 0.5rem;
+  letter-spacing: 0.05em;
+}
+
+.gunshi-article-body {
+  padding-left: 0;
+}
+
+.gunshi-article-quote {
+  font-family: 'Noto Serif JP', serif;
+  font-size: 0.85rem;
+  font-weight: 500;
+  font-style: normal;
+  color: #8B7355;
+  margin-bottom: 1.2rem;
+  padding-left: 1rem;
+  border-left: 2px solid rgba(139, 115, 85, 0.3);
+  line-height: 2;
+  letter-spacing: 0.08em;
+}
+
+.gunshi-article-translation {
+  font-family: 'Noto Serif JP', serif;
+  font-size: 0.9rem;
+  font-weight: 400;
+  line-height: 2.4;
+  color: #4A3F32;
+  margin-bottom: 1.5rem;
+  letter-spacing: 0.02em;
+}
+
+.gunshi-article-work-label {
+  font-family: 'Noto Serif JP', serif;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  color: #8B7355;
+  margin-bottom: 0.8rem;
+}
+
+.gunshi-article-work-list {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.gunshi-article-work-list li {
+  font-family: 'Noto Serif JP', serif;
+  font-size: 0.82rem;
+  font-weight: 400;
+  line-height: 1.7;
+  color: #5A4E40;
+  padding-left: 0.7rem;
+  position: relative;
+  letter-spacing: 0.01em;
+}
+
+.gunshi-article-work-list li::before {
+  content: '一';
+  position: absolute;
+  left: 0;
+  top: 0;
+  font-family: 'Noto Serif JP', serif;
+  font-size: 0.55rem;
+  color: #B8A88A;
+}
+
+/* ── Monthly Section ── */
+.gunshi-monthly {
+  padding: clamp(4rem, 3rem + 3vw, 6rem) var(--side-padding);
+  max-width: var(--container-xl);
+  margin: 0 auto;
+  border-top: 1px solid rgba(139, 115, 85, 0.15);
+  position: relative;
+}
+
+.gunshi-monthly::before {
+  content: '月';
+  position: absolute;
+  right: var(--side-padding);
+  top: clamp(2rem, 1rem + 2vw, 4rem);
+  font-family: 'Noto Serif JP', serif;
+  font-size: clamp(8rem, 5rem + 10vw, 18rem);
+  font-weight: 900;
+  color: rgba(0, 0, 0, 0.02);
+  line-height: 1;
+  pointer-events: none;
+}
+
+.gunshi-monthly-title {
+  font-family: 'Noto Serif JP', serif;
+  font-size: clamp(1.3rem, 1rem + 1.2vw, 1.8rem);
+  font-weight: 700;
+  color: #2A2218;
+  margin-bottom: 1.5rem;
+  letter-spacing: 0.05em;
+}
+
+.gunshi-monthly-text {
+  font-family: 'Noto Serif JP', serif;
+  font-size: 0.9rem;
+  font-weight: 400;
+  line-height: 2.6;
+  color: #4A3F32;
+  max-width: 700px;
+  margin-bottom: 1.5rem;
+  letter-spacing: 0.02em;
+}
+
+.gunshi-monthly-text strong {
+  font-weight: 700;
+  color: #2A2218;
+}
+
+/* ── Routine Section (常務) ── */
+.gunshi-routine {
+  padding: clamp(4rem, 3rem + 3vw, 6rem) var(--side-padding);
+  max-width: var(--container-xl);
+  margin: 0 auto;
+  border-top: 1px solid rgba(139, 115, 85, 0.15);
+}
+
+.gunshi-routine-label {
+  font-family: var(--font-display);
+  font-size: 0.6rem;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #8B7355;
+  margin-bottom: 0.8rem;
+}
+
+.gunshi-routine-title {
+  font-family: 'Noto Serif JP', serif;
+  font-size: clamp(1.3rem, 1rem + 1.2vw, 1.8rem);
+  font-weight: 700;
+  color: #2A2218;
+  margin-bottom: 0.8rem;
+  letter-spacing: 0.05em;
+}
+
+.gunshi-routine-intro {
+  font-family: 'Noto Serif JP', serif;
+  font-size: 0.85rem;
+  font-weight: 400;
+  line-height: 2.2;
+  color: #6B5E4F;
+  max-width: 650px;
+  margin-bottom: clamp(2rem, 1.5rem + 1.5vw, 3rem);
+  letter-spacing: 0.02em;
+}
+
+.gunshi-routine-cards {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+}
+
+.gunshi-routine-card {
+  padding: clamp(1.5rem, 1rem + 1vw, 2.5rem);
+  background: rgba(255, 255, 255, 0.5);
+  border: 1px solid rgba(139, 115, 85, 0.12);
+  border-radius: 4px;
+  transition: box-shadow var(--duration-normal) ease;
+}
+
+.gunshi-routine-card:hover {
+  box-shadow: 0 8px 32px rgba(139, 115, 85, 0.08);
+}
+
+.gunshi-routine-card-num {
+  font-family: 'Noto Serif JP', serif;
+  font-size: 1rem;
+  font-weight: 900;
+  color: #8B7355;
+  margin-bottom: 0.6rem;
+}
+
+.gunshi-routine-card-title {
+  font-family: 'Noto Serif JP', serif;
+  font-size: clamp(1rem, 0.9rem + 0.5vw, 1.2rem);
+  font-weight: 700;
+  color: #2A2218;
+  margin-bottom: 0.5rem;
+  letter-spacing: 0.03em;
+}
+
+.gunshi-routine-card-quote {
+  font-family: 'Noto Serif JP', serif;
+  font-size: 0.7rem;
+  font-style: normal;
+  color: #B8A88A;
+  margin-bottom: 1rem;
+  line-height: 1.8;
+  letter-spacing: 0.05em;
+}
+
+.gunshi-routine-card-text {
+  font-family: 'Noto Serif JP', serif;
+  font-size: 0.82rem;
+  font-weight: 400;
+  line-height: 2.2;
+  color: #5A4E40;
+  letter-spacing: 0.01em;
+}
+
+.gunshi-routine-card-list {
+  list-style: none;
+  padding: 0;
+  margin-top: 0.8rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.gunshi-routine-card-list li {
+  font-family: 'Noto Serif JP', serif;
+  font-size: 0.78rem;
+  font-weight: 400;
+  color: #5A4E40;
+  padding-left: 1rem;
+  position: relative;
+  line-height: 1.9;
+}
+
+.gunshi-routine-card-list li::before {
+  content: '・';
+  position: absolute;
+  left: 0;
+  top: 0;
+  color: #B8A88A;
+}
+
+.gunshi-routine-note {
+  font-family: 'Noto Serif JP', serif;
+  font-size: 0.72rem;
+  color: #9A8B75;
+  line-height: 2;
+  margin-top: 1.5rem;
+}
+
+/* ── Warning Section (戒め) ── */
+.gunshi-warning {
+  padding: clamp(4rem, 3rem + 3vw, 6rem) var(--side-padding);
+  margin: 0;
+  max-width: none;
+  background: #2A2218;
+  border-top: none;
+  text-align: center;
+}
+
+.gunshi-warning-title {
+  font-family: 'Noto Serif JP', serif;
+  font-size: clamp(1.1rem, 0.9rem + 0.8vw, 1.5rem);
+  font-weight: 700;
+  color: #F5F0E8;
+  margin-bottom: 0.8rem;
+  letter-spacing: 0.05em;
+}
+
+.gunshi-warning-intro {
+  font-family: 'Noto Serif JP', serif;
+  font-size: 0.85rem;
+  font-weight: 400;
+  line-height: 2.2;
+  color: rgba(245, 240, 232, 0.6);
+  max-width: 650px;
+  margin: 0 auto 2rem;
+  letter-spacing: 0.02em;
+}
+
+.gunshi-warning-list {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  gap: 1.5rem;
+  max-width: var(--container-xl);
+  margin: 0 auto;
+  justify-content: center;
+}
+
+.gunshi-warning-list li {
+  font-family: 'Noto Serif JP', serif;
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: #F5F0E8;
+  padding: 1.5rem;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(245, 240, 232, 0.1);
+  border-left: 3px solid #8B7355;
+  border-radius: 4px;
+  letter-spacing: 0.02em;
+  flex: 1;
+  text-align: left;
+}
+
+.gunshi-warning-list li span {
+  display: block;
+  font-size: 0.72rem;
+  font-weight: 400;
+  color: rgba(245, 240, 232, 0.45);
+  margin-top: 0.5rem;
+}
+
+/* ── Role Section (役割の定義) ── */
+.gunshi-role {
+  padding: clamp(4rem, 3rem + 3vw, 6rem) var(--side-padding);
+  max-width: var(--container-xl);
+  margin: 0 auto;
+  border-top: 1px solid rgba(139, 115, 85, 0.15);
+  position: relative;
+}
+
+.gunshi-role::before {
+  content: '参謀';
+  position: absolute;
+  right: var(--side-padding);
+  top: clamp(2rem, 1rem + 2vw, 4rem);
+  font-family: 'Noto Serif JP', serif;
+  font-size: clamp(8rem, 5rem + 10vw, 18rem);
+  font-weight: 900;
+  color: rgba(0, 0, 0, 0.02);
+  line-height: 1;
+  pointer-events: none;
+}
+
+.gunshi-role-title {
+  font-family: 'Noto Serif JP', serif;
+  font-size: clamp(1.1rem, 0.9rem + 0.8vw, 1.5rem);
+  font-weight: 700;
+  color: #2A2218;
+  margin-bottom: 1.5rem;
+  letter-spacing: 0.05em;
+}
+
+.gunshi-role-text {
+  font-family: 'Noto Serif JP', serif;
+  font-size: 0.9rem;
+  font-weight: 400;
+  line-height: 2.6;
+  color: #4A3F32;
+  max-width: 700px;
+  letter-spacing: 0.02em;
+}
+
+.gunshi-role-text strong {
+  font-weight: 700;
+  color: #2A2218;
+}
+
+.gunshi-role-cta {
+  margin-top: clamp(2rem, 1.5rem + 1.5vw, 3rem);
+  font-family: 'Noto Serif JP', serif;
+  font-size: clamp(1rem, 0.9rem + 0.5vw, 1.2rem);
+  font-weight: 600;
+  line-height: 2.4;
+  color: #2A2218;
+  letter-spacing: 0.03em;
+}
+
+/* ── CTA ── */
+.gunshi-contact {
+  padding: clamp(5rem, 4rem + 4vw, 8rem) var(--side-padding);
+  max-width: var(--container-xl);
+  margin: 0 auto;
+  border-top: 1px solid rgba(139, 115, 85, 0.15);
+  text-align: center;
+}
+
+.gunshi-contact-title {
+  font-family: 'Noto Serif JP', serif;
+  font-size: clamp(2rem, 1.5rem + 2vw, 3.5rem);
+  font-weight: 900;
+  color: #2A2218;
+  margin-bottom: 1rem;
+  letter-spacing: 0.1em;
+}
+
+.gunshi-contact-desc {
+  font-family: 'Noto Serif JP', serif;
+  font-size: 0.85rem;
+  color: #8B7355;
+  margin-bottom: 2rem;
+  letter-spacing: 0.1em;
+}
+
+.gunshi-contact-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.8rem;
+  padding: 1rem 3rem;
+  background: #2A2218;
+  color: #F5F0E8;
+  font-family: 'Noto Serif JP', serif;
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  border-radius: 0;
+  transition: all var(--duration-normal) var(--ease-out-expo);
+}
+
+.gunshi-contact-btn:hover {
+  background: #8B7355;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(139, 115, 85, 0.2);
+}
+
+/* ── Footer override ── */
+.sub-page:has(.gunshi-hero) .sub-footer {
+  border-top-color: rgba(139, 115, 85, 0.15);
+}
+
+/* ── Header override ── */
+.sub-page:has(.gunshi-hero) .sub-header {
+  background: rgba(245, 240, 232, 0.92);
+  border-bottom-color: rgba(139, 115, 85, 0.1);
+}
+
+/* ── Responsive ── */
+@media (max-width: 768px) {
+  .gunshi-article-header {
+    gap: 0.3rem;
+  }
+
+  .gunshi-article-body {
+    padding-left: 0;
+  }
+
+  .gunshi-article {
+    width: 100%;
+  }
+
+  .gunshi-routine-cards {
+    grid-template-columns: 1fr;
+  }
+
+  .gunshi-phase-header {
+    gap: 0.8rem;
+  }
+
+  .gunshi-warning-list {
+    flex-direction: column;
+  }
+
+  .gunshi-hero::after {
+    display: none;
+  }
+}
