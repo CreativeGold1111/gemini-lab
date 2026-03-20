@@ -1,0 +1,70 @@
+{
+  "type": "web",
+  "name": "Web制作版テンプレート",
+  "description": "Web制作・ホームページ制作向けの4ステップテンプレートです。サイトタイプ・ページ構成・機能・システム設定を選択できます。",
+  "s2TopLp": 70000,
+  "s2TopStd": 65000,
+  "lpSecPrice": 15000,
+  "step1": [
+    { "id": "s1_lp",      "label": "ランディングページ (LP)", "sub": "1ページ・5セクション", "isLP": true  },
+    { "id": "s1_web",     "label": "ウェブサイト（複数ページ）",                             "isLP": false },
+    { "id": "s1_recruit", "label": "採用サイト",                                              "isLP": false },
+    { "id": "s1_ec",      "label": "ECサイト",                                                "isLP": false },
+    { "id": "s1_media",   "label": "メディア・ブログサイト",                                  "isLP": false }
+  ],
+  "step2": [
+    { "label": "必須", "items": [
+      { "id": "s2_top",       "label": "トップページ",                       "price": 65000, "pages": 1, "required": true, "maxQty": 1 }
+    ]},
+    { "label": "基本情報", "items": [
+      { "id": "s2_concept",   "label": "私たちについて",                     "price": 20000, "pages": 1 },
+      { "id": "s2_service",   "label": "サービス紹介",                       "price": 20000, "pages": 1 },
+      { "id": "s2_company",   "label": "会社概要",                           "price": 15000, "pages": 1 },
+      { "id": "s2_message",   "label": "代表からのメッセージ",               "price": 15000, "pages": 1 },
+      { "id": "s2_profile",   "label": "プロフィール",                       "price": 15000, "pages": 1 },
+      { "id": "s2_access",    "label": "アクセス・地図",                     "price": 15000, "pages": 1 }
+    ]},
+    { "label": "実績・商品", "items": [
+      { "id": "s2_works",     "label": "実績紹介（一覧・詳細）",             "price": 30000, "pages": 2 },
+      { "id": "s2_product",   "label": "商品紹介（一覧・詳細）",             "price": 30000, "pages": 2 },
+      { "id": "s2_staff",     "label": "スタッフ・社員紹介（一覧・詳細）",   "price": 30000, "pages": 2 },
+      { "id": "s2_blog",      "label": "ブログ・お知らせ（一覧・詳細）",     "price": 30000, "pages": 2 },
+      { "id": "s2_voice",     "label": "お客様の声（一覧）",                 "price": 24000, "pages": 1 },
+      { "id": "s2_faq",       "label": "よくある質問（一覧）",               "price": 24000, "pages": 1 }
+    ]},
+    { "label": "法的・規約", "items": [
+      { "id": "s2_privacy",   "label": "プライバシーポリシー",               "price": 12000, "pages": 1 },
+      { "id": "s2_terms",     "label": "利用規約",                           "price": 12000, "pages": 1 },
+      { "id": "s2_tokusho",   "label": "特定商取引法に基づく表記",           "price": 10000, "pages": 1 }
+    ]},
+    { "label": "その他", "items": [
+      { "id": "s2_contact",   "label": "お問い合わせページ",                 "price": 12000, "pages": 1 },
+      { "id": "s2_recruit",   "label": "採用募集要項一覧（簡易一覧）",       "price": 24000, "pages": 1 },
+      { "id": "s2_recruitlp", "label": "採用情報LP（5セクション）",           "price": 70000, "pages": 1 },
+      { "id": "s2_gallery",   "label": "ギャラリー・フォト",                 "price": 24000, "pages": 1 },
+      { "id": "s2_404",       "label": "404エラーページ",                    "price": 15000, "pages": 1 }
+    ]}
+  ],
+  "step3": [
+    { "id": "s3_form",      "label": "お問い合わせフォーム機能実装",          "price":  25000 },
+    { "id": "s3_slider",    "label": "スライダー・カルーセル実装",            "price":  25000 },
+    { "id": "s3_anime",     "label": "アニメーション演出（フェードイン等）",   "price":  25000 },
+    { "id": "s3_gsap",      "label": "高度なアニメーション（GSAP等）",        "price":  50000 },
+    { "id": "s3_gmap",      "label": "Googleマップ埋め込み",                  "price":   6000 },
+    { "id": "s3_sns",       "label": "SNS連携（フィード表示）",               "price":  18000 },
+    { "id": "s3_search",    "label": "サイト内検索機能",                      "price":  30000 },
+    { "id": "s3_multilang", "label": "多言語対応切り替え機能",                "price": 100000 }
+  ],
+  "step4var": [
+    { "id": "s4_resp", "label": "レスポンシブ対応",  "unitPrice": 5000 },
+    { "id": "s4_seo",  "label": "基本的なSEO設定",   "unitPrice": 3000 }
+  ],
+  "step4fix": [
+    { "id": "s4_wp",       "label": "WordPress構築",              "price":  50000 },
+    { "id": "s4_ec",       "label": "EC機能実装（決済機能等）",   "price": 100000 },
+    { "id": "s4_ga4",      "label": "アクセス解析タグ設置 (GA4)", "price":  10000 },
+    { "id": "s4_server",   "label": "サーバー・ドメイン設定代行", "price":  15000 },
+    { "id": "s4_security", "label": "WordPressセキュリティ対策",  "price":  35000 }
+  ],
+  "freeSteps": []
+}
