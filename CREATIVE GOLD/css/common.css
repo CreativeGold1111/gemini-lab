@@ -188,6 +188,7 @@ body:hover .cursor-tag {
 .menu-open .overlay-nav li:nth-child(2) { transition-delay: 0.2s; }
 .menu-open .overlay-nav li:nth-child(3) { transition-delay: 0.3s; }
 .menu-open .overlay-nav li:nth-child(4) { transition-delay: 0.4s; }
+.menu-open .overlay-nav li:nth-child(5) { transition-delay: 0.5s; }
 
 .overlay-nav a { 
   font-family: 'Noto Sans JP'; 

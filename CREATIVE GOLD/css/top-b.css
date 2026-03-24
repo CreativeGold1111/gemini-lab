@@ -6,7 +6,7 @@
   --text-main: #f0f0f0;
   --text-muted: #999;
   --border: #333333;
-  --primary-green: #00ff66; /* Neon Green Accent! */
+  --primary-green: #c3ff00; /* Neon Yellow-Green Accent */
   --primary-blue: #ffffff;
 }
 
@@ -76,7 +76,7 @@ header.container {
 }
 
 .title-full-width {
-  font-size: 11.5vw;
+  font-size: 13.5vw;
   width: 100vw;
   margin-left: calc(50% - 50vw);
   letter-spacing: -1px;
@@ -183,7 +183,7 @@ header.container {
 
 .btn-b:hover {
   transform: translateY(-4px);
-  box-shadow: 0 10px 30px rgba(0, 255, 102, 0.3);
+  box-shadow: 0 10px 30px rgba(195, 255, 0, 0.3);
   background: var(--text-main);
   color: var(--bg-white);
 }
@@ -408,4 +408,77 @@ header.container {
   0% { transform: translateY(-100%); }
   50% { transform: translateY(0); }
   100% { transform: translateY(100%); }
+}
+
+/* --- WORKS INFINITE MARQUEE --- */
+.works-marquee-wrapper {
+  margin-top: 5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  overflow: hidden;
+  width: 100vw;
+  margin-left: calc(50% - 50vw);
+}
+
+.works-track {
+  display: flex;
+  width: max-content;
+}
+
+.works-track-left {
+  animation: marqueeLeft 40s linear infinite;
+}
+
+.works-track-right {
+  animation: marqueeRight 40s linear infinite;
+}
+
+.works-item {
+  width: 30vw;
+  min-width: 300px;
+  margin-right: 1.5rem;
+  border-radius: 1rem;
+  overflow: hidden;
+  position: relative;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s;
+  cursor: pointer;
+  background-color: var(--bg-soft);
+}
+
+.works-item img {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16/10;
+  object-fit: cover;
+  display: block;
+  opacity: 0.5;
+  transition: opacity 0.4s, transform 0.8s;
+  filter: grayscale(80%) contrast(1.2);
+}
+
+.works-item:hover {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 15px 30px rgba(195, 255, 0, 0.15);
+  z-index: 10;
+}
+
+.works-item:hover img {
+  opacity: 1;
+  transform: scale(1.05);
+  filter: grayscale(0%);
+}
+
+@keyframes marqueeLeft {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); } 
+}
+
+@keyframes marqueeRight {
+  0% { transform: translateX(-50%); }
+  100% { transform: translateX(0); }
+}
+
+@media (max-width: 768px) {
+  .works-item { width: 70vw; min-width: 250px; margin-right: 1rem; }
 }
