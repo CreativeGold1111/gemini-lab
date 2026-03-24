@@ -1,100 +1,107 @@
-/* ============================================
-   Common JS for Sub Pages
-   CREATIVE GOLD
-   
-   スクロールアニメーション、ナビゲーションハイライト、
-   サービス表示順の動的切替など
-   ============================================ */
+document.addEventListener('DOMContentLoaded', () => {
+    // --- Custom Cursor Logic ---
+    const cursor = document.createElement('div');
+    cursor.classList.add('custom-cursor');
+    const tag = document.createElement('span');
+    tag.classList.add('cursor-tag');
+    tag.textContent = 'SCANNING :: 0.0';
+    cursor.appendChild(tag);
+    document.body.appendChild(cursor);
 
-(function () {
-  'use strict';
-
-  document.addEventListener('DOMContentLoaded', () => {
-
-    // テーマ適用（theme.jsのinitに加えて追加のロジック）
-    const route = ThemeManager.getRoute();
-
-    // ── ナビゲーション現在ページハイライト ──
-    const currentPath = window.location.pathname;
-    document.querySelectorAll('.sub-header-nav a').forEach(a => {
-      const href = a.getAttribute('href');
-      if (currentPath.includes(href.replace('index.html', '').replace('.html', ''))) {
-        a.classList.add('is-current');
-      }
+    document.addEventListener('mousemove', (e) => {
+        cursor.style.left = e.clientX + 'px';
+        cursor.style.top = e.clientY + 'px';
+        
+        // Dynamic coordinates
+        const xPos = (e.clientX / window.innerWidth).toFixed(2);
+        const yPos = (e.clientY / window.innerHeight).toFixed(2);
+        tag.textContent = `COORD :: ${xPos} / ${yPos}`;
     });
 
-    // ── トップへ戻るリンクのルート対応 ──
-    // 下層ページはサブディレクトリにあるため ../top-x.html
-    const topLink = document.querySelector('.sub-header-logo');
-    if (topLink && route) {
-      topLink.href = `../top-${route}.html`;
-    }
-    const backLink = document.querySelector('.sub-footer-back');
-    if (backLink && route) {
-      backLink.href = `../top-${route}.html`;
-    }
+    const hoverElements = document.querySelectorAll('a, button, .works-slider-wrapper');
+    hoverElements.forEach(el => {
+        el.addEventListener('mouseenter', () => cursor.classList.add('hover'));
+        el.addEventListener('mouseleave', () => cursor.classList.remove('hover'));
+    });
 
-    // ── サービス表示順の動的切替 ──
-    const serviceContainer = document.querySelector('[data-service-reorder]');
-    if (serviceContainer && route) {
-      const items = Array.from(serviceContainer.querySelectorAll('[data-service-id]'));
-      
-      // ルートごとの表示順序
-      const order = {
-        a: ['web-gunshi', 'creative-gold', 'creative-ghost'],
-        b: ['creative-ghost', 'creative-gold', 'web-gunshi'],
-        c: ['creative-gold', 'creative-ghost', 'web-gunshi'],
-      };
+    // --- Mobile Menu Toggle ---
+    const menuToggle = document.querySelector('.menu-toggle');
+    const menuOverlay = document.querySelector('.menu-overlay');
+    const overlayLinks = document.querySelectorAll('.overlay-nav a');
 
-      const sortOrder = order[route] || order.a;
-      
-      // ソートして再配置
-      const sorted = items.sort((a, b) => {
-        const aIdx = sortOrder.indexOf(a.dataset.serviceId);
-        const bIdx = sortOrder.indexOf(b.dataset.serviceId);
-        return aIdx - bIdx;
-      });
-
-      // 再配置（ロゴ画像はそのまま維持）
-      sorted.forEach((item) => {
-        serviceContainer.appendChild(item);
-      });
+    if (menuToggle) {
+        menuToggle.addEventListener('click', () => {
+            document.body.classList.toggle('menu-open');
+        });
     }
 
-    // ── スクロールアニメーション ──
+    overlayLinks.forEach(link => {
+        link.addEventListener('click', () => {
+            document.body.classList.remove('menu-open');
+        });
+    });
+
+    // --- Background Particle Animation ---
+    const canvas = document.getElementById('bg-canvas');
+    if (canvas) {
+        const ctx = canvas.getContext('2d');
+        let width = canvas.width = window.innerWidth;
+        let height = canvas.height = window.innerHeight;
+
+        let particles = [];
+        const particleCount = 60;
+
+        class Particle {
+            constructor() {
+                this.reset();
+            }
+            reset() {
+                this.x = Math.random() * width;
+                this.y = Math.random() * height;
+                this.vx = (Math.random() - 0.5) * 0.4;
+                this.vy = (Math.random() - 0.5) * 0.4;
+                this.size = Math.random() * 1.5 + 0.5;
+            }
+            update() {
+                this.x += this.vx;
+                this.y += this.vy;
+                if (this.x < 0 || this.x > width || this.y < 0 || this.y > height) this.reset();
+            }
+            draw() {
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fillStyle = 'rgba(0, 102, 204, 0.4)';
+                ctx.fill();
+            }
+        }
+
+        for (let i = 0; i < particleCount; i++) particles.push(new Particle());
+
+        function animate() {
+            ctx.clearRect(0, 0, width, height);
+            particles.forEach(p => {
+                p.update();
+                p.draw();
+            });
+            requestAnimationFrame(animate);
+        }
+        animate();
+
+        window.addEventListener('resize', () => {
+            width = canvas.width = window.innerWidth;
+            height = canvas.height = window.innerHeight;
+        });
+    }
+
+    // --- Intersection Observer for Reveals ---
+    const reveals = document.querySelectorAll('.reveal');
     const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('is-visible');
-        }
-      });
-    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('active');
+            }
+        });
+    }, { threshold: 0.1 });
 
-    document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
-
-    // ── パスワードフォーム（デザイン・挙動のみ） ──
-    const passwordForm = document.querySelector('.password-form');
-    if (passwordForm) {
-      passwordForm.addEventListener('submit', (e) => {
-        e.preventDefault();
-        const input = passwordForm.querySelector('.password-input');
-        const error = passwordForm.querySelector('.password-error');
-        
-        if (!input.value.trim()) {
-          if (error) {
-            error.textContent = 'パスワードを入力してください。';
-            error.classList.add('is-visible');
-          }
-          return;
-        }
-
-        // 静的段階では常にエラー表示（CMS化後に実装）
-        if (error) {
-          error.textContent = 'パスワードが正しくありません。名刺に記載のパスワードをご確認ください。';
-          error.classList.add('is-visible');
-        }
-      });
-    }
-
-  });
-})();
+    reveals.forEach(el => observer.observe(el));
+});

@@ -1,253 +1,189 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="robots" content="noindex, nofollow">
-  <title>CREATIVE GOLD ― Think Different, Make Different.</title>
-  <meta name="description" content="CREATIVE GOLD - 型破りなクリエイティブで、御社のプロジェクトを加速する。">
-  <link rel="stylesheet" href="css/reset.css">
-  <link rel="stylesheet" href="css/variables.css">
-  <link rel="stylesheet" href="css/top-b.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CREATIVE GOLD | ビジネスを、ちょうどいい形に。</title>
+    <meta name="description" content="Webサイト、グラフィック、システム開発からAI活用まで。現場経験と経営視点の両輪で、あなたのビジネスに本当に意味のある「ちょうどいい形」を提案します。">
+    <!-- Google Fonts including strong typography options -->
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;700;900&family=Zen+Kaku+Gothic+New:wght@400;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/common.css">
+    <link rel="stylesheet" href="css/top-b.css">
 </head>
 <body class="top-b">
+    <canvas id="bg-canvas"></canvas>
 
-  <!-- Header -->
-  <header class="site-header">
-    <a href="top-b.html" class="header-logo"><img src="img/logo_bk.png" alt="CREATIVE GOLD" style="height:24px; width:auto;"></a>
-    <nav class="header-nav" aria-label="メインナビゲーション">
-      <a href="service/index.html">Service</a>
-      <a href="about/index.html">About</a>
-      <a href="works/index.html">Works</a>
-      <a href="contact/index.html">Contact</a>
-    </nav>
-  </header>
-
-  <main>
-
-    <!-- Hero -->
-    <section class="hero" id="hero">
-      <h1 class="hero-title">
-        <span class="hero-title-line">Creative</span>
-        <span class="hero-title-line">Gold<span class="accent">.</span></span>
-      </h1>
-      <div class="hero-sub">
-        <p class="hero-desc">
-          ありきたりじゃない、でもちゃんと機能する。<br>
-          そんなクリエイティブを、裏方からメインステージまで。
-        </p>
-        <a href="service/index.html" class="hero-cta">
-          <span>Explore</span>
-          <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-        </a>
-      </div>
+    <!-- FIRST VIEW -->
+    <section id="fv" class="fv-section">
+        <div class="fv-logo-wrap gimmick-reveal">
+            <img src="img/logo.png" alt="CREATIVE GOLD" class="fv-logo">
+        </div>
+        <div class="fv-scroll gimmick-reveal" style="transition-delay: 0.5s;">
+            SCROLL DOWN
+            <span class="fv-scroll-line"></span>
+        </div>
     </section>
 
-    <!-- Service（CREATIVE GHOSTを最上段） -->
-    <section class="section fade-in" id="service">
-      <h2 class="big-title">SERVICE</h2>
-
-      <div class="service-list">
-        <!-- CREATIVE GHOST（最上段） -->
-        <div class="service-item">
-          <div class="service-num">01</div>
-          <div class="service-visual">
-            <img src="img/servicelogo_ghost.svg" alt="CREATIVE GHOST" class="service-visual-logo">
-          </div>
-          <div class="service-info">
-            <h3 class="service-name-large">CREATIVE GHOST</h3>
-            <p class="service-title-ja">貴社の見えないクリエイター</p>
-            <p class="service-desc">
-              クライアント名義での制作、外注や業務委託としての実務、社内向けのクローズドなデザイン指導。表には出ないけれど、確実に御社のクリエイティブを底上げします。
-            </p>
-            <a href="service/ghost/index.html" class="service-link">
-              Detail
-              <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+    <!-- Header identical to top-a2 structurally, URLs mapped to new sections -->
+    <header class="container">
+        <div class="site-header site-header-blend">
+            <a href="index.html" class="logo">
+                <img src="img/logo.png" alt="CREATIVE GOLD" class="logo-img logo-invert">
             </a>
-          </div>
+            <nav>
+                <ul class="main-nav">
+                    <li><a href="#introduction">ABOUT US<br><span>金田一について</span></a></li>
+                    <li><a href="#service">SERVICE<br><span>できること</span></a></li>
+                    <li><a href="#team">TEAM<br><span>チーム</span></a></li>
+                    <li><a href="#contact">CONTACT<br><span>お問い合わせ</span></a></li>
+                </ul>
+                <!-- Hamburger -->
+                <button class="menu-toggle" aria-label="Toggle Menu">
+                    <span></span>
+                    <span></span>
+                </button>
+            </nav>
         </div>
+    </header>
 
-        <!-- CREATIVE GOLD -->
-        <div class="service-item">
-          <div class="service-num">02</div>
-          <div class="service-visual">
-            <img src="img/servicelogo_gold.svg" alt="CREATIVE GOLD" class="service-visual-logo">
-          </div>
-          <div class="service-info">
-            <h3 class="service-name-large">CREATIVE GOLD</h3>
-            <p class="service-title-ja">王道のクリエイティブ制作</p>
-            <p class="service-desc">
-              WEBサイト構築、DTPデザイン、映像制作など。屋号を冠する王道サービスとして、幅広いクリエイティブの実務をこなします。
-            </p>
-            <a href="service/gold/index.html" class="service-link">
-              Detail
-              <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-            </a>
-          </div>
-        </div>
-
-        <!-- WEB軍師 -->
-        <div class="service-item">
-          <div class="service-num">03</div>
-          <div class="service-visual">
-            <img src="img/servicelogo_webgunshi.svg" alt="WEB軍師" class="service-visual-logo">
-          </div>
-          <div class="service-info">
-            <h3 class="service-name-large">WEB GUNSHI</h3>
-            <p class="service-title-ja">月額制のWEB戦略パートナー</p>
-            <p class="service-desc">
-              WEB解析に基づく戦略立案、GASやAIを用いた業務効率化、制作物全体の設計。データとロジックで、クリエイティブをもっと面白く。
-            </p>
-            <a href="service/gunshi/index.html" class="service-link">
-              Detail
-              <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-            </a>
-          </div>
-        </div>
-      </div>
-
-      <div style="text-align:center; margin-top:clamp(2rem, 1.5rem + 1.5vw, 3rem);">
-        <a href="service/index.html" class="service-link" style="justify-content:center;">
-          View All Services
-          <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-        </a>
-      </div>
-    </section>
-
-    <!-- Works -->
-    <section class="works-section fade-in" id="works">
-      <div class="works-header">
-        <h2 class="big-title">WORKS</h2>
-        <a href="works/index.html" class="works-more">
-          View All
-          <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-        </a>
-      </div>
-      <div class="works-marquee">
-        <div class="works-marquee-track">
-          <div class="works-card">
-            <div class="works-card-thumb"></div>
-            <div class="works-card-info">
-              <p class="works-card-cat">Web Design</p>
-              <p class="works-card-title">ブランドサイト制作</p>
-            </div>
-          </div>
-          <div class="works-card">
-            <div class="works-card-thumb"></div>
-            <div class="works-card-info">
-              <p class="works-card-cat">Art Direction</p>
-              <p class="works-card-title">ビジュアルアイデンティティ</p>
-            </div>
-          </div>
-          <div class="works-card">
-            <div class="works-card-thumb"></div>
-            <div class="works-card-info">
-              <p class="works-card-cat">Movie</p>
-              <p class="works-card-title">コンセプトムービー</p>
-            </div>
-          </div>
-          <div class="works-card">
-            <div class="works-card-thumb"></div>
-            <div class="works-card-info">
-              <p class="works-card-cat">DTP</p>
-              <p class="works-card-title">エディトリアルデザイン</p>
-            </div>
-          </div>
-          <!-- Duplicate for seamless loop -->
-          <div class="works-card">
-            <div class="works-card-thumb"></div>
-            <div class="works-card-info">
-              <p class="works-card-cat">Web Design</p>
-              <p class="works-card-title">ブランドサイト制作</p>
-            </div>
-          </div>
-          <div class="works-card">
-            <div class="works-card-thumb"></div>
-            <div class="works-card-info">
-              <p class="works-card-cat">Art Direction</p>
-              <p class="works-card-title">ビジュアルアイデンティティ</p>
-            </div>
-          </div>
-          <div class="works-card">
-            <div class="works-card-thumb"></div>
-            <div class="works-card-info">
-              <p class="works-card-cat">Movie</p>
-              <p class="works-card-title">コンセプトムービー</p>
-            </div>
-          </div>
-          <div class="works-card">
-            <div class="works-card-thumb"></div>
-            <div class="works-card-info">
-              <p class="works-card-cat">DTP</p>
-              <p class="works-card-title">エディトリアルデザイン</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- About -->
-    <section class="section fade-in" id="about">
-      <h2 class="big-title">ABOUT</h2>
-
-      <div class="about-layout">
-        <div class="about-main">
-          <p class="about-text">
-            <span>メッセージテキストが入ります。ここにはCREATIVE GOLDの想いや姿勢を伝える文章が入ります。</span><br>
-            <span>たとえば、なぜこの仕事をしているのか。何を大切にしているのか。</span><br>
-            <span>クライアントと一緒に何を実現したいのか。</span><br>
-            <span>そういった、少し踏み込んだ言葉を、</span><br>
-            <span>飾らずに、でも力強く、ここに置きたいと思います。</span>
-          </p>
-          <a href="about/index.html" class="service-link about-link">
-            Read More
-            <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-          </a>
-        </div>
-      </div>
-    </section>
-
-    <!-- Contact -->
-    <section class="contact-section fade-in" id="contact">
-      <h2 class="big-title big-title--light">CONTACT</h2>
-      <div class="contact-inner">
-        <p class="contact-copy">
-          面白いこと、<br>
-          一緒にやりませんか。
-        </p>
-        <a href="contact/index.html" class="contact-btn">Contact Us</a>
-      </div>
-    </section>
-
-    <!-- Note -->
-    <section class="note-banner fade-in">
-      <a href="https://note.com/" class="note-banner-link" target="_blank" rel="noopener">
-        <span class="note-banner-label">note 更新中</span>
-        <span class="note-banner-arrow">→</span>
-      </a>
-    </section>
-
-  </main>
-
-  <footer class="site-footer">
-    <div class="footer-inner">
-      <div class="footer-logo">CREATIVE GOLD</div>
-      <p class="footer-copy">&copy; 2025 CREATIVE GOLD</p>
+    <div class="menu-overlay">
+        <ul class="overlay-nav">
+            <li><a href="#introduction"><span class="en">ABOUT US</span>金田一について</a></li>
+            <li><a href="#service"><span class="en">SERVICE</span>できること</a></li>
+            <li><a href="#team"><span class="en">TEAM</span>チーム</a></li>
+            <li><a href="#contact"><span class="en">CONTACT</span>お問い合わせ</a></li>
+        </ul>
     </div>
-  </footer>
 
-  <script src="js/theme.js"></script>
-  <script>
-    // スクロールアニメーション
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('is-visible');
-        }
-      });
-    }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+    <main>
 
-    document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
-  </script>
+        <!-- 01 INTRODUCTION -->
+        <section id="introduction" class="section-b" style="padding-top: 25vh;">
+            <div class="container intro-wrap">
+                <div class="huge-title title-full-width outline-anim text-center" data-text="01 CREATE WITH YOU">01 CREATE WITH YOU</div>
+                
+                <div class="intro-content text-center">
+                    <p class="gimmick-reveal typo-ja-huge">
+                        はじめまして。金田一です！<br>
+                        <span style="font-size: 0.5em; display: inline-block; margin-top: -10px; margin-bottom: 20px; color: #ccc;">いつもお世話になっています。</span><br>さあ何から始めましょう！
+                    </p>
+                    
+                    <div class="gimmick-reveal" style="transition-delay: 0.3s;">
+                        <span class="romaji-text">
+                            mikake ha chotto charai kamo shirenai kedo,<br>
+                            shigoto ha gachi desu. 16-nen no keiken ha uso ja naikamo.<br>
+                            nattoku no iku katachi, issho ni tsukuri-masho.
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 02 SERVICE -->
+        <section id="service" class="section-b container">
+            <span class="b-label gimmick-reveal">02 SERVICE</span>
+            <p class="gimmick-reveal typo-ja-mid text-center" style="margin-bottom: 5rem;">
+                紙からWebから、アクセス解析から講師まで。<br>自分、色々とできます！
+            </p>
+            
+            <div class="service-sticky-container">
+                <div class="service-card gimmick-reveal">
+                    <div class="s-num">01</div>
+                    <div class="s-content-wrap">
+                        <h3>自分、クリエイティブ作れます。</h3>
+                        <p>クリエイティブな業界に入って16年目！紙媒体からホームページ、パン屋さんの内装や化粧品のパッケージまで色々なことをやらせていただきました。さあ、何作りましょ！</p>
+                    </div>
+                </div>
+                
+                <div class="service-card gimmick-reveal">
+                    <div class="s-num">02</div>
+                    <div class="s-content-wrap">
+                        <h3>自分、効率化や仕組み化できます。</h3>
+                        <p>8人で回してた仕事を、自作のツールで3人で回せるようにしたり。イベントの企画や運用ルール作り、SNS広告やECサイトの運用まで。結果を出すために今何をすべきか、一緒に考えましょ！</p>
+                    </div>
+                </div>
+                
+                <div class="service-card gimmick-reveal">
+                    <div class="s-num">03</div>
+                    <div class="s-content-wrap">
+                        <h3>自分、教えられます。</h3>
+                        <p>昔、専門学校の講師をやってたんですが、縁あってまさかの今年からまた新しい学校で講師をします。他にも「デザイン教えて！」とか「フリーランスの営業ってどうやってきたの？」なんて相談に乗ることも。</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-center gimmick-reveal" style="margin-top: 2rem;">
+                <a href="service/index.html" class="btn-b">SERVICE DETAIL →</a>
+            </div>
+        </section>
+
+        <!-- 03 ABOUT US -->
+        <section id="about" class="section-b container">
+            <div class="b-flex">
+                <div class="b-flex-left">
+                    <div class="huge-title outline-anim vertical-title" data-text="03 ABOUT US">03 ABOUT US</div>
+                </div>
+                <div class="b-flex-right typographic-block">
+                    <p class="gimmick-reveal split-line">デザイナーとして活動を始めたのが2010年。</p>
+                    <p class="gimmick-reveal split-line" style="line-height: 2.2;">時給19円で働いたこともあったり。<br>初めて就職した会社が倒産したり。<br>大手企業のディレクターになったり。<br>営業してくれてた親友がいきなり音信不通になったり。</p>
+                    <p class="gimmick-reveal split-line">そんなこんなで16年、<br>色々な経験をさせていただきました。</p>
+
+                    <div class="gimmick-reveal" style="margin-top: 4rem;">
+                        <a href="about/index.html" class="btn-b">MORE ABOUT ME →</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 05 TEAM -->
+        <section id="team" class="section-b team-section gimmick-reveal" style="padding: 10vh 5vw;">
+            <div style="max-width: 1200px; margin: 0 auto;">
+                <span class="b-label" style="color: var(--primary-green);">05 TEAM</span>
+                <div class="typographic-block team-block">
+                    <p class="gimmick-reveal">自分、色々とできます！とは言ってるものの、できないことはできません。</p>
+                    <p class="gimmick-reveal" style="color: #666; line-height: 2.2;">
+                        綺麗な写真、<br>
+                        かっこいい動画撮影、<br>
+                        3DCG、<br>
+                        店舗内装の設計、、<br>
+                        一人じゃできないことばっかりです。
+                    </p>
+                    <p class="gimmick-reveal" style="color: transparent; -webkit-text-stroke: 1px var(--text-main);">それでもクオリティは妥協したくない。</p>
+                    <p class="gimmick-reveal">心から信頼できるスペシャリストがいます。<br>そんなスペシャリストを紹介します。</p>
+                </div>
+
+                <div class="gimmick-reveal" style="margin-top: 4rem;">
+                    <a href="team/index.html" class="btn-b">MEET OUR TEAM →</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- 06 CONTACT -->
+        <section id="contact" class="section-b" style="display: flex; align-items: center; justify-content: center; flex-direction: column;">
+            <div class="container text-center" style="width: 100%;">
+                <span class="b-label gimmick-reveal" style="text-align: center;">06 CONTACT</span>
+                <p class="gimmick-reveal" style="font-size: 1.5rem; margin-bottom: 3rem;">ここまでスクロールしてくれてありがとうございます。</p>
+                <div class="gimmick-reveal">
+                    <a href="contact/index.html" class="contact-huge hover-invert" data-text="そろそろ&#10;ご飯行きません？">
+                        そろそろ<br>ご飯行きません？
+                    </a>
+                </div>
+
+                <div class="gimmick-reveal" style="margin-top: 3rem;">
+                    <a href="contact/index.html" class="btn-b">MAIL SEND →</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer style="padding: 4rem; text-align: center; border-top: 1px dashed var(--border);">
+        <div class="container eng" style="opacity: 0.3; font-size: 10px; font-family: 'Outfit';">
+            &copy; 2026 CREATIVE GOLD. ALL RIGHTS RESERVED.
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="js/common.js"></script>
+    <script src="js/top-b.js"></script>
 </body>
 </html>
