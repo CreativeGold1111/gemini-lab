@@ -1,0 +1,196 @@
+/* css/about.css */
+
+/* Hero Section inheriting Works Archive Vibe */
+.about-hero {
+    padding: 180px 5vw 80px;
+    position: relative;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 80px;
+}
+
+.about-title {
+    font-size: clamp(3rem, 8vw, 6rem);
+    font-weight: 500;
+    font-family: 'Outfit', 'Zen Kaku Gothic New', sans-serif;
+    line-height: 1.1;
+    margin: 0;
+    letter-spacing: -0.02em;
+    color: var(--text-main);
+}
+
+.about-subtitle {
+    margin-top: 2rem;
+    font-size: 16px;
+    color: var(--text-muted);
+    max-width: 600px;
+    line-height: 2;
+}
+
+/* Sections */
+.about-section {
+    margin-bottom: 120px;
+}
+
+.section-heading {
+    font-family: 'Outfit';
+    font-size: clamp(2rem, 5vw, 3rem);
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    margin-bottom: 3rem;
+    color: var(--text-main);
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.section-heading::after {
+    content: '';
+    flex-grow: 1;
+    height: 1px;
+    background: var(--border);
+}
+
+/* Layout Grids */
+.profile-grid {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 4rem;
+}
+
+.overview-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+}
+
+.overview-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.overview-table th, .overview-table td {
+    padding: 1.5rem 0;
+    border-bottom: 1px solid var(--border);
+    text-align: left;
+    vertical-align: top;
+    color: var(--text-main);
+}
+
+.overview-table th {
+    width: 25%;
+    font-weight: 500;
+    color: var(--text-muted);
+}
+
+/* Redaction Gimmick Styles */
+.redacted {
+    display: inline-block;
+    color: transparent !important;
+    background-color: var(--text-main);
+    padding: 0 4px;
+    border-radius: 2px;
+    user-select: none;
+    position: relative;
+    overflow: hidden;
+    transition: background-color 0.8s cubic-bezier(0.16, 1, 0.3, 1), 
+                color 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    cursor: default;
+}
+
+/* The glitch/noise effect on redacted blocks */
+.redacted::after {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background-image: repeating-linear-gradient(45deg, transparent, transparent 2px, rgba(255,255,255,0.1) 2px, rgba(255,255,255,0.1) 4px);
+    opacity: 0.3;
+    pointer-events: none;
+    transition: opacity 0.4s;
+}
+
+/* Revealed State */
+body.decrypted .redacted {
+    background-color: transparent;
+    color: var(--primary-blue) !important;
+    text-shadow: 0 0 10px rgba(var(--primary-blue-rgb), 0.4);
+    user-select: text;
+}
+body.decrypted .redacted::after {
+    opacity: 0;
+}
+
+/* Decryption Form Box */
+.decrypt-box {
+    margin: 4rem 0;
+    padding: 3rem;
+    background: var(--bg-soft);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    position: relative;
+    overflow: hidden;
+}
+
+.decrypt-box::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; width: 4px; height: 100%;
+    background: var(--primary-blue);
+}
+
+.decrypt-form {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1.5rem;
+    max-width: 500px;
+}
+
+.decrypt-input {
+    flex-grow: 1;
+    padding: 1rem;
+    background: transparent;
+    border: 1px solid var(--border);
+    color: var(--text-main);
+    font-family: 'Outfit', monospace;
+    font-size: 16px;
+    outline: none;
+    transition: border-color 0.3s;
+}
+
+.decrypt-input:focus {
+    border-color: var(--text-main);
+}
+
+.decrypt-btn {
+    padding: 1rem 2rem;
+    background: var(--text-main);
+    color: var(--bg-white);
+    border: none;
+    font-family: 'Outfit';
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    cursor: pointer;
+    transition: opacity 0.3s;
+}
+
+.decrypt-btn:hover {
+    opacity: 0.8;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .profile-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+    .overview-table th, .overview-table td {
+        display: block;
+        width: 100%;
+    }
+    .overview-table th {
+        padding-bottom: 0.5rem;
+        border-bottom: none;
+    }
+    .decrypt-form {
+        flex-direction: column;
+    }
+}

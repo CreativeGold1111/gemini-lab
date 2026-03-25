@@ -1,0 +1,282 @@
+/* css/about.css */
+
+/* Hero Section inheriting Works Archive Vibe */
+.about-hero {
+    padding: 180px 5vw 80px;
+    position: relative;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 80px;
+}
+
+.about-title {
+    font-size: clamp(3rem, 8vw, 6rem);
+    font-weight: 500;
+    font-family: 'Outfit', 'Zen Kaku Gothic New', sans-serif;
+    line-height: 1.1;
+    margin: 0;
+    letter-spacing: -0.02em;
+    color: var(--text-main);
+}
+
+.about-subtitle {
+    margin-top: 2rem;
+    font-size: 16px;
+    color: var(--text-muted);
+    max-width: 600px;
+    line-height: 2;
+}
+
+/* Sections */
+.about-section {
+    margin-bottom: 120px;
+}
+
+.section-heading {
+    font-family: 'Outfit';
+    font-size: clamp(2rem, 5vw, 3rem);
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    margin-bottom: 3rem;
+    color: var(--text-main);
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.section-heading::after {
+    content: '';
+    flex-grow: 1;
+    height: 1px;
+    background: var(--border);
+}
+
+/* Layout Grids */
+.profile-grid {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 4rem;
+}
+
+.overview-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+}
+
+.overview-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.overview-table th, .overview-table td {
+    padding: 1.5rem 0;
+    border-bottom: 1px solid var(--border);
+    text-align: left;
+    vertical-align: top;
+    color: var(--text-main);
+}
+
+.overview-table th {
+    width: 25%;
+    font-weight: 500;
+    color: var(--text-muted);
+}
+
+/* Redaction Gimmick Styles */
+.redacted {
+    display: inline;
+    color: transparent !important;
+    background-color: var(--text-main);
+    padding: 2px 4px;
+    border-radius: 2px;
+    user-select: none;
+    position: relative;
+    cursor: default;
+    box-decoration-break: clone;
+    -webkit-box-decoration-break: clone;
+}
+
+/* Theme-based Redaction Marker Colors */
+body {
+    --redacted-marker-color: rgba(0, 210, 255, 0.4); /* White x Blue theme (水色系) */
+}
+body.top-b {
+    --redacted-marker-color: rgba(195, 255, 0, 0.4); /* Black x Green theme (黄緑系) */
+}
+body.top-c {
+    --redacted-marker-color: rgba(255, 32, 64, 0.4); /* Black x Red theme (赤系) */
+}
+
+/* We remove the ::after noise since inline element positioning can be tricky on wrap, 
+   the solid black box already looks perfectly like a classified document redaction */
+
+@keyframes decrypt-flash-and-mark {
+    0% { background-color: var(--text-main); color: transparent; background-image: none; text-shadow: none; }
+    15% { background-color: #fff; color: transparent; background-image: none; text-shadow: none; }
+    30% { background-color: transparent; color: #fff; background-image: none; text-shadow: 0 0 15px #fff; }
+    40% { background-color: transparent; color: var(--text-main); background-image: linear-gradient(transparent 60%, var(--redacted-marker-color) 60%); background-size: 0% 100%; text-shadow: none; }
+    100% { background-color: transparent; color: var(--text-main); background-image: linear-gradient(transparent 60%, var(--redacted-marker-color) 60%); background-size: 100% 100%; text-shadow: none; }
+}
+
+body.decrypted .redacted {
+    animation: decrypt-flash-and-mark 1.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    background-color: transparent;
+    background-repeat: no-repeat;
+    background-position: left center;
+    color: var(--text-main) !important;
+    user-select: text;
+}
+
+/* Floating Decrypt Popup */
+.decrypt-popup {
+    position: fixed;
+    bottom: 40px;
+    right: 40px;
+    background: rgba(10, 10, 10, 0.85);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    padding: 2rem;
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 8px;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+    z-index: 10000;
+    width: 380px;
+    max-width: calc(100vw - 40px);
+    transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.6s ease;
+}
+
+.decrypt-popup.hidden {
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(20px);
+}
+
+.decrypt-form {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.decrypt-input {
+    flex-grow: 1;
+    padding: 0.75rem;
+    background: transparent;
+    border: 1px solid var(--border);
+    color: var(--text-main);
+    font-family: 'Outfit', monospace;
+    font-size: 14px;
+    outline: none;
+    transition: border-color 0.3s;
+    border-radius: 4px;
+}
+
+.decrypt-input:focus {
+    border-color: var(--text-main);
+}
+
+.decrypt-btn {
+    padding: 0.75rem 1.5rem;
+    background: var(--text-main);
+    color: var(--bg-white);
+    border: none;
+    font-family: 'Outfit';
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    cursor: pointer;
+    transition: opacity 0.3s;
+    border-radius: 4px;
+}
+
+.decrypt-btn:hover {
+    opacity: 0.8;
+}
+
+/* YouTube Modal Overlay */
+.youtube-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 11000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 1;
+    visibility: visible;
+    transition: opacity 0.4s ease, visibility 0.4s ease;
+}
+.youtube-modal.hidden {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+.youtube-modal-bg {
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0, 0, 0, 0.9);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+}
+.youtube-modal-content {
+    position: relative;
+    width: 90%;
+    max-width: 900px;
+    aspect-ratio: 16/9;
+    z-index: 2;
+    transform: scale(1);
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.youtube-modal.hidden .youtube-modal-content {
+    transform: scale(0.95);
+}
+.youtube-modal-content .video-container {
+    width: 100%;
+    height: 100%;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 30px 60px rgba(0,0,0,0.8);
+    border: 1px solid rgba(255,255,255,0.1);
+}
+.youtube-modal-content iframe {
+    width: 100%;
+    height: 100%;
+}
+.close-youtube-btn {
+    position: absolute;
+    top: -40px;
+    right: 0;
+    background: none;
+    border: none;
+    color: #fff;
+    cursor: pointer;
+    padding: 5px;
+    transition: transform 0.3s;
+}
+.close-youtube-btn:hover {
+    transform: scale(1.1);
+}
+.youtube-popup-trigger:hover {
+    opacity: 0.8;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .profile-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+    .overview-table th, .overview-table td {
+        display: block;
+        width: 100%;
+    }
+    .overview-table th {
+        padding-bottom: 0.5rem;
+        border-bottom: none;
+    }
+    .decrypt-popup {
+        bottom: 20px;
+        right: 20px;
+        left: 20px;
+        width: auto;
+    }
+}

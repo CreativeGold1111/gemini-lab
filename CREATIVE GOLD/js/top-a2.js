@@ -16,22 +16,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
 
-    // --- Mobile Menu Toggle ---
-    const menuToggle = document.querySelector('.menu-toggle');
-    const menuOverlay = document.querySelector('.menu-overlay');
-    const overlayLinks = document.querySelectorAll('.overlay-nav a');
-
-    const toggleMenu = () => {
-        document.body.classList.toggle('menu-open');
-    };
-
-    menuToggle.addEventListener('click', toggleMenu);
-    
-    overlayLinks.forEach(link => {
-        link.addEventListener('click', () => {
-            document.body.classList.remove('menu-open');
-        });
-    });
+    // Mobile Menu Toggle is handled by common.js
 
     // --- Custom Cursor ---
     let mouseX = 0, mouseY = 0;

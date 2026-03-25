@@ -40,10 +40,7 @@ header.container {
 .top-b .site-header { mix-blend-mode: difference; }
 .top-b .logo-img.logo-invert { filter: brightness(0) invert(1); }
 .top-b .main-nav a, .top-b .main-nav a span { color: #fff !important; pointer-events: auto; }
-.top-b .menu-overlay { background: #f0f0f0 !important; }
-.top-b .menu-overlay .overlay-nav a { color: #0a0a0a !important; }
-.top-b .menu-toggle span { background: #fff !important; }
-.top-b .menu-open .menu-toggle span { background: #0a0a0a !important; }
+/* Menu overrides removed to let common.css handle dynamic theming */
 
 /* Sections */
 .section-b {
@@ -76,10 +73,12 @@ header.container {
 }
 
 .title-full-width {
-  font-size: 13.5vw;
+  font-size: clamp(2rem, 8vw, 13.5vw);
   width: 100vw;
   margin-left: calc(50% - 50vw);
   letter-spacing: -1px;
+  white-space: normal; /* Fix horizontal overflow */
+  word-break: break-word;
 }
 
 .vertical-title {
